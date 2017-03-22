@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointmentScheduler", "MedicalAppointmentScheduler\MedicalAppointmentScheduler.csproj", "{0318BD82-F8C3-43B2-84E5-1B4DBB9AC8BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointmentScheduler.Tests", "MedicalAppointmentScheduler.Tests\MedicalAppointmentScheduler.Tests.csproj", "{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0318BD82-F8C3-43B2-84E5-1B4DBB9AC8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0318BD82-F8C3-43B2-84E5-1B4DBB9AC8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0318BD82-F8C3-43B2-84E5-1B4DBB9AC8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0318BD82-F8C3-43B2-84E5-1B4DBB9AC8BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
