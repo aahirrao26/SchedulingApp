@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MedicalAppointmentScheduler.Data")]
+[assembly: AssemblyTitle("MedicalAppointmentScheduler.Core.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP Inc.")]
-[assembly: AssemblyProduct("MedicalAppointmentScheduler.Data")]
+[assembly: AssemblyProduct("MedicalAppointmentScheduler.Core.Data")]
 [assembly: AssemblyCopyright("Copyright © HP Inc. 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("91a7d4b2-9bab-428c-80db-2d9021fe4c72")]
+[assembly: Guid("06e8911c-bdf8-4015-a77d-d6301a242287")]
 
 // Version information for an assembly consists of the following four values:
 //
