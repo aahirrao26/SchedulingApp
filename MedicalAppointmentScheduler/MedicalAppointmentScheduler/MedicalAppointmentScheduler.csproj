@@ -194,14 +194,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -246,10 +243,14 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Administrator\Create.cshtml" />
+    <Content Include="Views\Administrator\Delete.cshtml" />
+    <Content Include="Views\Administrator\Details.cshtml" />
+    <Content Include="Views\Administrator\Edit.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -263,6 +264,10 @@
     <ProjectReference Include="..\MedicalAppointmentScheduler.Core.Business\MedicalAppointmentScheduler.Core.Business.csproj">
       <Project>{e8abfb0e-bbdc-4606-b78d-ec7d91039454}</Project>
       <Name>MedicalAppointmentScheduler.Core.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MedicalAppointmentScheduler.Core.Data\MedicalAppointmentScheduler.Core.Data.csproj">
+      <Project>{06e8911c-bdf8-4015-a77d-d6301a242287}</Project>
+      <Name>MedicalAppointmentScheduler.Core.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -25,10 +25,10 @@ namespace MedicalAppointmentScheduler.Core.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<L_State> L_State { get; set; }
-        public virtual DbSet<L_User_Roles> L_User_Roles { get; set; }
-        public virtual DbSet<User_Address> User_Address { get; set; }
-        public virtual DbSet<User_Details> User_Details { get; set; }
-        public virtual DbSet<User_Login> User_Login { get; set; }
+        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<UserAddress> UserAddresses { get; set; }
+        public virtual DbSet<UserDetails> UserDetails { get; set; }
+        public virtual DbSet<UserLogin> UserLogins { get; set; }
     }
 }

@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b0709b23cdf040f8a1ca4eefa1c4b3c5" Name="Diagram1">
-        <EntityTypeShape EntityType="MedicalSchedulerDBModel.L_State" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalSchedulerDBModel.L_User_Roles" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalSchedulerDBModel.User_Address" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalSchedulerDBModel.User_Details" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalSchedulerDBModel.User_Login" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+      <Diagram DiagramId="070776947abd4fd6821ccd481cae9ae3" Name="Diagram1">
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.State" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.UserRole" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.UserAddress" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.UserDetails" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.UserLogin" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__User_Addr__State__1A14E395" ManuallyRouted="false" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__User_Deta__RoleI__1273C1CD" ManuallyRouted="false" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__User_Addr__UserI__1B0907CE" ManuallyRouted="false" />
