@@ -16,6 +16,7 @@ namespace MedicalAppointmentScheduler.Controllers
             return View();
         }
 
+        //Authenticate the user 
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
@@ -26,7 +27,7 @@ namespace MedicalAppointmentScheduler.Controllers
                 if (loginManager.ValidatedUser(loginViewModel.Email, loginViewModel.Password))
                 {
                     FormsAuthentication.SetAuthCookie(loginViewModel.Email, false);
-                    return View("Index");
+                    return RedirectToAction("Contact","Home");
                 }
                 else
                 {
@@ -37,5 +38,15 @@ namespace MedicalAppointmentScheduler.Controllers
             // If we got this far, something failed, redisplay form
             return View(loginViewModel);
         }
+
+        // POST: /Account/LogOff
+        [HttpPost]
+        [Authorize]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
