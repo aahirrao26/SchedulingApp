@@ -2,13 +2,14 @@
 using System.Web.Security;
 using MedicalAppointmentScheduler.Models;
 using MedicalAppointmentScheduler.Models.BusinessClass;
+using MedicalAppointmentScheduler.Core.Business;
+using MedicalAppointmentScheduler.Core.Data;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
-
     public class AccountController : Controller
     {
-        //GET: Login
+        //GET: this action is called for all anonymous users to get authenticated
        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -16,18 +17,18 @@ namespace MedicalAppointmentScheduler.Controllers
             return View();
         }
 
-        //Authenticate the user 
+        //POST: Authenticate the user and redirect to action based on its role
         [HttpPost]
-        public ActionResult Login(LoginViewModel loginViewModel)
+        public ActionResult Login(UserLogin loginViewModel)
         {
             if (ModelState.IsValid)
             {
                 AccountManager loginManager = new AccountManager();
-
-                if (loginManager.ValidatedUser(loginViewModel.Email, loginViewModel.Password))
+                int userId = loginManager.ValidatedUser(loginViewModel.Email, loginViewModel.Password);
+                if (userId != 0)
                 {
                     FormsAuthentication.SetAuthCookie(loginViewModel.Email, false);
-                    return RedirectToAction("Contact","Home");
+                    return RedirectToAction("Index", loginManager.GetUserRole(userId));
                 }
                 else
                 {
