@@ -1,1 +1,10 @@
-C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.csprojResolveAssemblyReference.cache
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.dll.config
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.pdb
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\EntityFramework.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\EntityFramework.xml
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.csprojResolveAssemblyReference.cache
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.pdb

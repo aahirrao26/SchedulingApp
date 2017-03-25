@@ -1,1 +1,12 @@
-C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.csprojResolveAssemblyReference.cache
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Business.dll.config
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Business.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Business.pdb
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\EntityFramework.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Data.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Data.pdb
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\EntityFramework.xml
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.csprojResolveAssemblyReference.cache
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.dll
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.pdb

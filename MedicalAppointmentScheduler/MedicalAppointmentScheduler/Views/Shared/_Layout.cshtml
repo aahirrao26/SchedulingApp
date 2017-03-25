@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("HomePage", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("HomePage", "Index", @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())</li>
                     </ul>
                 @Html.Partial("_LoginPartial")
             </div>
