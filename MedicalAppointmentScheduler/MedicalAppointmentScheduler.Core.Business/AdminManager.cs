@@ -9,14 +9,17 @@ namespace MedicalAppointmentScheduler.Core.Business
 {
     public class AdminManager
     {
-        public void DeleteUser(int userId)
+        private MedicalSchedulerDBEntities dbContext;
+
+        public AdminManager(MedicalSchedulerDBEntities _dbContext)
         {
-            using (MedicalSchedulerDBEntities dbContext = new MedicalSchedulerDBEntities())
-            {
-                UserDetails userDetails = dbContext.UserDetails.Find(userId);
-                dbContext.UserDetails.Remove(userDetails);
-                dbContext.SaveChanges();
-            }
+            this.dbContext = _dbContext; 
+        }
+        public void DeleteUser(int userId)
+        {        
+             UserDetails userDetails = dbContext.UserDetails.Find(userId);
+             dbContext.UserDetails.Remove(userDetails);
+             dbContext.SaveChanges();
         }
     }
 }

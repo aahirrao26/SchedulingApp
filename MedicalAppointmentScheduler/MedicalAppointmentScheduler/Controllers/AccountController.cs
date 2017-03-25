@@ -23,7 +23,8 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             if (ModelState.IsValid)
             {
-                AccountManager loginManager = new AccountManager();
+                MedicalSchedulerDBEntities dbContext = new MedicalSchedulerDBEntities();
+                AccountManager loginManager = new AccountManager(dbContext);
                 int userId = loginManager.ValidatedUser(loginViewModel.Email, loginViewModel.Password);
                 if (userId != 0)
                 {

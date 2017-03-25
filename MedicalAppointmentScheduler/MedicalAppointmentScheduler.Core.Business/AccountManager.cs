@@ -1,10 +1,16 @@
 ﻿using System.Linq;
 using MedicalAppointmentScheduler.Core.Data;
+using System.Data.Entity;
 
 namespace MedicalAppointmentScheduler.Models.BusinessClass
 {
     public class AccountManager
     {
+        private MedicalSchedulerDBEntities dbContext;
+        public AccountManager(MedicalSchedulerDBEntities _dbContext)
+        {
+            this.dbContext = _dbContext;
+        }
         /// <summary>
         /// This method will validated the user credentials against the database
         /// </summary>
@@ -13,12 +19,8 @@ namespace MedicalAppointmentScheduler.Models.BusinessClass
         /// <returns></returns>
         public int ValidatedUser(string userName, string password)
         {
-            using (MedicalSchedulerDBEntities dbContext = new MedicalSchedulerDBEntities())
-            {
-                var userId = dbContext.UserLogins.Where(o => o.Email.ToLower().Equals(userName) && o.Password.Equals(password)).Select(u => u.UserID).SingleOrDefault();
-                
-                return userId;
-            }
+            var userId = dbContext.UserLogins.Where(o => o.Email.ToLower().Equals(userName) && o.Password.Equals(password)).Select(u => u.UserID).SingleOrDefault();
+            return userId;
         }
 
         /// <summary>
@@ -27,15 +29,12 @@ namespace MedicalAppointmentScheduler.Models.BusinessClass
         /// <param name="userId"></param>
         public string GetUserRole(int userId)
         {
-            using (MedicalSchedulerDBEntities dbContext = new MedicalSchedulerDBEntities())
-            {
-                var userRole = (from roles in dbContext.UserRoles
+            var userRole = (from roles in dbContext.UserRoles
                                 join user in dbContext.UserDetails
                                 on roles.ID equals user.RoleID
                                 where user.ID == userId
                                 select roles.RoleName).SingleOrDefault();
-                return userRole;
-            }
+            return userRole;         
         }
     }
 }
