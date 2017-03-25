@@ -19,15 +19,20 @@ namespace MedicalAppointmentScheduler.Core.Data
     {
         public int ID { get; set; }
 
+        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Required]
         [Display(Name = "Phone Name")]
         public string Phone { get; set; }
 
+        [Required]
+        [EmailAddress]
         [Display(Name = "Email Address")]
         public string EmailAdress { get; set; }
 
