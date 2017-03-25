@@ -25,11 +25,12 @@ namespace MedicalAppointmentScheduler.Controllers
             {
                 MedicalSchedulerDBEntities dbContext = new MedicalSchedulerDBEntities();
                 AccountManager loginManager = new AccountManager(dbContext);
-                int userId = loginManager.ValidatedUser(loginViewModel.Email, loginViewModel.Password);
+                int userId = loginManager.ValidateUser(loginViewModel.Email, loginViewModel.Password);
                 if (userId != 0)
                 {
                     FormsAuthentication.SetAuthCookie(loginViewModel.Email, false);
-                    return RedirectToAction("Index", loginManager.GetUserRole(userId));
+                    string controllerRole = loginManager.GetUserRole(userId) == null ? "Home" : loginManager.GetUserRole(userId);
+                    return RedirectToAction("Index", controllerRole);
                 }
                 else
                 {
