@@ -59,7 +59,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         [TestMethod]
         public void TestValidateUserForValidCredentials()
         {           
-            int userId =  accountManager.ValidatedUser("aa@gmail.com","12345");
+            int userId =  accountManager.ValidateUser("aa@gmail.com","12345");
 
             Assert.AreEqual(1, userId);
         }
@@ -67,7 +67,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         [TestMethod]
         public void TestValidateUserForInvalidEmail()
         {
-            int userId = accountManager.ValidatedUser("ba@gmail.com", "12345");
+            int userId = accountManager.ValidateUser("ba@gmail.com", "12345");
 
             Assert.AreEqual(0, userId);
         }
@@ -75,7 +75,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         [TestMethod]
         public void TestValidateUserForInvalidPassword()
         {
-            int userId = accountManager.ValidatedUser("aa@gmail.com", "xyz");
+            int userId = accountManager.ValidateUser("aa@gmail.com", "xyz");
 
             Assert.AreEqual(0, userId);
         }

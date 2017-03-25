@@ -17,7 +17,7 @@ namespace MedicalAppointmentScheduler.Models.BusinessClass
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public int ValidatedUser(string userName, string password)
+        public int ValidateUser(string userName, string password)
         {
             var userId = dbContext.UserLogins.Where(o => o.Email.ToLower().Equals(userName) && o.Password.Equals(password)).Select(u => u.UserID).SingleOrDefault();
             return userId;

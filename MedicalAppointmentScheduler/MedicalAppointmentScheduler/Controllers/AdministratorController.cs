@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
+using MedicalAppointmentScheduler.Core.Business;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
@@ -14,6 +15,7 @@ namespace MedicalAppointmentScheduler.Controllers
     public class AdministratorController : Controller
     {
         private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
+        private AdminManager adminManager;
 
         // GET: Administrator
         public ActionResult Index()
@@ -50,8 +52,8 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.UserDetails.Add(userDetails);
-                db.SaveChanges();
+                adminManager = new AdminManager(db);
+                adminManager.CreateUser(userDetails);
                 return RedirectToAction("Index");
             }
 
@@ -80,9 +82,9 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Phone,EmailAdress,RoleID")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(userDetails).State = EntityState.Modified;
-                db.SaveChanges();
+            {              
+                adminManager = new AdminManager(db);
+                adminManager.EditUser(userDetails);
                 return RedirectToAction("Index");
             }
             ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName", userDetails.RoleID);
@@ -108,10 +110,9 @@ namespace MedicalAppointmentScheduler.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
-            UserDetails userDetails = db.UserDetails.Find(id);
-            db.UserDetails.Remove(userDetails);
-            db.SaveChanges();
+        {            
+            adminManager = new AdminManager(db);
+            adminManager.DeleteUser(id);
             return RedirectToAction("Index");
         }
 
