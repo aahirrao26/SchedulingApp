@@ -86,11 +86,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <EntityDeploy Include="MedicalSchedulerDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MedicalSchedulerDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="MedicalSchedulerDBModel.edmx.diagram">
       <DependentUpon>MedicalSchedulerDBModel.edmx</DependentUpon>
     </None>
