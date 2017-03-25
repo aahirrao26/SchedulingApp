@@ -1,0 +1,1 @@
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.csprojResolveAssemblyReference.cache
