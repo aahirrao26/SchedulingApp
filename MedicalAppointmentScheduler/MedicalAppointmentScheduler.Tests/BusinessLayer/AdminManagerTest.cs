@@ -1,25 +1,21 @@
-﻿using MedicalAppointmentScheduler.Controllers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
+using MedicalAppointmentScheduler.Core.Business;
+using System.Data.Entity;
+using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using System.Data.Entity;
-using System.Web.Mvc;
-using System.Web.Security;
-using System.Web;
 
-namespace MedicalAppointmentScheduler.Tests.Controllers
+
+namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 {
-    /// <summary>
-    /// Summary description for AccountControllerTest
-    /// </summary>
     [TestClass]
-    public class AccountControllerTest
+    public class AdminManagerTest
     {
-        AccountController accountController;
+        private AdminManager adminManager;
+        private Mock<MedicalSchedulerDBEntities> mockContext;
 
         [TestInitialize]
         public void setUpData()
@@ -55,32 +51,31 @@ namespace MedicalAppointmentScheduler.Tests.Controllers
             mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.Expression).Returns(userDetailsData.Expression);
             mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.ElementType).Returns(userDetailsData.ElementType);
 
-            var mockContext = new Mock<MedicalSchedulerDBEntities>();
+            mockContext = new Mock<MedicalSchedulerDBEntities>();
             mockContext.Setup(m => m.UserLogins).Returns(mockUserLoginSet.Object);
             mockContext.Setup(m => m.UserDetails).Returns(mockUserDetailsSet.Object);
             mockContext.Setup(m => m.UserRoles).Returns(mockUserRoleSet.Object);
 
-            accountController = new AccountController(mockContext.Object);
+            adminManager = new AdminManager(mockContext.Object);
         }
 
         [TestMethod]
-        public void TestLoginGet()
+        public void CreateUserTest()
         {
-            string testurl = "http://gooogle.com";
-            var result = accountController.Login(testurl) as ViewResult;
+            UserDetails user = new UserDetails() { ID = 3, FirstName = "Sean", LastName = "Fox", EmailAdress = "33@gmail.com", RoleID = 3 };
 
-            Assert.AreEqual(testurl, result.ViewBag.ReturnUrl);
+            adminManager.CreateUser(user);
+            var test = mockContext.Object.UserDetails.Where(o => o.ID.Equals(3)).Select(u => u.ID).SingleOrDefault();
+            Assert.AreEqual(2, test);
         }
 
         [TestMethod]
-        public void TestLoginValidUser()
+        public void Delete()
         {
-            //Response.Cookies.Add(FormsAuthentication.GetAuthCookie("user-1", true));
-            UserLogin loginViewModel = new UserLogin() { Email = "aa@gmail.com", Password = "12345" };
-            //var result = accountController.Login(loginViewModel) as ViewResult;
+            adminManager.DeleteUser(1);
+            var test = mockContext.Object.UserDetails.Where(o => o.ID.Equals(1)).Select(u => u.ID).SingleOrDefault();
+            Assert.AreEqual(test, 0);
 
-            //Assert.AreEqual("Index", result.ViewName);
-            //Assert.AreEqual("Administrator", result.Model);
         }
     }
 }
