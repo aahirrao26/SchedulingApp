@@ -101,7 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\AccountManagerTest.cs" />
-    <Compile Include="Controllers\AdministratorControllerTest.cs" />
+    <Compile Include="BusinessLayer\AdminManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
