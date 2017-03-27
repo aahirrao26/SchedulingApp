@@ -27,6 +27,8 @@ namespace MedicalAppointmentScheduler.Core.Data
         public string Phone { get; set; }
         public string EmailAdress { get; set; }
         public Nullable<int> RoleID { get; set; }
+        public string MiddleName { get; set; }
+        public Nullable<int> AGE { get; set; }
     
         public virtual UserRole L_User_Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

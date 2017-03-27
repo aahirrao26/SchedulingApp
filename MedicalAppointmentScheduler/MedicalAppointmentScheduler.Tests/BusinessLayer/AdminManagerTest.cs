@@ -1,19 +1,22 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System.Data.Entity;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using Moq;
+
 
 namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 {
     [TestClass]
-    public class AccountManagerTest
+    public class AdminManagerTest
     {
-        AccountManager accountManager;
-      
+        private AdminManager adminManager;
+        private Mock<MedicalSchedulerDBEntities> mockContext;
+
         [TestInitialize]
         public void setUpData()
         {
@@ -48,50 +51,31 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.Expression).Returns(userDetailsData.Expression);
             mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.ElementType).Returns(userDetailsData.ElementType);
 
-            var mockContext = new Mock<MedicalSchedulerDBEntities>();
+            mockContext = new Mock<MedicalSchedulerDBEntities>();
             mockContext.Setup(m => m.UserLogins).Returns(mockUserLoginSet.Object);
             mockContext.Setup(m => m.UserDetails).Returns(mockUserDetailsSet.Object);
             mockContext.Setup(m => m.UserRoles).Returns(mockUserRoleSet.Object);
 
-            accountManager = new AccountManager(mockContext.Object);
+            adminManager = new AdminManager(mockContext.Object);
         }
 
         [TestMethod]
-        public void TestValidateUserForValidCredentials()
-        {           
-            int userId =  accountManager.ValidateUser("aa@gmail.com","12345");
-
-            Assert.AreEqual(1, userId);
-        }
-
-        [TestMethod]
-        public void TestValidateUserForInvalidEmail()
+        public void CreateUserTest()
         {
-            int userId = accountManager.ValidateUser("ba@gmail.com", "12345");
+            UserDetails user = new UserDetails() { ID = 3, FirstName = "Sean", LastName = "Fox", EmailAdress = "33@gmail.com", RoleID = 3 };
 
-            Assert.AreEqual(0, userId);
+            adminManager.CreateUser(user);
+            var test = mockContext.Object.UserDetails.Where(o => o.ID.Equals(3)).Select(u => u.ID).SingleOrDefault();
+            Assert.AreEqual(2, test);
         }
 
         [TestMethod]
-        public void TestValidateUserForInvalidPassword()
+        public void Delete()
         {
-            int userId = accountManager.ValidateUser("aa@gmail.com", "xyz");
+            adminManager.DeleteUser(1);
+            var test = mockContext.Object.UserDetails.Where(o => o.ID.Equals(1)).Select(u => u.ID).SingleOrDefault();
+            Assert.AreEqual(test, 0);
 
-            Assert.AreEqual(0, userId);
-        }
-
-        [TestMethod]
-        public void TestGetUserRole()
-        {
-            string role = accountManager.GetUserRole(1);
-            Assert.AreEqual("Administrator", role);
-        }
-
-        [TestMethod]
-        public void TestGetUserInvalidRole()
-        {
-            string role = accountManager.GetUserRole(2);
-            Assert.AreEqual(null, role);
         }
     }
 }

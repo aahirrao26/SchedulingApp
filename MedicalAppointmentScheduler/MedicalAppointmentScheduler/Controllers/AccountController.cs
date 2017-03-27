@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
-using MedicalAppointmentScheduler.Models;
-using MedicalAppointmentScheduler.Models.BusinessClass;
 using MedicalAppointmentScheduler.Core.Business;
 using MedicalAppointmentScheduler.Core.Data;
 
@@ -9,8 +7,17 @@ namespace MedicalAppointmentScheduler.Controllers
 {
     public class AccountController : Controller
     {
+        MedicalSchedulerDBEntities dbContext;
+        public AccountController() {
+            dbContext = new MedicalSchedulerDBEntities();
+        }
+        public AccountController(MedicalSchedulerDBEntities _dbContext)
+        {
+            dbContext = _dbContext;
+        }
+
         //GET: this action is called for all anonymous users to get authenticated
-       [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -23,7 +30,7 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             if (ModelState.IsValid)
             {
-                MedicalSchedulerDBEntities dbContext = new MedicalSchedulerDBEntities();
+                
                 AccountManager loginManager = new AccountManager(dbContext);
                 int userId = loginManager.ValidateUser(loginViewModel.Email, loginViewModel.Password);
                 if (userId != 0)

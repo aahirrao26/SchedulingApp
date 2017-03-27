@@ -2,7 +2,7 @@
 using MedicalAppointmentScheduler.Core.Data;
 using System.Data.Entity;
 
-namespace MedicalAppointmentScheduler.Models.BusinessClass
+namespace MedicalAppointmentScheduler.Core.Business
 {
     public class AccountManager
     {
