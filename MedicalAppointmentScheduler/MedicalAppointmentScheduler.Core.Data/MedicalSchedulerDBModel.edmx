@@ -37,9 +37,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
           <Property Name="LastName" Type="varchar" MaxLength="100" />
-          <Property Name="AGE" Type="int" />
           <Property Name="Phone" Type="varchar" MaxLength="20" />
           <Property Name="EmailAdress" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="RoleID" Type="int" />
@@ -53,7 +51,7 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__User_Addr__State__398D8EEE">
+        <Association Name="FK__User_Addr__State__1A14E395">
           <End Role="L_State" Type="Self.L_State" Multiplicity="0..1" />
           <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -65,7 +63,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_Addr__UserI__3A81B327">
+        <Association Name="FK__User_Addr__UserI__1B0907CE">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="0..1" />
           <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -77,7 +75,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_Deta__RoleI__1BFD2C07">
+        <Association Name="FK__User_Deta__RoleI__1273C1CD">
           <End Role="L_User_Roles" Type="Self.L_User_Roles" Multiplicity="0..1" />
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="*" />
           <ReferentialConstraint>
@@ -89,7 +87,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_Logi__UserI__36B12243">
+        <Association Name="FK__User_Logi__UserI__15502E78">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="1" />
           <End Role="User_Login" Type="Self.User_Login" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,19 +105,19 @@
           <EntitySet Name="User_Address" EntityType="Self.User_Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Details" EntityType="Self.User_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Login" EntityType="Self.User_Login" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__User_Addr__State__398D8EEE" Association="Self.FK__User_Addr__State__398D8EEE">
+          <AssociationSet Name="FK__User_Addr__State__1A14E395" Association="Self.FK__User_Addr__State__1A14E395">
             <End Role="L_State" EntitySet="L_State" />
             <End Role="User_Address" EntitySet="User_Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_Addr__UserI__3A81B327" Association="Self.FK__User_Addr__UserI__3A81B327">
+          <AssociationSet Name="FK__User_Addr__UserI__1B0907CE" Association="Self.FK__User_Addr__UserI__1B0907CE">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="User_Address" EntitySet="User_Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_Deta__RoleI__1BFD2C07" Association="Self.FK__User_Deta__RoleI__1BFD2C07">
+          <AssociationSet Name="FK__User_Deta__RoleI__1273C1CD" Association="Self.FK__User_Deta__RoleI__1273C1CD">
             <End Role="L_User_Roles" EntitySet="L_User_Roles" />
             <End Role="User_Details" EntitySet="User_Details" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_Logi__UserI__36B12243" Association="Self.FK__User_Logi__UserI__36B12243">
+          <AssociationSet Name="FK__User_Logi__UserI__15502E78" Association="Self.FK__User_Logi__UserI__15502E78">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="User_Login" EntitySet="User_Login" />
           </AssociationSet>
@@ -171,8 +169,6 @@
           <NavigationProperty Name="L_User_Roles" Relationship="Self.FK__User_Deta__RoleI__1273C1CD" FromRole="User_Details" ToRole="L_User_Roles" />
           <NavigationProperty Name="User_Address" Relationship="Self.FK__User_Addr__UserI__1B0907CE" FromRole="User_Details" ToRole="User_Address" />
           <NavigationProperty Name="User_Login" Relationship="Self.FK__User_Logi__UserI__15502E78" FromRole="User_Details" ToRole="User_Login" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AGE" Type="Int32" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -293,8 +289,6 @@
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="MedicalSchedulerDBModel.UserDetails">
               <MappingFragment StoreEntitySet="User_Details">
-                <ScalarProperty Name="AGE" ColumnName="AGE" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
