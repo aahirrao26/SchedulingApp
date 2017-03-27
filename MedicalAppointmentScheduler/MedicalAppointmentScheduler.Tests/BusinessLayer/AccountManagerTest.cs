@@ -3,9 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Data.Entity;
 using MedicalAppointmentScheduler.Core.Data;
-using MedicalAppointmentScheduler.Models.BusinessClass;
 using System.Collections.Generic;
 using System.Linq;
+using MedicalAppointmentScheduler.Controllers;
+using MedicalAppointmentScheduler.Core.Business;
+using System.Web.Mvc;
 
 namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 {
@@ -13,7 +15,11 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
     public class AccountManagerTest
     {
         AccountManager accountManager;
-      
+        AccountController controller;
+
+        Mock<IAccountManager> mockAccountManager;      
+        Mock<IAuthentication> mockAuth = new Mock<IAuthentication>();
+
         [TestInitialize]
         public void setUpData()
         {
@@ -54,6 +60,8 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             mockContext.Setup(m => m.UserRoles).Returns(mockUserRoleSet.Object);
 
             accountManager = new AccountManager(mockContext.Object);
+            mockAccountManager = new Mock<IAccountManager>();
+            controller = new AccountController(mockContext.Object, mockAccountManager.Object, mockAuth.Object);            
         }
 
         [TestMethod]
@@ -92,6 +100,24 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         {
             string role = accountManager.GetUserRole(2);
             Assert.AreEqual(null, role);
+        }
+
+        [TestMethod]
+        public void TestControllerLogin()
+        {   
+            //Arrange
+            UserLogin loginViewModel = new UserLogin() { Email="aa@gmail.com",Password="12345"};
+            mockAuth.Setup(x => x.SetAuthCookie(loginViewModel.Email)).Verifiable();
+
+            mockAccountManager.Setup(x => x.ValidateUser(loginViewModel.Email, loginViewModel.Password)).Returns(1);
+            mockAccountManager.Setup(x => x.GetUserRole(1)).Returns("Administrator");
+
+            //Act
+            RedirectToRouteResult result = (RedirectToRouteResult)controller.Login(loginViewModel) ;
+
+            //Assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Administrator", result.RouteValues["controller"]);
         }
     }
 }

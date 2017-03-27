@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MedicalAppointmentScheduler.Core.Business
 {
-    public class AdminManager
+    public class AdminManager: IAdminManager
     {
         private MedicalSchedulerDBEntities dbContext;
 
