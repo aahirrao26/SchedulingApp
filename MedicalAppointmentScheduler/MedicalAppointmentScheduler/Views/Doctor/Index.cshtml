@@ -1,8 +1,11 @@
-﻿@{
-    ViewBag.Title = "Your Home Page";
+﻿@model IEnumerable<MedicalAppointmentScheduler.Core.Data.UserDetails>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="jumbotron">
-    <h1>Medical Scheduler</h1>
-    <p class="lead">Manage your appoinments</p>
+    <p>
+        @Html.ActionLink("Search for Patient", "Search")
+    </p>
 </div>
