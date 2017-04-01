@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-
+using EntityFramework.MoqHelper;
 
 namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 {
@@ -16,66 +16,138 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
     {
         private AdminManager adminManager;
         private Mock<MedicalSchedulerDBEntities> mockContext;
+        List<UserDetails> userDetailsData;
+        List<UserLogin> userLoginData;
+        List<UserAddress> userAddressData;
+        List<UserRole> userRoleData;
 
-        [TestInitialize]
+       [TestInitialize]
         public void setUpData()
         {
-            var UserLoginData = new List<UserLogin>
-            {
-                new UserLogin { ID = 1, Email="aa@gmail.com", Password="12345", UserID = 1},
-                new UserLogin { ID = 2, Email="bb@gmail.com", Password="12345", UserID = 2}
-            }.AsQueryable();
+             userLoginData = new List<UserLogin>();
+             var mockUserLoginSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserLogin>()
+                                      .SetupForQueryOn(userLoginData)
+                                       .WithAdd(userLoginData)
+                                       .WithRemove(userLoginData)
+                                       .WithFind(userLoginData,"UserID");
+        
+            userDetailsData = new List<UserDetails>();
+            var mockUserDetailsSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserDetails>()
+                                      .SetupForQueryOn(userDetailsData)
+                                       .WithAdd(userDetailsData)
+                                       .WithRemove(userDetailsData)
+                                       .WithFind(userDetailsData,"ID");
+            mockUserDetailsSet.Setup(m => m.Include(It.IsAny<string>())).Returns(mockUserDetailsSet.Object);
+                              
+            userAddressData = new List<UserAddress>();
+            var mockUserAddressSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserAddress>()
+                                      .SetupForQueryOn(userAddressData)
+                                       .WithAdd(userAddressData)
+                                       .WithRemove(userAddressData)
+                                       .WithFind(userAddressData,"UserID");
 
-            var userRoleData = new List<UserRole>
-            {
-                new UserRole {ID=1, RoleName="Administrator"}
-            }.AsQueryable();
+            userRoleData = new List<UserRole>();
+            userRoleData.Add(new UserRole { ID = 1, RoleName = "Test_Admin" });
+            userRoleData.Add(new UserRole { ID = 2, RoleName = "Test_Doctor" });
 
-            var userDetailsData = new List<UserDetails>
-            {
-                new UserDetails {ID=1,RoleID=1}
-            }.AsQueryable();
+            var mockUserRoleSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserRole>()
+                                      .SetupForQueryOn(userRoleData);
 
-            var mockUserLoginSet = new Mock<DbSet<UserLogin>>();
-            mockUserLoginSet.As<IQueryable<UserLogin>>().Setup(m => m.Provider).Returns(UserLoginData.Provider);
-            mockUserLoginSet.As<IQueryable<UserLogin>>().Setup(m => m.Expression).Returns(UserLoginData.Expression);
-            mockUserLoginSet.As<IQueryable<UserLogin>>().Setup(m => m.ElementType).Returns(UserLoginData.ElementType);
 
-            var mockUserRoleSet = new Mock<DbSet<UserRole>>();
-            mockUserRoleSet.As<IQueryable<UserRole>>().Setup(m => m.Provider).Returns(userRoleData.Provider);
-            mockUserRoleSet.As<IQueryable<UserRole>>().Setup(m => m.Expression).Returns(userRoleData.Expression);
-            mockUserRoleSet.As<IQueryable<UserRole>>().Setup(m => m.ElementType).Returns(userRoleData.ElementType);
-
-            var mockUserDetailsSet = new Mock<DbSet<UserDetails>>();
-            mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.Provider).Returns(userDetailsData.Provider);
-            mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.Expression).Returns(userDetailsData.Expression);
-            mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.ElementType).Returns(userDetailsData.ElementType);
-
-            mockContext = new Mock<MedicalSchedulerDBEntities>();
+           mockContext = new Mock<MedicalSchedulerDBEntities>();        
             mockContext.Setup(m => m.UserLogins).Returns(mockUserLoginSet.Object);
             mockContext.Setup(m => m.UserDetails).Returns(mockUserDetailsSet.Object);
+            mockContext.Setup(m => m.UserAddresses).Returns(mockUserAddressSet.Object);
             mockContext.Setup(m => m.UserRoles).Returns(mockUserRoleSet.Object);
 
-            adminManager = new AdminManager(mockContext.Object);
+            adminManager = new AdminManager(mockContext.Object);    
         }
 
-        //[TestMethod]
-        //public void CreateUserTest()
-        //{
-        //    UserDetails user = new UserDetails() { ID = 3, FirstName = "Sean", LastName = "Fox", EmailAdress = "33@gmail.com", RoleID = 3 };
+        [TestMethod]
+        public void CreateUserTest()
+        {
+            //Arrange
+            UserDetails user = new UserDetails() { ID = 3, FirstName = "Sean", LastName = "Fox", EmailAdress = "33@gmail.com", RoleID = 3 };
 
-        //    adminManager.CreateUser(user);
-        //    var test = mockContext.Object.UserDetails.Where(o => o.ID.Equals(3)).Select(u => u.ID).SingleOrDefault();
-        //    Assert.AreEqual(2, test);
-        //}
+            //Act
+            adminManager.CreateUser(user);
 
-        //[TestMethod]
-        //public void Delete()
-        //{
-        //    adminManager.DeleteUser(1);
-        //    var test = mockContext.Object.UserDetails.Where(o => o.ID.Equals(1)).Select(u => u.ID).SingleOrDefault();
-        //    Assert.AreEqual(test, 0);
+            //Assert
+            Assert.AreEqual(1, mockContext.Object.UserDetails.Count());
+            Assert.AreEqual("33@gmail.com", mockContext.Object.UserDetails.Single().EmailAdress);
+            Assert.AreEqual("Sean", userDetailsData[0].FirstName);
+            Assert.AreEqual("Fox", userDetailsData[0].LastName);
+            Assert.AreEqual(3, userDetailsData[0].RoleID);
+        }
 
-        //}
+        [TestMethod]
+        public void DeleteUserTest()
+        {
+            //Arrange
+            UserDetails testUser = new UserDetails() { ID = 3, FirstName = "Sean", LastName = "Fox", EmailAdress = "33@gmail.com", RoleID = 3 };
+            userDetailsData.Add(testUser);
+            UserAddress testAddress = new UserAddress() { AddressID = 1, AddressLine = "5th Street", City = "Charlotte", StateID = 1, UserID = 3 };
+            userAddressData.Add(testAddress);
+            UserLogin userLogin = new UserLogin { ID = 1, UserID=3, Email="33@gmail.com", Password="xyz"};
+            userLoginData.Add(userLogin);
+            
+            //Pre-Assert          
+            Assert.AreEqual(1, userDetailsData.Count);
+            Assert.AreEqual(1, userAddressData.Count);
+            Assert.AreEqual(1, userLoginData.Count);
+
+
+            //Act
+            adminManager.DeleteUser(3);
+           
+            //Assert
+            Assert.AreEqual(0,userDetailsData.Count);
+            Assert.AreEqual(0, userAddressData.Count);
+            Assert.AreEqual(0, userLoginData.Count);
+        }
+
+        [TestMethod]
+
+        public void FindUserTest()
+        {
+            //Arrange
+            Assert.AreEqual(0, mockContext.Object.UserDetails.Count());
+            UserDetails user = new UserDetails() { ID = 1, FirstName = "Sean", LastName = "Fox", EmailAdress = "33@gmail.com", RoleID = 3 };
+            userDetailsData.Add(user);
+            Assert.AreEqual(1, mockContext.Object.UserDetails.Count());
+
+            //Act
+            UserDetails testUser = adminManager.FindUser(1);
+
+            //Assert
+            Assert.AreEqual("33@gmail.com", testUser.EmailAdress);
+            Assert.AreEqual("Sean", testUser.FirstName);
+            Assert.AreEqual("Fox", testUser.LastName);
+        }
+
+        [TestMethod]
+        public void TestGetRoles()
+        {
+            List<UserRole> testRoles = adminManager.GetRoles().ToList();
+
+            Assert.AreEqual("Test_Admin",testRoles[0].RoleName);
+            Assert.AreEqual("Test_Doctor",testRoles[1].RoleName);
+        }
+
+        [TestMethod]
+        public void TestGetUSerList()
+        {
+            //Arrange            
+            UserDetails user = new UserDetails() { ID = 1, FirstName = "John", LastName = "Test", EmailAdress = "33@gmail.com", RoleID = 3, L_User_Roles= new UserRole { ID = 3, RoleName = "Test_Admin" } };
+            userDetailsData.Add(user);
+                       
+            //Act
+            List<UserDetails> testUsers = adminManager.GetUserList();
+
+            //Assert
+            Assert.AreEqual("John", testUsers[0].FirstName);
+            Assert.AreEqual("Test", testUsers[0].LastName);
+        }
+      
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using MedicalAppointmentScheduler.Controllers;
 using MedicalAppointmentScheduler.Core.Business;
 using System.Web.Mvc;
+using EntityFramework.MoqHelper;
 
 namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 {
@@ -23,36 +24,31 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         [TestInitialize]
         public void setUpData()
         {
-            var UserLoginData = new List<UserLogin>
+            var userLoginData = new List<UserLogin>
             {
                 new UserLogin { ID = 1, Email="aa@gmail.com", Password="12345", UserID = 1},
                 new UserLogin { ID = 2, Email="bb@gmail.com", Password="12345", UserID = 2}
-            }.AsQueryable();
+            };
 
             var userRoleData = new List<UserRole>
             {
-                new UserRole {ID=1, RoleName="Administrator"}
-            }.AsQueryable();
+                new UserRole {ID=1, RoleName="Test_Admin"}
+            };
 
             var userDetailsData = new List<UserDetails>
             {
                 new UserDetails {ID=1,RoleID=1}
-            }.AsQueryable();
+            };
 
-            var mockUserLoginSet = new Mock<DbSet<UserLogin>>();
-            mockUserLoginSet.As<IQueryable<UserLogin>>().Setup(m => m.Provider).Returns(UserLoginData.Provider);
-            mockUserLoginSet.As<IQueryable<UserLogin>>().Setup(m => m.Expression).Returns(UserLoginData.Expression);
-            mockUserLoginSet.As<IQueryable<UserLogin>>().Setup(m => m.ElementType).Returns(UserLoginData.ElementType);
+            var mockUserLoginSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserLogin>()
+                                      .SetupForQueryOn(userLoginData);
 
-            var mockUserRoleSet = new Mock<DbSet<UserRole>>();
-            mockUserRoleSet.As<IQueryable<UserRole>>().Setup(m => m.Provider).Returns(userRoleData.Provider);
-            mockUserRoleSet.As<IQueryable<UserRole>>().Setup(m => m.Expression).Returns(userRoleData.Expression);
-            mockUserRoleSet.As<IQueryable<UserRole>>().Setup(m => m.ElementType).Returns(userRoleData.ElementType);
+            var mockUserRoleSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserRole>()
+                                      .SetupForQueryOn(userRoleData);              
 
-            var mockUserDetailsSet = new Mock<DbSet<UserDetails>>();
-            mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.Provider).Returns(userDetailsData.Provider);
-            mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.Expression).Returns(userDetailsData.Expression);
-            mockUserDetailsSet.As<IQueryable<UserDetails>>().Setup(m => m.ElementType).Returns(userDetailsData.ElementType);
+            var mockUserDetailsSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserDetails>()
+                                      .SetupForQueryOn(userDetailsData);
+          
 
             var mockContext = new Mock<MedicalSchedulerDBEntities>();
             mockContext.Setup(m => m.UserLogins).Returns(mockUserLoginSet.Object);
@@ -61,7 +57,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 
             accountManager = new AccountManager(mockContext.Object);
             mockAccountManager = new Mock<IAccountManager>();
-            controller = new AccountController(mockContext.Object, mockAccountManager.Object, mockAuth.Object);            
+            controller = new AccountController(mockAccountManager.Object, mockAuth.Object);            
         }
 
         [TestMethod]
@@ -92,7 +88,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         public void TestGetUserRole()
         {
             string role = accountManager.GetUserRole(1);
-            Assert.AreEqual("Administrator", role);
+            Assert.AreEqual("Test_Admin", role);
         }
 
         [TestMethod]

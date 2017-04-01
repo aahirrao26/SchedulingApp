@@ -8,15 +8,35 @@ using System.Threading.Tasks;
 
 namespace MedicalAppointmentScheduler.Core.Business
 {
+    public interface IAdminManager
+    {
+        void DeleteUser(int userId);
+
+        void EditUser(UserDetails userDetails);
+
+        void CreateUser(UserDetails userDetails);
+
+        List<UserDetails> GetUserList();
+
+        DbSet<UserRole> GetRoles();
+
+        UserDetails FindUser(int? userId);
+    }
+
     public class AdminManager: IAdminManager
     {
         private MedicalSchedulerDBEntities dbContext;
+
+        public AdminManager()
+        {
+            this.dbContext = new MedicalSchedulerDBEntities();
+        }
 
         public AdminManager(MedicalSchedulerDBEntities _dbContext)
         {
             this.dbContext = _dbContext; 
         }
-
+               
         /// <summary>
         /// This method will delete the user 
         /// </summary>
@@ -69,7 +89,29 @@ namespace MedicalAppointmentScheduler.Core.Business
         {
             dbContext.UserDetails.Add(userDetails);
             dbContext.SaveChanges();
-        }             
-            
+        }
+
+        public List<UserDetails> GetUserList()
+        {
+            List<UserDetails> userList = dbContext.UserDetails.Include(u => u.L_User_Roles).ToList();
+            return userList;
+        }
+
+        public UserDetails FindUser(int? userId)
+        {
+            UserDetails user = dbContext.UserDetails.Find(userId);
+            return user;
+        }
+
+        public DbSet<UserRole> GetRoles()
+        {
+            return dbContext.UserRoles;
+        }
+
+        public void Dispose()
+        {
+            dbContext.Dispose(); 
+        }
+
     }
 }

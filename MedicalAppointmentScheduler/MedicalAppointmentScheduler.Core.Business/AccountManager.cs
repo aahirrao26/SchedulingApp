@@ -3,9 +3,20 @@ using MedicalAppointmentScheduler.Core.Data;
 
 namespace MedicalAppointmentScheduler.Core.Business
 {
+    public interface IAccountManager
+    {
+        int ValidateUser(string userName, string password);
+        string GetUserRole(int userId);
+    }
+
     public class AccountManager : IAccountManager
     {
         private MedicalSchedulerDBEntities dbContext;
+
+        public AccountManager()
+        {
+            this.dbContext = new MedicalSchedulerDBEntities();
+        }
         public AccountManager(MedicalSchedulerDBEntities _dbContext)
         {
             this.dbContext = _dbContext;

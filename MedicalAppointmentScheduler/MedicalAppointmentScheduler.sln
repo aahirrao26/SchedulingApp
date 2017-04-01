@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{93802318-239
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DDL", "DDL", "{C241A884-EA02-46DC-90C5-0F955456978A}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\NANDU\Desktop\UserTables_03222017.sql = C:\Users\NANDU\Desktop\UserTables_03222017.sql
+		..\..\..\..\..\NANDU\Desktop\UserTables_03222017.sql = ..\..\..\..\..\NANDU\Desktop\UserTables_03222017.sql
 	EndProjectSection
 EndProject
 Global
