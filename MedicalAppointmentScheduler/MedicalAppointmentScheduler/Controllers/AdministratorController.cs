@@ -12,16 +12,27 @@ using MedicalAppointmentScheduler.Core.Business;
 namespace MedicalAppointmentScheduler.Controllers
 {
     [Authorize]
+    [OutputCache(NoStore = true, Duration = 0)]
     public class AdministratorController : Controller
     {
-        private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
+       //private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
         private AdminManager adminManager;
+
+        public AdministratorController()
+        {
+            adminManager = new AdminManager();
+        }
+
+        public AdministratorController(AdminManager _adminManager)
+        {
+            adminManager = _adminManager;
+        }
 
         // GET: Administrator
         public ActionResult Index()
         {
-            var userDetails = db.UserDetails.Include(u => u.L_User_Roles);
-            return View(userDetails.ToList());
+            List<UserDetails> userList = adminManager.GetUserList();
+            return View(userList);
         }
 
         // GET: Administrator/Details/5
@@ -31,7 +42,7 @@ namespace MedicalAppointmentScheduler.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = adminManager.FindUser(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
@@ -42,7 +53,7 @@ namespace MedicalAppointmentScheduler.Controllers
         // GET: Administrator/Create
         public ActionResult Create()
         {
-            ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName");
+            ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName");
             return View();
         }
 
@@ -51,13 +62,12 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Phone,EmailAdress,RoleID")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
-            {
-                adminManager = new AdminManager(db);
+            {               
                 adminManager.CreateUser(userDetails);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName", userDetails.RoleID);
+            ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName", userDetails.RoleID);
             return View(userDetails);
         }
 
@@ -68,12 +78,12 @@ namespace MedicalAppointmentScheduler.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = adminManager.FindUser(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName", userDetails.RoleID);
+            ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName", userDetails.RoleID);
             return View(userDetails);
         }
 
@@ -82,12 +92,11 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Phone,EmailAdress,RoleID")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
-            {              
-                adminManager = new AdminManager(db);
+            {                          
                 adminManager.EditUser(userDetails);
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName", userDetails.RoleID);
+            ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName", userDetails.RoleID);
             return View(userDetails);
         }
 
@@ -98,7 +107,7 @@ namespace MedicalAppointmentScheduler.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = adminManager.FindUser(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
@@ -110,8 +119,7 @@ namespace MedicalAppointmentScheduler.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {            
-            adminManager = new AdminManager(db);
+        {                    
             adminManager.DeleteUser(id);
             return RedirectToAction("Index");
         }
@@ -120,7 +128,7 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                adminManager.Dispose();
             }
             base.Dispose(disposing);
         }

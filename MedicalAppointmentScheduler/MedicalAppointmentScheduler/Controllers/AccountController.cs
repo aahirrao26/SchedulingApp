@@ -5,22 +5,19 @@ using MedicalAppointmentScheduler.Core.Data;
 namespace MedicalAppointmentScheduler.Controllers
 {
     public class AccountController : Controller
-    {
-        MedicalSchedulerDBEntities dbContext;
+    {      
         IAccountManager loginManager;
         IAuthentication authenticationHelper;
 
         public AccountController()
-        {
-            dbContext = new MedicalSchedulerDBEntities();
-            loginManager = new AccountManager(dbContext);
+        {            
+            loginManager = new AccountManager();
             authenticationHelper = new FormsAuth();
 
         }
 
-        public AccountController(MedicalSchedulerDBEntities _db , IAccountManager _loginManager, IAuthentication _authenticationHelper)
-        {
-            MedicalSchedulerDBEntities dbContext =_db ;
+        public AccountController(IAccountManager _loginManager, IAuthentication _authenticationHelper)
+        {           
             loginManager = _loginManager;
             authenticationHelper = _authenticationHelper;
         }
