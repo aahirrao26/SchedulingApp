@@ -38,7 +38,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
                                        .WithRemove(userDetailsData)
                                        .WithFind(userDetailsData,"ID");
             mockUserDetailsSet.Setup(m => m.Include(It.IsAny<string>())).Returns(mockUserDetailsSet.Object);
-                              
+                                          
             userAddressData = new List<UserAddress>();
             var mockUserAddressSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserAddress>()
                                       .SetupForQueryOn(userAddressData)
@@ -135,7 +135,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         }
 
         [TestMethod]
-        public void TestGetUSerList()
+        public void TestGetUserList()
         {
             //Arrange            
             UserDetails user = new UserDetails() { ID = 1, FirstName = "John", LastName = "Test", EmailAdress = "33@gmail.com", RoleID = 3, L_User_Roles= new UserRole { ID = 3, RoleName = "Test_Admin" } };
@@ -148,6 +148,27 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             Assert.AreEqual("John", testUsers[0].FirstName);
             Assert.AreEqual("Test", testUsers[0].LastName);
         }
-      
+
+        /// <summary>
+        /// The below method is testing the edit user functionality with test database
+        /// </summary>
+        [TestMethod]
+        public void TestEditUser()
+        {
+            //Arrange
+            //The below will initialize accordingly to the connection string specified in the app.config under test project
+            //the connection string under test project is set to TestDatabase
+            MedicalSchedulerDBEntities testContext = new MedicalSchedulerDBEntities();
+            AdminManager testAdminManager = new AdminManager(testContext);
+
+            //Edit test for first name, Last name, Email and phone.
+            UserDetails editUser = new UserDetails() { ID = 4, FirstName = "Test4 Edit", LastName = "Test4 Edit", EmailAdress = "edit_test4@gmail.com", RoleID = 4, L_User_Roles = null, User_Address = null, User_Login = null, Phone = "454-133-1234" };
+
+            testAdminManager.EditUser(editUser);
+
+            UserDetails testUser = testAdminManager.FindUser(4);
+            Assert.AreEqual("Test4 Edit", testUser.FirstName);
+            Assert.AreEqual("Test4 Edit", testUser.LastName);
+        }
     }
 }
