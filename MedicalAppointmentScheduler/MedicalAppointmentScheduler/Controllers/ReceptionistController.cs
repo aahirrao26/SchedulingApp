@@ -24,11 +24,11 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Search(string firstName, string lastName)
         {
             if (lastName == "")
-                return View(db.UserDetails.Where(u => (u.FirstName == firstName || firstName == null) && (u.RoleID == 4)).ToList());
+                return View(db.UserDetails.Where(u => (u.FirstName == firstName || firstName == null) && (u.RoleID == 2)).ToList());
             else if (firstName == "")
-                return View(db.UserDetails.Where(u => (u.LastName == lastName || lastName == null) && (u.RoleID == 4)).ToList());
+                return View(db.UserDetails.Where(u => (u.LastName == lastName || lastName == null) && (u.RoleID == 2)).ToList());
             else
-                return View(db.UserDetails.Where(u => (u.FirstName == firstName || firstName == null) && (u.LastName == lastName || lastName == null) && (u.RoleID == 4)).ToList());
+                return View(db.UserDetails.Where(u => (u.FirstName == firstName || firstName == null) && (u.LastName == lastName || lastName == null) && (u.RoleID == 2)).ToList());
         }
     }
 }
