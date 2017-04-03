@@ -1,0 +1,76 @@
+﻿@model IEnumerable<MedicalAppointmentScheduler.Core.Data.UserDetails>
+@{
+    ViewBag.Title = "Search for Patients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Search.css" rel="stylesheet" />
+
+
+<div id="search-form" style="margin-top:100px;margin-bottom:50px;">
+    @using (Html.BeginForm("Search", "Doctor", FormMethod.Get))
+    {
+        <b>
+            First Name:
+        </b>
+        @Html.TextBox("firstName")
+        <b style="margin-left:50px;">
+            Last Name:
+        </b>
+        @Html.TextBox("lastName")
+        <input id="Search" value="Search" type="submit" class="search-btn btn btn-default">
+    }
+</div>
+
+
+<div id="results" style="margin-top:50px;">
+    <table class="table">
+        <tr>
+            <th>Select</th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAdress)
+            </th>
+        </tr>
+
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="5" style="text-align:center;">
+                    No matching records found
+                </td>
+            </tr>
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.RadioButton("Select", "Appointment")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAdress)
+                </td>
+            </tr>
+        }
+    </table>
+    <div style="text-align:center;">
+        <input id="View-Pat" value="View Patient" type="button" class="btn-lg btn-default">
+    </div>
+</div>
