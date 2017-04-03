@@ -23,6 +23,10 @@ namespace MedicalAppointmentScheduler.Core.Business
         UserDetails FindUser(int? userId);
     }
 
+    /// <summary>
+    /// The below class will implement IAdminManger
+    /// </summary>
+
     public class AdminManager: IAdminManager
     {
         private MedicalSchedulerDBEntities dbContext;
