@@ -12,14 +12,14 @@ namespace MedicalAppointmentScheduler.Controllers
     [OutputCache(NoStore = true, Duration = 0)]
     public class AdministratorController : Controller
     {
-        private AdminManager adminManager;
+        private IAdminManager adminManager;
 
         public AdministratorController()
         {
             adminManager = new AdminManager();
         }
 
-        public AdministratorController(AdminManager _adminManager)
+        public AdministratorController(IAdminManager _adminManager)
         {
             adminManager = _adminManager;
         }

@@ -42,6 +42,10 @@ public partial class MedicalSchedulerDBEntities : DbContext
 
     public virtual DbSet<UserLogin> UserLogins { get; set; }
 
+    public virtual DbSet<Appointment> Appointments { get; set; }
+
+    public virtual DbSet<Slots> Slots { get; set; }
+
 }
 
 }

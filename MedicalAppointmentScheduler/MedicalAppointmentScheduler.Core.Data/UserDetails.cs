@@ -26,6 +26,12 @@ public partial class UserDetails
 
         this.User_Login = new HashSet<UserLogin>();
 
+        this.Appointments = new HashSet<Appointment>();
+
+        this.Appointments1 = new HashSet<Appointment>();
+
+        this.Appointments2 = new HashSet<Appointment>();
+
     }
 
 
@@ -52,6 +58,18 @@ public partial class UserDetails
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<UserLogin> User_Login { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Appointment> Appointments { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Appointment> Appointments1 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Appointment> Appointments2 { get; set; }
 
 }
 

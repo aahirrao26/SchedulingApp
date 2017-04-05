@@ -5,7 +5,18 @@
 }
 <link href="~/Content/Search.css" rel="stylesheet" />
 
-
+@if (TempData["UserSuccessMessage"] != null)
+{
+<div style="margin-top:100px;margin-bottom:50px;" class="alert-success">
+    <span class="successMessage">@TempData["UserSuccessMessage"]</span> 
+</div>
+}
+@if (TempData["UserErrorMessage"] != null)
+{
+    <div style="margin-top:100px;margin-bottom:50px;" class="alert-danger">
+        <span class="successMessage">@TempData["UserErrorMessage"]</span>
+    </div>
+}
 <div id="search-form" style="margin-top:100px;margin-bottom:50px;">
     @using (Html.BeginForm("Search", "Receptionist", FormMethod.Get))
     {
@@ -21,11 +32,9 @@
     }
 </div>
 
-
 <div id="results" style="margin-top:50px;">
     <table class="table">
         <tr>
-            <th>Select</th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -38,6 +47,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.EmailAdress)
             </th>
+            <th></th>
         </tr>
 
         @if (Model.Count() == 0)
@@ -53,9 +63,6 @@
         {
             <tr>
                 <td>
-                    @Html.RadioButton("Select", "Appointment")
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 <td>
@@ -67,9 +74,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EmailAdress)
                 </td>
+                <td>
+                    @Html.ActionLink("Make Appointment","MakeAppointment", new { patientID = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { patientID = item.ID })
+                </td>
             </tr>
         }
     </table>
-    <div style="text-align:center;"><input id="View-Pat" value="View Patient" type="button" class="btn-lg btn-default">
-    <input id="Make-Aptmt" value="Make Appointment" type="button" class="btn-lg btn-default"></div>
+    @*<div style="text-align:center;"><input id="View-Pat" value="View Patient" type="button" class="btn-lg btn-default">
+    <input id="Make-Aptmt" value="Make Appointment" type="button" class="btn-lg btn-default"></div>*@
 </div>
