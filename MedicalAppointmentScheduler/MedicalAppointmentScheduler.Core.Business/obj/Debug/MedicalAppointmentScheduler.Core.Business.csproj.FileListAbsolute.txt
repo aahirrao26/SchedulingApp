@@ -22,3 +22,15 @@ C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\M
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.csprojResolveAssemblyReference.cache
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.dll
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.pdb
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Business.dll.config
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Business.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Business.pdb
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\EntityFramework.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\EntityFramework.SqlServer.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Data.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\MedicalAppointmentScheduler.Core.Data.pdb
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\EntityFramework.xml
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\bin\Debug\EntityFramework.SqlServer.xml
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.csprojResolveAssemblyReference.cache
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Business\obj\Debug\MedicalAppointmentScheduler.Core.Business.pdb

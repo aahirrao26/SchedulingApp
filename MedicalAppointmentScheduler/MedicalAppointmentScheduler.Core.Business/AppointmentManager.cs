@@ -11,6 +11,7 @@ namespace MedicalAppointmentScheduler.Core.Business
     {
         bool BookAppointment(Appointment newAppointment);
         List<UserDetails> GetDoctorList();
+        List<int> GetAvailableSlots(int doctorID, DateTime date);
 
     }
     public class AppointmentManager:IAppointmentManager
@@ -36,9 +37,6 @@ namespace MedicalAppointmentScheduler.Core.Business
         {
             try
             {
-                //TODO: Remove hardcorded value for slot
-                newAppointment.SlotID = 1;
-                               
                 dbContext.Appointments.Add(newAppointment);
                 dbContext.SaveChanges();
                 return true;
@@ -56,6 +54,22 @@ namespace MedicalAppointmentScheduler.Core.Business
         public List<UserDetails> GetDoctorList()
         { 
             return dbContext.UserDetails.Where(role => role.RoleID == (int)ApplicationRole.Doctor).ToList();
+        }
+
+        public List<int> GetAvailableSlots(int doctorID, DateTime date) {
+
+            //var query =
+            //from slots in dbContext.Slots
+            //join appointments in dbContext.Appointments.Where(a=>a.DoctorID==doctorID && a.Date==date.Date) on slots.ID equals appointments.SlotID into gj
+            //from x in gj.DefaultIfEmpty()
+            //select new
+            //{
+            //    ID = slots.ID,
+            //    StartTime = slots.StartTime,
+            //    EndTime = slots.EndTime 
+            //};
+
+            return dbContext.Slots.Select(s=>s.ID).ToList();
         }
     }
 }
