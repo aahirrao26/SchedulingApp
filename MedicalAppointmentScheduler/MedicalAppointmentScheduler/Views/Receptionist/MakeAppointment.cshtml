@@ -30,7 +30,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "/Receptionist/GetAvailableSlotsFor?doctorID=1&date=" + $(".date-picker").val(),
+                url: "/Receptionist/GetAvailableSlotsFor?doctorID=" + $("#ddlDoctor option:selected").val() + "&date=" + $(".date-picker").val(),
                 success: function (data) {
                     var slots = data.availableSlots;
                     if (slots.length == 0) {
@@ -58,7 +58,6 @@
         })
 
         $("#ddlDoctor").change(function () {
-
             $("#makeAppointment").addClass("invisible");
             $("#lblSlot").addClass("invisible");
             $("#slotsGroup").html('');

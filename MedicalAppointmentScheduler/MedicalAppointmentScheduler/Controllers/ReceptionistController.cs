@@ -76,7 +76,7 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult GetAvailableSlotsFor(int doctorID, DateTime date) {
 
             var availableSlots = appointmentManager.GetAvailableSlots(doctorID, date);
-            
+
             return Json(new { availableSlots }, JsonRequestBehavior.AllowGet);
         }
     }
