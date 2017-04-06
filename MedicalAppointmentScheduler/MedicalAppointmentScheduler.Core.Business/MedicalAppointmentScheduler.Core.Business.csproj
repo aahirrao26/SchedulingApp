@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="AccountManager.cs" />
     <Compile Include="AdminManager.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="AppointmentManager.cs" />
     <Compile Include="IAuthentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

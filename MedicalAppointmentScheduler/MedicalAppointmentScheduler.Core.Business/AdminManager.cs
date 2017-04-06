@@ -21,6 +21,8 @@ namespace MedicalAppointmentScheduler.Core.Business
         DbSet<UserRole> GetRoles();
 
         UserDetails FindUser(int? userId);
+
+        void Dispose();
     }
 
     /// <summary>

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
+using PagedList;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
@@ -15,24 +12,27 @@ namespace MedicalAppointmentScheduler.Controllers
     [OutputCache(NoStore = true, Duration = 0)]
     public class AdministratorController : Controller
     {
-       //private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
-        private AdminManager adminManager;
+        private IAdminManager adminManager;
 
         public AdministratorController()
         {
             adminManager = new AdminManager();
         }
 
-        public AdministratorController(AdminManager _adminManager)
+        public AdministratorController(IAdminManager _adminManager)
         {
             adminManager = _adminManager;
         }
 
         // GET: Administrator
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int pageSize =5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+
             List<UserDetails> userList = adminManager.GetUserList();
-            return View(userList);
+            return View(userList.ToPagedList(pageIndex, pageSize));
         }
 
         // GET: Administrator/Details/5
