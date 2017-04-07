@@ -108,3 +108,7 @@ C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\M
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.dll
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.pdb
+C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\EntityFramework.MoqHelper.dll
+C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\PagedList.dll
+C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\EntityFramework.MoqHelper.xml
+C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\PagedList.xml

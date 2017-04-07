@@ -15,13 +15,19 @@ namespace MedicalAppointmentScheduler.Controllers
     public class ReceptionistController : Controller
     {
         private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
+        private ISearchManager SearchManager;
         IAppointmentManager appointmentManager;
 
         public ReceptionistController()
         {
+            SearchManager = new SearchManager();
             appointmentManager = new AppointmentManager();
         }
 
+        public ReceptionistController(ISearchManager _SearchManager)
+        {
+            SearchManager = _SearchManager;
+        }
         public ReceptionistController(IAppointmentManager _appointmentManager)
         {
             appointmentManager = _appointmentManager ;
@@ -37,11 +43,11 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Search(string firstName, string lastName)
         {
             if (lastName == "")
-                return View(db.UserDetails.Where(u => (u.FirstName == firstName || firstName == null) && (u.RoleID == 2)).ToList());
+                return View(SearchManager.GetPatientList(firstName, lastName));
             else if (firstName == "")
-                return View(db.UserDetails.Where(u => (u.LastName == lastName || lastName == null) && (u.RoleID == 2)).ToList());
+                return View(SearchManager.GetPatientList(firstName, lastName));
             else
-                return View(db.UserDetails.Where(u => (u.FirstName == firstName || firstName == null) && (u.LastName == lastName || lastName == null) && (u.RoleID == 2)).ToList());
+                return View(SearchManager.GetPatientList(firstName, lastName));
         }
 
         public ActionResult MakeAppointment(int patientID)

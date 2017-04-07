@@ -7,12 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
+using MedicalAppointmentScheduler.Core.Business;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
+    [Authorize]
     public class DoctorController : Controller
     {
-        private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
+        private ISearchManager SearchManager;
+
+        public DoctorController()
+        {
+            SearchManager = new SearchManager();
+        }
+
+        public DoctorController(ISearchManager _SearchManager)
+        {
+            SearchManager = _SearchManager;
+        }
 
         // GET: Doctor
         public ActionResult Index()
@@ -24,11 +36,11 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Search(string firstName, string lastName)
         {
             if (lastName == "")
-                return View(db.UserDetails.Where(u => (u.FirstName == firstName || firstName == null) && (u.RoleID == 2)).ToList());
+                return View(SearchManager.GetPatientList(firstName, lastName));
             else if (firstName == "")
-                return View(db.UserDetails.Where(u => (u.LastName == lastName || lastName == null) && (u.RoleID == 2)).ToList());
+                return View(SearchManager.GetPatientList(firstName, lastName));
             else
-                return View(db.UserDetails.Where(u => (u.FirstName == firstName || firstName == null) && (u.LastName == lastName || lastName == null) && (u.RoleID == 2)).ToList());
+                return View(SearchManager.GetPatientList(firstName, lastName));
         }
     }
 }
