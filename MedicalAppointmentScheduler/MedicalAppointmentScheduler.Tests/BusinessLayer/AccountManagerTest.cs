@@ -9,6 +9,7 @@ using MedicalAppointmentScheduler.Controllers;
 using MedicalAppointmentScheduler.Core.Business;
 using System.Web.Mvc;
 using EntityFramework.MoqHelper;
+using System.Web;
 
 namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 {
@@ -107,6 +108,12 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 
             mockAccountManager.Setup(x => x.ValidateUser(loginViewModel.Email, loginViewModel.Password)).Returns(1);
             mockAccountManager.Setup(x => x.GetUserRole(1)).Returns("Administrator");
+
+            //Arrange session object
+            var context = new Mock<ControllerContext>();
+            var session = new Mock<HttpSessionStateBase>();
+            context.Setup(m => m.HttpContext.Session).Returns(session.Object);
+            controller.ControllerContext = context.Object;
 
             //Act
             RedirectToRouteResult result = (RedirectToRouteResult)controller.Login(loginViewModel) ;
