@@ -8,15 +8,41 @@ using System.Threading.Tasks;
 
 namespace MedicalAppointmentScheduler.Core.Business
 {
-    public class AdminManager
+    public interface IAdminManager
+    {
+        void DeleteUser(int userId);
+
+        void EditUser(UserDetails userDetails);
+
+        void CreateUser(UserDetails userDetails);
+
+        List<UserDetails> GetUserList();
+
+        DbSet<UserRole> GetRoles();
+
+        UserDetails FindUser(int? userId);
+
+        void Dispose();
+    }
+
+    /// <summary>
+    /// The below class will implement IAdminManger
+    /// </summary>
+
+    public class AdminManager: IAdminManager
     {
         private MedicalSchedulerDBEntities dbContext;
 
-        public AdminManager(MedicalSchedulerDBEntities _dbContext)
+        public AdminManager()
         {
-            this.dbContext = _dbContext;
+            this.dbContext = new MedicalSchedulerDBEntities();
         }
 
+        public AdminManager(MedicalSchedulerDBEntities _dbContext)
+        {
+            this.dbContext = _dbContext; 
+        }
+               
         /// <summary>
         /// This method will delete the user 
         /// </summary>
@@ -71,13 +97,27 @@ namespace MedicalAppointmentScheduler.Core.Business
             dbContext.SaveChanges();
         }
 
-        /**
-         * Used to retrieve data.  For testing purposes only.
-         */
-        public int getUserDetails(int id)
+        public List<UserDetails> GetUserList()
         {
-            var roleId = dbContext.UserDetails.Where(o => o.ID.Equals(id)).Select(u => u.ID).SingleOrDefault();
-            return roleId;
+            List<UserDetails> userList = dbContext.UserDetails.Include(u => u.L_User_Roles).ToList();
+            return userList;
         }
+
+        public UserDetails FindUser(int? userId)
+        {
+            UserDetails user = dbContext.UserDetails.Find(userId);
+            return user;
+        }
+
+        public DbSet<UserRole> GetRoles()
+        {
+            return dbContext.UserRoles;
+        }
+
+        public void Dispose()
+        {
+            dbContext.Dispose(); 
+        }
+
     }
 }

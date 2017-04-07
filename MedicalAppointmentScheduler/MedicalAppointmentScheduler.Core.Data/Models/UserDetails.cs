@@ -12,7 +12,14 @@ namespace MedicalAppointmentScheduler.Core.Data
     public partial class UserDetails
     {
 
-
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+        
     }
 
     public class UserDetailsMetadata
@@ -28,7 +35,7 @@ namespace MedicalAppointmentScheduler.Core.Data
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Phone Name")]
+        [Display(Name = "Phone Number")]
         public string Phone { get; set; }
 
         [Required]

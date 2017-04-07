@@ -1,25 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
+using MedicalAppointmentScheduler.Core.Business;
+using PagedList;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
     [Authorize]
+    [OutputCache(NoStore = true, Duration = 0)]
     public class AdministratorController : Controller
     {
-        private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
+        private IAdminManager adminManager;
+
+        public AdministratorController()
+        {
+            adminManager = new AdminManager();
+        }
+
+        public AdministratorController(IAdminManager _adminManager)
+        {
+            adminManager = _adminManager;
+        }
 
         // GET: Administrator
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var userDetails = db.UserDetails.Include(u => u.L_User_Roles);
-            return View(userDetails.ToList());
+            int pageSize =5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+
+            List<UserDetails> userList = adminManager.GetUserList();
+            return View(userList.ToPagedList(pageIndex, pageSize));
         }
 
         // GET: Administrator/Details/5
@@ -29,7 +42,7 @@ namespace MedicalAppointmentScheduler.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = adminManager.FindUser(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
@@ -40,7 +53,7 @@ namespace MedicalAppointmentScheduler.Controllers
         // GET: Administrator/Create
         public ActionResult Create()
         {
-            ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName");
+            ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName");
             return View();
         }
 
@@ -49,13 +62,12 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Phone,EmailAdress,RoleID")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
-            {
-                db.UserDetails.Add(userDetails);
-                db.SaveChanges();
+            {               
+                adminManager.CreateUser(userDetails);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName", userDetails.RoleID);
+            ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName", userDetails.RoleID);
             return View(userDetails);
         }
 
@@ -66,12 +78,12 @@ namespace MedicalAppointmentScheduler.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = adminManager.FindUser(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName", userDetails.RoleID);
+            ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName", userDetails.RoleID);
             return View(userDetails);
         }
 
@@ -80,12 +92,11 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Phone,EmailAdress,RoleID")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(userDetails).State = EntityState.Modified;
-                db.SaveChanges();
+            {                          
+                adminManager.EditUser(userDetails);
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleID = new SelectList(db.UserRoles, "ID", "RoleName", userDetails.RoleID);
+            ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName", userDetails.RoleID);
             return View(userDetails);
         }
 
@@ -96,7 +107,7 @@ namespace MedicalAppointmentScheduler.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = adminManager.FindUser(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
@@ -108,10 +119,8 @@ namespace MedicalAppointmentScheduler.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
-            UserDetails userDetails = db.UserDetails.Find(id);
-            db.UserDetails.Remove(userDetails);
-            db.SaveChanges();
+        {                    
+            adminManager.DeleteUser(id);
             return RedirectToAction("Index");
         }
 
@@ -119,7 +128,7 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                adminManager.Dispose();
             }
             base.Dispose(disposing);
         }

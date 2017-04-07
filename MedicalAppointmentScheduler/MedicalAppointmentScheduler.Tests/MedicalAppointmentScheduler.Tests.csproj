@@ -41,6 +41,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework.MoqHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.MoqHelper.1.0.0\lib\net45\EntityFramework.MoqHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
@@ -101,13 +105,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\AccountManagerTest.cs" />
-    <Compile Include="Controllers\UnitTest1.cs" />
     <Compile Include="BusinessLayer\AdminManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config" />
+    <Content Include="App.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -125,6 +129,9 @@
       <Project>{0318BD82-F8C3-43B2-84E5-1B4DBB9AC8BA}</Project>
       <Name>MedicalAppointmentScheduler</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

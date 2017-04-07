@@ -1,14 +1,27 @@
 ﻿using System.Web.Mvc;
-using System.Web.Security;
-using MedicalAppointmentScheduler.Models;
-using MedicalAppointmentScheduler.Models.BusinessClass;
 using MedicalAppointmentScheduler.Core.Business;
 using MedicalAppointmentScheduler.Core.Data;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
     public class AccountController : Controller
-    {
+    {      
+        IAccountManager loginManager;
+        IAuthentication authenticationHelper;
+
+        public AccountController()
+        {            
+            loginManager = new AccountManager();
+            authenticationHelper = new FormsAuth();
+
+        }
+
+        public AccountController(IAccountManager _loginManager, IAuthentication _authenticationHelper)
+        {           
+            loginManager = _loginManager;
+            authenticationHelper = _authenticationHelper;
+        }
+
         //GET: this action is called for all anonymous users to get authenticated
        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -22,14 +35,14 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Login(UserLogin loginViewModel)
         {
             if (ModelState.IsValid)
-            {
-                MedicalSchedulerDBEntities dbContext = new MedicalSchedulerDBEntities();
-                AccountManager loginManager = new AccountManager(dbContext);
-                int userId = loginManager.ValidatedUser(loginViewModel.Email, loginViewModel.Password);
+            {                            
+                int userId = loginManager.ValidateUser(loginViewModel.Email, loginViewModel.Password);
                 if (userId != 0)
                 {
-                    FormsAuthentication.SetAuthCookie(loginViewModel.Email, false);
-                    return RedirectToAction("Index", loginManager.GetUserRole(userId));
+                    authenticationHelper.SetAuthCookie(loginViewModel.Email);
+                    Session["LoggedInUser"] = userId;
+                    string controllerRole = loginManager.GetUserRole(userId) == null ? "Home" : loginManager.GetUserRole(userId);
+                    return RedirectToAction("Index", controllerRole);
                 }
                 else
                 {
@@ -46,7 +59,7 @@ namespace MedicalAppointmentScheduler.Controllers
         [Authorize]
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
+            authenticationHelper.LogOff();
             return RedirectToAction("Index", "Home");
         }
 

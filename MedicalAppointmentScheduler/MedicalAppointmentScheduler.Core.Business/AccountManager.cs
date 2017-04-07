@@ -1,12 +1,22 @@
 ﻿using System.Linq;
 using MedicalAppointmentScheduler.Core.Data;
-using System.Data.Entity;
 
-namespace MedicalAppointmentScheduler.Models.BusinessClass
+namespace MedicalAppointmentScheduler.Core.Business
 {
-    public class AccountManager
+    public interface IAccountManager
+    {
+        int ValidateUser(string userName, string password);
+        string GetUserRole(int userId);
+    }
+
+    public class AccountManager : IAccountManager
     {
         private MedicalSchedulerDBEntities dbContext;
+
+        public AccountManager()
+        {
+            this.dbContext = new MedicalSchedulerDBEntities();
+        }
         public AccountManager(MedicalSchedulerDBEntities _dbContext)
         {
             this.dbContext = _dbContext;
@@ -17,7 +27,7 @@ namespace MedicalAppointmentScheduler.Models.BusinessClass
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public int ValidatedUser(string userName, string password)
+        public int ValidateUser(string userName, string password)
         {
             var userId = dbContext.UserLogins.Where(o => o.Email.ToLower().Equals(userName) && o.Password.Equals(password)).Select(u => u.UserID).SingleOrDefault();
             return userId;

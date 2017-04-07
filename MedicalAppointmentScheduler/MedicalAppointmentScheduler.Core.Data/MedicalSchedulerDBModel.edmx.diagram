@@ -14,6 +14,12 @@
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__User_Deta__RoleI__1273C1CD" ManuallyRouted="false" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__User_Addr__UserI__1B0907CE" ManuallyRouted="false" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__User_Logi__UserI__15502E78" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.Appointment" Width="1.5" PointX="8.25" PointY="4.125" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.Slots" Width="1.5" PointX="6" PointY="0.75" />
+        <AssociationConnector Association="MedicalSchedulerDBModel.FK__Appointme__Booke__4D94879B" />
+        <AssociationConnector Association="MedicalSchedulerDBModel.FK__Appointme__Docto__4BAC3F29" />
+        <AssociationConnector Association="MedicalSchedulerDBModel.FK__Appointme__Patie__4CA06362" />
+        <AssociationConnector Association="MedicalSchedulerDBModel.FK__Appointme__SlotI__4E88ABD4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
