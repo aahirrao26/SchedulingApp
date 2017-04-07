@@ -52,16 +52,16 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             List<UserDetails> testPatients = SearchManager.GetPatientList("John", "Smith");
 
             //Assert
-            Assert.AreEqual(userDetailsData[1].FirstName, testPatients[0].FirstName);
-            Assert.AreEqual(userDetailsData[1].LastName, testPatients[0].LastName);
+            Assert.AreEqual("John", testPatients[0].FirstName);
+            Assert.AreEqual("Smith", testPatients[0].LastName);
             Assert.AreEqual(1, testPatients.Count);
 
             //Act
             testPatients = SearchManager.GetPatientList("John", "");
 
             //Assert
-            Assert.AreEqual(userDetailsData[1].FirstName, testPatients[0].FirstName);
-            Assert.AreEqual(userDetailsData[1].LastName, testPatients[0].LastName);
+            Assert.AreEqual("John", testPatients[0].FirstName);
+            Assert.AreEqual("Smith", testPatients[0].LastName);
             Assert.AreEqual(1, testPatients.Count);
         }
     }
