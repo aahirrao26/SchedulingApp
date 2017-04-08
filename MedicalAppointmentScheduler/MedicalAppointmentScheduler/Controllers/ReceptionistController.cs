@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
 
@@ -70,6 +71,13 @@ namespace MedicalAppointmentScheduler.Controllers
 
             ViewBag.DoctorID = new SelectList(appointmentManager.GetDoctorList(), "ID", "FullName");           
             return View(appointment);
+        }
+
+        public ActionResult GetAvailableSlotsFor(int doctorID, DateTime date) {
+
+            var availableSlots = appointmentManager.GetAvailableSlots(doctorID, date);
+
+            return Json(new { availableSlots }, JsonRequestBehavior.AllowGet);
         }
     }
 }
