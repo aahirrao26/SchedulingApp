@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicalSchedulerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="User_Address" Relationship="Self.FK__User_Addr__State__1A14E395" FromRole="L_State" ToRole="User_Address" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User_Details" Relationship="Self.FK__User_Deta__RoleI__1273C1CD" FromRole="L_User_Roles" ToRole="User_Details" />
+  </EntityType>
+  <EntityType Name="UserAddress">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressLine" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StateID" Type="Int32" />
+    <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="L_State" Relationship="Self.FK__User_Addr__State__1A14E395" FromRole="User_Address" ToRole="L_State" />
+    <NavigationProperty Name="User_Details" Relationship="Self.FK__User_Addr__UserI__1B0907CE" FromRole="User_Address" ToRole="User_Details" />
+  </EntityType>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAdress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" />
+    <NavigationProperty Name="L_User_Roles" Relationship="Self.FK__User_Deta__RoleI__1273C1CD" FromRole="User_Details" ToRole="L_User_Roles" />
+    <NavigationProperty Name="User_Address" Relationship="Self.FK__User_Addr__UserI__1B0907CE" FromRole="User_Details" ToRole="User_Address" />
+    <NavigationProperty Name="User_Login" Relationship="Self.FK__User_Logi__UserI__15502E78" FromRole="User_Details" ToRole="User_Login" />
+    <NavigationProperty Name="Appointments" Relationship="MedicalSchedulerDBModel.FK__Appointme__Booke__4D94879B" FromRole="UserDetails" ToRole="Appointment" />
+    <NavigationProperty Name="Appointments1" Relationship="MedicalSchedulerDBModel.FK__Appointme__Docto__4BAC3F29" FromRole="UserDetails" ToRole="Appointment" />
+    <NavigationProperty Name="Appointments2" Relationship="MedicalSchedulerDBModel.FK__Appointme__Patie__4CA06362" FromRole="UserDetails" ToRole="Appointment" />
+  </EntityType>
+  <EntityType Name="UserLogin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User_Details" Relationship="Self.FK__User_Logi__UserI__15502E78" FromRole="User_Login" ToRole="User_Details" />
+  </EntityType>
+  <Association Name="FK__User_Addr__State__1A14E395">
+    <End Role="L_State" Type="MedicalSchedulerDBModel.State" Multiplicity="0..1" />
+    <End Role="User_Address" Type="MedicalSchedulerDBModel.UserAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="L_State">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Address">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Deta__RoleI__1273C1CD">
+    <End Role="L_User_Roles" Type="MedicalSchedulerDBModel.UserRole" Multiplicity="0..1" />
+    <End Role="User_Details" Type="MedicalSchedulerDBModel.UserDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="L_User_Roles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Details">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Addr__UserI__1B0907CE">
+    <End Role="User_Details" Type="MedicalSchedulerDBModel.UserDetails" Multiplicity="0..1" />
+    <End Role="User_Address" Type="MedicalSchedulerDBModel.UserAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_Details">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Address">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Logi__UserI__15502E78">
+    <End Role="User_Details" Type="MedicalSchedulerDBModel.UserDetails" Multiplicity="1" />
+    <End Role="User_Login" Type="MedicalSchedulerDBModel.UserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_Details">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Login">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedicalSchedulerDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="States" EntityType="MedicalSchedulerDBModel.State" />
+    <EntitySet Name="UserRoles" EntityType="MedicalSchedulerDBModel.UserRole" />
+    <EntitySet Name="UserAddresses" EntityType="MedicalSchedulerDBModel.UserAddress" />
+    <EntitySet Name="UserDetails" EntityType="MedicalSchedulerDBModel.UserDetails" />
+    <EntitySet Name="UserLogins" EntityType="MedicalSchedulerDBModel.UserLogin" />
+    <AssociationSet Name="FK__User_Addr__State__1A14E395" Association="Self.FK__User_Addr__State__1A14E395">
+      <End Role="L_State" EntitySet="States" />
+      <End Role="User_Address" EntitySet="UserAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Deta__RoleI__1273C1CD" Association="Self.FK__User_Deta__RoleI__1273C1CD">
+      <End Role="L_User_Roles" EntitySet="UserRoles" />
+      <End Role="User_Details" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Addr__UserI__1B0907CE" Association="Self.FK__User_Addr__UserI__1B0907CE">
+      <End Role="User_Details" EntitySet="UserDetails" />
+      <End Role="User_Address" EntitySet="UserAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Logi__UserI__15502E78" Association="Self.FK__User_Logi__UserI__15502E78">
+      <End Role="User_Details" EntitySet="UserDetails" />
+      <End Role="User_Login" EntitySet="UserLogins" />
+    </AssociationSet>
+    <EntitySet Name="Appointments" EntityType="MedicalSchedulerDBModel.Appointment" />
+    <EntitySet Name="Slots" EntityType="MedicalSchedulerDBModel.Slots" />
+    <AssociationSet Name="FK__Appointme__Booke__4D94879B" Association="MedicalSchedulerDBModel.FK__Appointme__Booke__4D94879B">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appointme__Docto__4BAC3F29" Association="MedicalSchedulerDBModel.FK__Appointme__Docto__4BAC3F29">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appointme__Patie__4CA06362" Association="MedicalSchedulerDBModel.FK__Appointme__Patie__4CA06362">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appointme__SlotI__4E88ABD4" Association="MedicalSchedulerDBModel.FK__Appointme__SlotI__4E88ABD4">
+      <End Role="L_Slots" EntitySet="Slots" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DoctorID" Type="Int32" Nullable="false" />
+    <Property Name="PatientID" Type="Int32" />
+    <Property Name="BookedBy" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SlotID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User_Details" Relationship="MedicalSchedulerDBModel.FK__Appointme__Booke__4D94879B" FromRole="Appointment" ToRole="UserDetails" />
+    <NavigationProperty Name="User_Details1" Relationship="MedicalSchedulerDBModel.FK__Appointme__Docto__4BAC3F29" FromRole="Appointment" ToRole="UserDetails" />
+    <NavigationProperty Name="User_Details2" Relationship="MedicalSchedulerDBModel.FK__Appointme__Patie__4CA06362" FromRole="Appointment" ToRole="UserDetails" />
+    <NavigationProperty Name="L_Slots" Relationship="MedicalSchedulerDBModel.FK__Appointme__SlotI__4E88ABD4" FromRole="Appointment" ToRole="L_Slots" />
+  </EntityType>
+  <EntityType Name="Slots">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Appointments" Relationship="MedicalSchedulerDBModel.FK__Appointme__SlotI__4E88ABD4" FromRole="L_Slots" ToRole="Appointment" />
+  </EntityType>
+  <Association Name="FK__Appointme__Booke__4D94879B">
+    <End Type="MedicalSchedulerDBModel.UserDetails" Role="UserDetails" Multiplicity="1" />
+    <End Type="MedicalSchedulerDBModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="BookedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appointme__Docto__4BAC3F29">
+    <End Type="MedicalSchedulerDBModel.UserDetails" Role="UserDetails" Multiplicity="1" />
+    <End Type="MedicalSchedulerDBModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="DoctorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appointme__Patie__4CA06362">
+    <End Type="MedicalSchedulerDBModel.UserDetails" Role="UserDetails" Multiplicity="0..1" />
+    <End Type="MedicalSchedulerDBModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="PatientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appointme__SlotI__4E88ABD4">
+    <End Type="MedicalSchedulerDBModel.Slots" Role="L_Slots" Multiplicity="1" />
+    <End Type="MedicalSchedulerDBModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="L_Slots">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="SlotID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
