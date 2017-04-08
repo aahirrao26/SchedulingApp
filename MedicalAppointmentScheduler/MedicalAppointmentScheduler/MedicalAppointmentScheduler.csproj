@@ -313,6 +313,8 @@
     <Content Include="Views\Doctor\Search.cshtml" />
     <Content Include="Views\Receptionist\Search.cshtml" />
     <Content Include="Views\Receptionist\MakeAppointment.cshtml" />
+    <Content Include="Views\Receptionist\EditAppointment.cshtml" />
+    <Content Include="Views\Receptionist\DeleteAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,15 +23,11 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             SearchManager = new SearchManager();
             appointmentManager = new AppointmentManager();
-        }
-
-        public ReceptionistController(ISearchManager _SearchManager)
-        {
-            SearchManager = _SearchManager;
-        }
-        public ReceptionistController(IAppointmentManager _appointmentManager)
+        }       
+        public ReceptionistController(IAppointmentManager _appointmentManager, ISearchManager _SearchManager)
         {
             appointmentManager = _appointmentManager ;
+            SearchManager = _SearchManager;
         }
 
         // GET: Receptionist
@@ -72,7 +68,7 @@ namespace MedicalAppointmentScheduler.Controllers
                     TempData["UserErrorMessage"] = "Sorry! The appointment cannot be booked online at this moment";
 
 
-                return RedirectToAction("Search");
+                return RedirectToAction("EditAppointment");
             }
 
             ViewBag.DoctorID = new SelectList(appointmentManager.GetDoctorList(), "ID", "FullName");           
@@ -84,6 +80,34 @@ namespace MedicalAppointmentScheduler.Controllers
             var availableSlots = appointmentManager.GetAvailableSlots(doctorID, date);
 
             return Json(new { availableSlots }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EditAppointment()
+        {
+            List<Appointment> appointmentList = appointmentManager.GetAppointmentList();
+            return View(appointmentList);                
+        }
+
+        public ActionResult DeleteAppointment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Appointment appointment = appointmentManager.FindAppointment(id);
+            if (appointment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(appointment);
+        }
+     
+        [HttpPost, ActionName("DeleteAppointment")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAppointmentConfirmed(int id)
+        {
+            appointmentManager.DeleteAppointment(id);
+            return RedirectToAction("EditAppointment");
         }
     }
 }

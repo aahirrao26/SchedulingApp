@@ -11,8 +11,10 @@ namespace MedicalAppointmentScheduler.Core.Business
     {
         bool BookAppointment(Appointment newAppointment);
         List<UserDetails> GetDoctorList();
-        List<int> GetAvailableSlots(int doctorID, DateTime date);
-
+        List<AvailableSlots> GetAvailableSlots(int doctorID, DateTime date);
+        List<Appointment> GetAppointmentList();
+        Appointment FindAppointment(int? AppointmentID);
+        void DeleteAppointment(int AppointmentID);
     }
     public class AppointmentManager:IAppointmentManager
     {
@@ -56,17 +58,68 @@ namespace MedicalAppointmentScheduler.Core.Business
             return dbContext.UserDetails.Where(role => role.RoleID == (int)ApplicationRole.Doctor).ToList();
         }
 
-        public List<int> GetAvailableSlots(int doctorID, DateTime date) {
+        /// <summary>
+        /// This gets the list of all the slots based on the provided date and doctor's ID
+        /// </summary>
+        /// <param name="doctorID"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public List<AvailableSlots> GetAvailableSlots(int doctorID, DateTime date) {
 
-            List<int> availableSlots = (from slots in dbContext.Slots
+            List<AvailableSlots> availableSlots = (from slots in dbContext.Slots
                                           join appointments in dbContext.Appointments
                                           on slots.ID equals appointments.SlotID
                                           into sa
                                           from t in sa.Where(f => f.DoctorID == doctorID && f.Date == date.Date).DefaultIfEmpty()
                                           where t == null
-                                          select slots.ID).ToList();
+                                          select new AvailableSlots { ID = slots.ID, EndTime = slots.EndTime, StartTime = slots.EndTime }).ToList();
 
             return availableSlots;
         }
+
+        /// <summary>
+        /// Get the list of all appointments
+        /// </summary>
+        /// <returns></returns>
+        public List<Appointment> GetAppointmentList()
+        {
+            List<Appointment> appointmentList = dbContext.Appointments.Where(u => u.Date>=DateTime.Today).ToList();
+            return appointmentList;
+        }
+
+        /// <summary>
+        /// Find appointment for the passed appointmentID
+        /// </summary>
+        /// <param name="AppointmentID"></param>
+        /// <returns></returns>
+        public Appointment FindAppointment(int? AppointmentID)
+        {
+            Appointment appointment = dbContext.Appointments.Find(AppointmentID);
+            return appointment;
+        }
+
+        /// <summary>
+        /// Delete appointment
+        /// </summary>
+        /// <param name="AppointmentID"></param>
+        public void DeleteAppointment(int AppointmentID)
+        {
+            try
+            {
+                //Delete appointment entry
+                Appointment appointment = dbContext.Appointments.SingleOrDefault(u => u.ID == AppointmentID);
+                if (appointment != null)
+                {
+                    dbContext.Appointments.Remove(appointment);
+                }
+                               
+                dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+
     }
 }

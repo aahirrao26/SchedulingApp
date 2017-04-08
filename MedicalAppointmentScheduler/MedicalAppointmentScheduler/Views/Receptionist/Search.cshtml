@@ -4,19 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Search.css" rel="stylesheet" />
-
-@if (TempData["UserSuccessMessage"] != null)
-{
-    <div style="margin-top:100px;margin-bottom:50px;" class="alert-success">
-        <span class="successMessage">@TempData["UserSuccessMessage"]</span>
-    </div>
-}
-@if (TempData["UserErrorMessage"] != null)
-{
-    <div style="margin-top:100px;margin-bottom:50px;" class="alert-danger">
-        <span class="successMessage">@TempData["UserErrorMessage"]</span>
-    </div>
-}
 <div id="search-form" style="margin-top:100px;margin-bottom:50px;">
     @using (Html.BeginForm("Search", "Receptionist", FormMethod.Get))
     {
@@ -75,8 +62,9 @@
                     @Html.DisplayFor(modelItem => item.EmailAdress)
                 </td>
                 <td>
-                    @Html.ActionLink("Make Appointment", "MakeAppointment", new { patientID = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { patientID = item.ID })
+                    @Html.ActionLink("Make Appointment", "MakeAppointment", new { patientID = item.ID }) 
+                    @*|
+                    @Html.ActionLink("Details", "Details", new { patientID = item.ID })*@
                 </td>
             </tr>
         }

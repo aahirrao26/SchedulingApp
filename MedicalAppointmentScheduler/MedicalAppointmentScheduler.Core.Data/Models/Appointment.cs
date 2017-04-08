@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,9 +29,10 @@ namespace MedicalAppointmentScheduler.Core.Data
         [Display(Name = "Doctor Name")]
         public int DoctorID { get; set; }
 
+        [Display(Name = "Patient Name")]
         public Nullable<int> PatientID { get; set; }
 
-
+        [Display(Name = "Booked By")]
         public int BookedBy { get; set; }
 
         [Required]
@@ -41,8 +43,6 @@ namespace MedicalAppointmentScheduler.Core.Data
         public System.DateTime Date { get; set; }
 
         public int SlotID { get; set; }
-
-
 
         public virtual UserDetails User_Details { get; set; }
 

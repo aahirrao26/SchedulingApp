@@ -26,36 +26,40 @@
 
         $(".date-picker").change(function () {
 
-            $("#slotsGroup").html('');
+                $("#slotsGroup").html('');
 
-            $.ajax({
-                type: "GET",
-                url: "/Receptionist/GetAvailableSlotsFor?doctorID=" + $("#ddlDoctor option:selected").val() + "&date=" + $(".date-picker").val(),
-                success: function (data) {
-                    var slots = data.availableSlots;
-                    if (slots.length == 0) {
-                        $('#slotsGroup').html('<p>No Slots Available for Selected Date</p>');
-                        $("#makeAppointment").addClass("invisible");
-                        $("#lblSlot").addClass("invisible");
+                $.ajax({
+                    type: "GET",
+                    url: "/Receptionist/GetAvailableSlotsFor?doctorID=" + $("#ddlDoctor option:selected").val() + "&date=" + $(".date-picker").val(),
+                    success: function (data) {
+                        var slots = data.availableSlots;
+                        if (slots.length == 0) {
+                            $('#slotsGroup').html('<p>No Slots Available for Selected Date</p>').addClass('alert-danger');
+                            $("#makeAppointment").addClass("invisible");
+                            $("#lblSlot").addClass("invisible");
+                        }
+                        else {
+                            var buttons = '';
+                            var items = '';
+
+                            //$.each(slots, function (i, item) {
+                            //    buttons = buttons + '<option value="' + item.value + '">' + item.text + '</option>';
+                            //});
+                            $('#slotsGroup').html('<select class="form-control" id="SlotID" name="SlotID">' + buttons + '</select>');
+
+                            for (var i = 0; i < slots.length; i++) {
+                                var opt = new Option(slots[i].SlotTime, slots[i].ID);
+                                $('#SlotID').append(opt);
+                            }
+                            $('#slotsGroup').removeClass('alert-danger');
+                            $("#makeAppointment").removeClass("invisible");
+                            $("#lblSlot").removeClass("invisible");
+                        }
                     }
-                    else {
-                        var buttons = '';
-                        var items = '';
+                });
 
-                        $.each(slots, function (i, item) {
-                            buttons = buttons + '<option value="' + item + '">' + item + '</option>';
-                        });
-                        $('#slotsGroup').html('<select class="form-control" id="SlotID" name="SlotID">' + buttons + '</select>');
-
-                        $("#makeAppointment").removeClass("invisible");
-                        $("#lblSlot").removeClass("invisible");
-                    }
-
-                }
-            });
-
-            return false;
-        })
+                return false;
+               })
 
         $("#ddlDoctor").change(function () {
             $("#makeAppointment").addClass("invisible");
@@ -69,10 +73,10 @@
 
 <h2>Make Appointment</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -88,37 +92,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DoctorID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control",@id="ddlDoctor" })
+                @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control", @id = "ddlDoctor" })
                 @Html.ValidationMessageFor(model => model.DoctorID, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.PatientID, "PatientID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PatientID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PatientID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BookedBy, "BookedBy", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("BookedBy", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BookedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Date, new { @class = "date-picker",@id="appointmentDate" })
+                @Html.TextBoxFor(model => model.Date, new { @class = "date-picker", @id = "appointmentDate" })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SlotID, "Slot", htmlAttributes: new { @class = "control-label col-md-2 invisible",@id = "lblSlot" })
+            @Html.LabelFor(model => model.SlotID, "Available Slot", htmlAttributes: new { @class = "control-label col-md-2 invisible", @id = "lblSlot" })
             <div class="col-md-10">
                 <div id="slotsGroup">
                 </div>
@@ -128,12 +116,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default invisible" id="makeAppointment" />
+                <input type="submit" value="Book" class="btn btn-default invisible" id="makeAppointment" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Home Page", "Index")
 </div>

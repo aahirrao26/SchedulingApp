@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
 using PagedList;
+using static MedicalAppointmentScheduler.Core.Business.Helper;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
@@ -106,6 +107,11 @@ namespace MedicalAppointmentScheduler.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var x = ApplicationRole.Administrator.ToString();
+            if (Session["LoggedInUserRole"] != null && Convert.ToString(Session["LoggedInUserRole"]) == ApplicationRole.Administrator.ToString())
+            {
+                return View("Error");
             }
             UserDetails userDetails = adminManager.FindUser(id);
             if (userDetails == null)
