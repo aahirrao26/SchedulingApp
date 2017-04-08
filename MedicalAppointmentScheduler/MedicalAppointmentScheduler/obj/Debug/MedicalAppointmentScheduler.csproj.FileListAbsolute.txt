@@ -260,3 +260,7 @@ C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\Med
 C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.csprojResolveAssemblyReference.cache
 C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.dll
 C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.pdb
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\PagedList.dll
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\PagedList.Mvc.dll
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\PagedList.xml
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\PagedList.Mvc.xml

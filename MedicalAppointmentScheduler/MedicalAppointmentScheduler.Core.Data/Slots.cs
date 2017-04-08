@@ -33,8 +33,6 @@ public partial class Slots
 
     public Nullable<System.TimeSpan> EndTime { get; set; }
 
-
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Appointment> Appointments { get; set; }
