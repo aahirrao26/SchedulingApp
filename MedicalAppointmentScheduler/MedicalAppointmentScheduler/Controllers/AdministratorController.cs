@@ -102,14 +102,14 @@ namespace MedicalAppointmentScheduler.Controllers
         }
 
         // GET: Administrator/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id,int? RoleId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var x = ApplicationRole.Administrator.ToString();
-            if (Session["LoggedInUserRole"] != null && Convert.ToString(Session["LoggedInUserRole"]) == ApplicationRole.Administrator.ToString())
+           
+            if (RoleId == (int)ApplicationRole.Administrator)
             {
                 return View("Error");
             }

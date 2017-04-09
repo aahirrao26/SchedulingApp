@@ -87,7 +87,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         /// <returns></returns>
         public List<Appointment> GetAppointmentList()
         {
-            List<Appointment> appointmentList = dbContext.Appointments.Where(u => u.Date>=DateTime.Today).ToList();
+            List<Appointment> appointmentList = dbContext.Appointments.Where(u => u.Date>=DateTime.Today).OrderByDescending(u=>u.Date).ThenBy(u =>u.L_Slots.StartTime).ToList();
             return appointmentList;
         }
 
