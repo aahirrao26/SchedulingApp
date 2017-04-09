@@ -82,7 +82,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         }
 
         /// <summary>
-        /// Get the list of all appointments
+        /// Get the list of all appointments order by appointment date and starttime
         /// </summary>
         /// <returns></returns>
         public List<Appointment> GetAppointmentList()
