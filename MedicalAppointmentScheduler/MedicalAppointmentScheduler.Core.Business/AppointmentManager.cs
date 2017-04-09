@@ -64,16 +64,20 @@ namespace MedicalAppointmentScheduler.Core.Business
         /// <param name="doctorID"></param>
         /// <param name="date"></param>
         /// <returns></returns>
-        public List<AvailableSlots> GetAvailableSlots(int doctorID, DateTime date) {
-
+        public List<AvailableSlots> GetAvailableSlots(int doctorID, DateTime date)
+        {
             List<AvailableSlots> availableSlots = (from slots in dbContext.Slots
                                           join appointments in dbContext.Appointments
                                           on slots.ID equals appointments.SlotID
                                           into sa
                                           from t in sa.Where(f => f.DoctorID == doctorID && f.Date == date.Date).DefaultIfEmpty()
                                           where t == null
-                                          select new AvailableSlots { ID = slots.ID, EndTime = slots.EndTime, StartTime = slots.EndTime }).ToList();
-
+                                          select new AvailableSlots { ID = slots.ID, EndTime = slots.EndTime, StartTime = slots.StartTime }).ToList();
+            if (date == DateTime.Today)
+            {
+                var currentTime = DateTime.Now.TimeOfDay;
+                availableSlots = availableSlots.Where(f => f.StartTime > currentTime).ToList();
+            }
             return availableSlots;
         }
 

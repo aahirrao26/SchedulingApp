@@ -21,7 +21,7 @@ namespace MedicalAppointmentScheduler.Core.Data
                 time = DateTime.Today.Add(EndTime.Value);
                 string DisplayEndTime = time.ToString("hh:mm tt");
 
-                return DisplayStartTime + "-" + DisplayEndTime;
+                return DisplayStartTime + " - " + DisplayEndTime;
             }
         }
     }
@@ -50,7 +50,7 @@ namespace MedicalAppointmentScheduler.Core.Data
                 time = DateTime.Today.Add(EndTime.Value);
                 string DisplayEndTime = time.ToString("hh:mm tt");
 
-                return DisplayStartTime + "-" + DisplayEndTime;
+                return DisplayStartTime + " - " + DisplayEndTime;
             }
         }
 
