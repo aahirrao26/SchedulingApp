@@ -32,7 +32,7 @@
                     }
                     else
                     {
-                    <li>@Html.ActionLink("HomePage", "Index", @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())</li>
+                    <li>@Html.ActionLink("HomePage", "Index", "Home")</li>
                     }
                     </ul>
                 @Html.Partial("_LoginPartial")

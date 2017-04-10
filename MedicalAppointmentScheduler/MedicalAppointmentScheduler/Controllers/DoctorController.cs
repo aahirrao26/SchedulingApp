@@ -12,6 +12,7 @@ using MedicalAppointmentScheduler.Core.Business;
 namespace MedicalAppointmentScheduler.Controllers
 {
     [Authorize]
+    [OutputCache(NoStore = true, Duration = 0)]
     public class DoctorController : Controller
     {
         private ISearchManager SearchManager;
