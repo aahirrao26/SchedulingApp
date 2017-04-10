@@ -161,3 +161,7 @@ C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\Med
 C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.dll
 C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.pdb
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\EntityFramework.MoqHelper.dll
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\PagedList.dll
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\EntityFramework.MoqHelper.xml
+C:\Users\Sean\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\PagedList.xml
