@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
 
@@ -15,7 +16,8 @@ namespace MedicalAppointmentScheduler.Controllers
     {
         private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
         IAppointmentManager appointmentManager;
-
+        int pageSize = 5;
+        int pageIndex = 1;
         public PatientController()
         {
             appointmentManager = new AppointmentManager();
@@ -26,10 +28,18 @@ namespace MedicalAppointmentScheduler.Controllers
             appointmentManager = _appointmentManager;
         }
 
-        /**
-         * Creates a view displaying all of the patient's appointments and detailes of those appointments
-         */
+       
         public ActionResult Index()
+        {
+            return View();
+        }
+
+
+        /// <summary>
+        /// Creates a view displaying all of the patient's appointments and detailes of those appointments
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ViewUpcomingAppointment()
         {
             int patientID = Convert.ToInt32(Session["LoggedInUser"]);   //Gets patient ID of user
 
@@ -39,11 +49,21 @@ namespace MedicalAppointmentScheduler.Controllers
             //Gets the appointment times for each appointment
             foreach (Appointment i in temp)
             {
-                times.Add(i.ID,db.Slots.Where(u => u.ID == i.SlotID).ToList());
+                times.Add(i.ID, db.Slots.Where(u => u.ID == i.SlotID).ToList());
             }
             ViewBag.slots = times;
 
             return View(db.Appointments.Where(u => u.PatientID == patientID));
+
+        }
+
+        public ActionResult ViewAppointmentHistory(int? page)
+        {
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            int patientID = Convert.ToInt32(Session["LoggedInUser"]);
+            List<Appointment>  appointmentList = appointmentManager.GetPatientAppointmentHistory(patientID);
+            return View(appointmentList.ToPagedList(pageIndex, pageSize));
+          
         }
     }
 }

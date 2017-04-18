@@ -15,6 +15,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         List<Appointment> GetAppointmentList();
         Appointment FindAppointment(int? AppointmentID);
         void DeleteAppointment(int AppointmentID);
+        List<Appointment> GetPatientAppointmentHistory(int patientID);
     }
     public class AppointmentManager:IAppointmentManager
     {
@@ -122,6 +123,25 @@ namespace MedicalAppointmentScheduler.Core.Business
             catch (Exception)
             {
             }
+        }
+
+        /// <summary>
+        /// This method will get the appointment history for the supplied patient 
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        public List<Appointment> GetPatientAppointmentHistory(int patientID)
+        {
+            List<Appointment> appointmentList = new List<Appointment>();
+            if (patientID != 0)
+            {
+                var currentTime = DateTime.Now.TimeOfDay;
+                var appointmentList1 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date < DateTime.Today).OrderByDescending(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
+                var appointmentList2 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date == DateTime.Today && u.L_Slots.EndTime < currentTime).OrderByDescending(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
+
+                appointmentList = appointmentList1.Union(appointmentList2).ToList();
+            }
+            return appointmentList;
         }
 
 
