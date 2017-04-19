@@ -16,6 +16,8 @@
           <Property Name="BookedBy" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="SlotID" Type="int" Nullable="false" />
+          <Property Name="IsCancelled" Type="bit" Nullable="false" />
+          <Property Name="BookedDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="L_Slots">
           <Key>
@@ -71,7 +73,7 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Appointme__Booke__4D94879B">
+        <Association Name="FK__Appointme__Booke__656C112C">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="1" />
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -83,7 +85,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Appointme__Docto__4BAC3F29">
+        <Association Name="FK__Appointme__Docto__6383C8BA">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="1" />
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -95,7 +97,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Appointme__Patie__4CA06362">
+        <Association Name="FK__Appointme__Patie__6477ECF3">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="0..1" />
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,7 +109,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Appointme__SlotI__4E88ABD4">
+        <Association Name="FK__Appointme__SlotI__66603565">
           <End Role="L_Slots" Type="Self.L_Slots" Multiplicity="1" />
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -175,19 +177,19 @@
           <EntitySet Name="User_Address" EntityType="Self.User_Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Details" EntityType="Self.User_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Login" EntityType="Self.User_Login" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Appointme__Booke__4D94879B" Association="Self.FK__Appointme__Booke__4D94879B">
+          <AssociationSet Name="FK__Appointme__Booke__656C112C" Association="Self.FK__Appointme__Booke__656C112C">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Appointme__Docto__4BAC3F29" Association="Self.FK__Appointme__Docto__4BAC3F29">
+          <AssociationSet Name="FK__Appointme__Docto__6383C8BA" Association="Self.FK__Appointme__Docto__6383C8BA">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Appointme__Patie__4CA06362" Association="Self.FK__Appointme__Patie__4CA06362">
+          <AssociationSet Name="FK__Appointme__Patie__6477ECF3" Association="Self.FK__Appointme__Patie__6477ECF3">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Appointme__SlotI__4E88ABD4" Association="Self.FK__Appointme__SlotI__4E88ABD4">
+          <AssociationSet Name="FK__Appointme__SlotI__66603565" Association="Self.FK__Appointme__SlotI__66603565">
             <End Role="L_Slots" EntitySet="L_Slots" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
@@ -373,6 +375,8 @@
           <NavigationProperty Name="User_Details1" Relationship="MedicalSchedulerDBModel.FK__Appointme__Docto__4BAC3F29" FromRole="Appointment" ToRole="UserDetails" />
           <NavigationProperty Name="User_Details2" Relationship="MedicalSchedulerDBModel.FK__Appointme__Patie__4CA06362" FromRole="Appointment" ToRole="UserDetails" />
           <NavigationProperty Name="L_Slots" Relationship="MedicalSchedulerDBModel.FK__Appointme__SlotI__4E88ABD4" FromRole="Appointment" ToRole="L_Slots" />
+          <Property Name="BookedDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Slots">
           <Key>
@@ -491,6 +495,8 @@
           <EntitySetMapping Name="Appointments">
             <EntityTypeMapping TypeName="MedicalSchedulerDBModel.Appointment">
               <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+                <ScalarProperty Name="BookedDate" ColumnName="BookedDate" />
                 <ScalarProperty Name="SlotID" ColumnName="SlotID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="BookedBy" ColumnName="BookedBy" />
