@@ -65,5 +65,42 @@ namespace MedicalAppointmentScheduler.Controllers
             return View(appointmentList.ToPagedList(pageIndex, pageSize));
           
         }
+
+        public ActionResult MakeAppointment()
+        {
+            ViewBag.DoctorID = new SelectList(appointmentManager.GetDoctorList(), "ID", "FullName");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MakeAppointment([Bind(Include = "ID,Details,DoctorID,PatientID,BookedBy,Date,SlotID")] Appointment appointment)
+        {
+           if (ModelState.IsValid)
+            {
+                appointment.BookedBy = Convert.ToInt32(Session["LoggedInUser"]);
+                appointment.PatientID = Convert.ToInt32(Session["LoggedInUser"]);
+                bool isBooked = appointmentManager.BookAppointment(appointment);            
+
+                return RedirectToAction("ConfirmAppointmentBooking",new { isBooked = isBooked});
+            }
+
+            ViewBag.DoctorID = new SelectList(appointmentManager.GetDoctorList(), "ID", "FullName");
+            return View(appointment);
+        }
+
+        public ActionResult GetAvailableSlotsFor(int doctorID, DateTime date)
+        {
+
+            var availableSlots = appointmentManager.GetAvailableSlots(doctorID, date);
+
+            return Json(new { availableSlots }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ConfirmAppointmentBooking(bool isBooked)
+        {
+            ViewData["AppointmentBooked"] = isBooked;
+            return View();
+        }
     }
 }

@@ -20,10 +20,16 @@
             @Html.DisplayNameFor(model => model.FirstOrDefault().BookedBy)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BookedDate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().IsCancelled)
         </th>
         <th></th>
     </tr>
@@ -41,10 +47,16 @@
             @Html.DisplayFor(modelItem => item.User_Details.FullName)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.BookedDate)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.User_Details1.FullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.L_Slots.SlotTime)
+        </td>
+        <td>
+            @(item.IsCancelled?"Cancelled":"-")      
         </td>
     </tr>
 }

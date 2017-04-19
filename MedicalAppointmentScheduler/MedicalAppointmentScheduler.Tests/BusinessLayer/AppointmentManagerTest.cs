@@ -115,8 +115,13 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             Slots testslot2 = new Slots() { ID = 2, EndTime = DateTime.Now.TimeOfDay, StartTime = DateTime.Now.TimeOfDay };
             slotsData.Add(testslot2);
 
-            Appointment testAppointment = new Appointment() { ID = 1, BookedBy = 4, Details = "Test", Date = new DateTime(2018,12,01), DoctorID = 2, PatientID = 9, SlotID = 2 };
-            appointmentData.Add(testAppointment);
+            //Booked slot
+            Appointment testAppointment1 = new Appointment() { ID = 1, BookedBy = 4, Details = "Test1", Date = new DateTime(2018,12,01), DoctorID = 2, PatientID = 9, SlotID = 2};
+            appointmentData.Add(testAppointment1);
+
+            //Cancelled slot
+            Appointment testAppointment2 = new Appointment() { ID = 2, BookedBy = 4, Details = "Test2", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, SlotID = 1, IsCancelled=true };
+            appointmentData.Add(testAppointment2);
 
             //Act
             List<AvailableSlots> slots = appointmentManager.GetAvailableSlots(2, new DateTime(2018, 12, 01));
@@ -149,11 +154,11 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             appointmentData.Add(testAppointment);
 
             //PreAssert
-            Assert.AreEqual(1, appointmentData.Count);
+            Assert.AreEqual(false, appointmentData[0].IsCancelled);
             //Act
             appointmentManager.DeleteAppointment(1);
 
-            Assert.AreEqual(0, appointmentData.Count);
+            Assert.AreEqual(true, appointmentData[0].IsCancelled);
         }
 
         [TestMethod]
@@ -169,6 +174,10 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             //past appointment
             Appointment testAppointment3 = new Appointment() { ID = 3, BookedBy = 4, Details = "Test 3", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 5, StartTime = new TimeSpan(18, 0, 0) } };
             appointmentData.Add(testAppointment3);
+          
+            //Cancelled appointment
+            Appointment testAppointment4 = new Appointment() { ID = 4, BookedBy = 4, Details = "Test 4", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, IsCancelled=true, L_Slots = new Slots { ID = 3, StartTime = new TimeSpan(10, 0, 0) } };
+            appointmentData.Add(testAppointment4);
 
             //Act
             List<Appointment> appointments = appointmentManager.GetAppointmentList();

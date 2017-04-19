@@ -40,6 +40,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         {
             try
             {
+                newAppointment.BookedDate = DateTime.Now.Date;
                 dbContext.Appointments.Add(newAppointment);
                 dbContext.SaveChanges();
                 return true;
@@ -71,7 +72,7 @@ namespace MedicalAppointmentScheduler.Core.Business
                                           join appointments in dbContext.Appointments
                                           on slots.ID equals appointments.SlotID
                                           into sa
-                                          from t in sa.Where(f => f.DoctorID == doctorID && f.Date == date.Date).DefaultIfEmpty()
+                                          from t in sa.Where(f => f.DoctorID == doctorID && f.Date == date.Date && f.IsCancelled == false).DefaultIfEmpty()
                                           where t == null
                                           select new AvailableSlots { ID = slots.ID, EndTime = slots.EndTime, StartTime = slots.StartTime }).ToList();
             if (date == DateTime.Today)
@@ -88,7 +89,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         /// <returns></returns>
         public List<Appointment> GetAppointmentList()
         {
-            List<Appointment> appointmentList = dbContext.Appointments.Where(u => u.Date>=DateTime.Today).OrderByDescending(u=>u.Date).ThenBy(u =>u.L_Slots.StartTime).ToList();
+            List<Appointment> appointmentList = dbContext.Appointments.Where(u => u.Date>=DateTime.Today && u.IsCancelled==false).OrderBy(u=>u.Date).ThenBy(u =>u.L_Slots.StartTime).ToList();
             return appointmentList;
         }
 
@@ -115,7 +116,8 @@ namespace MedicalAppointmentScheduler.Core.Business
                 Appointment appointment = dbContext.Appointments.SingleOrDefault(u => u.ID == AppointmentID);
                 if (appointment != null)
                 {
-                    dbContext.Appointments.Remove(appointment);
+                    appointment.IsCancelled = true;
+                   // dbContext.Appointments.Remove(appointment);
                 }
                                
                 dbContext.SaveChanges();
@@ -136,10 +138,10 @@ namespace MedicalAppointmentScheduler.Core.Business
             if (patientID != 0)
             {
                 var currentTime = DateTime.Now.TimeOfDay;
-                var appointmentList1 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date < DateTime.Today).OrderByDescending(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
-                var appointmentList2 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date == DateTime.Today && u.L_Slots.EndTime < currentTime).OrderByDescending(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
-
-                appointmentList = appointmentList1.Union(appointmentList2).ToList();
+                var appointmentList1 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date < DateTime.Today).ToList();
+                var appointmentList2 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date == DateTime.Today && u.L_Slots.EndTime < currentTime).ToList();
+                var appointmentList3 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.IsCancelled == true).ToList();
+                appointmentList = appointmentList1.Union(appointmentList2).Union(appointmentList3).OrderBy(u=>u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
             }
             return appointmentList;
         }
