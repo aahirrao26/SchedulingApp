@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Data/obj/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Business/obj/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler/obj/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler/bin
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Core.Business/bin/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Core.Data/bin/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Tests/bin/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Tests/obj/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Core.Data/obj/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Core.Business/obj/Debug

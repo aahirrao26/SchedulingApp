@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <input class="btn btn-lg searc" type="button" value="View Upcoming Appointments" onclick="location.href='@Url.Action("ViewUpcomingAppointment", "Patient")'" />
+</div>
+<div class="jumbotron">
+    <input class="btn btn-lg searc" type="button" value="View Appointment History" onclick="location.href='@Url.Action("ViewAppointmentHistory", "Patient")'" />
+</div>

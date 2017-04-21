@@ -7,6 +7,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointmentScheduler
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointmentScheduler.Tests", "MedicalAppointmentScheduler.Tests\MedicalAppointmentScheduler.Tests.csproj", "{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{280FE92D-DE7D-4022-A1BD-AC0FEA7B8853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointmentScheduler.Core.Business", "MedicalAppointmentScheduler.Core.Business\MedicalAppointmentScheduler.Core.Business.csproj", "{E8ABFB0E-BBDC-4606-B78D-EC7D91039454}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointmentScheduler.Core.Data", "MedicalAppointmentScheduler.Core.Data\MedicalAppointmentScheduler.Core.Data.csproj", "{06E8911C-BDF8-4015-A77D-D6301A242287}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{93802318-2396-45D1-969F-71199BBE1246}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DDL", "DDL", "{C241A884-EA02-46DC-90C5-0F955456978A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\NANDU\Desktop\UserTables_03222017.sql = ..\..\..\..\..\NANDU\Desktop\UserTables_03222017.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +34,21 @@ Global
 		{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{947FB5DE-6FA7-4DA2-A732-799CCDDEA3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8ABFB0E-BBDC-4606-B78D-EC7D91039454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8ABFB0E-BBDC-4606-B78D-EC7D91039454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8ABFB0E-BBDC-4606-B78D-EC7D91039454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8ABFB0E-BBDC-4606-B78D-EC7D91039454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06E8911C-BDF8-4015-A77D-D6301A242287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E8911C-BDF8-4015-A77D-D6301A242287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E8911C-BDF8-4015-A77D-D6301A242287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E8911C-BDF8-4015-A77D-D6301A242287}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E8ABFB0E-BBDC-4606-B78D-EC7D91039454} = {280FE92D-DE7D-4022-A1BD-AC0FEA7B8853}
+		{06E8911C-BDF8-4015-A77D-D6301A242287} = {280FE92D-DE7D-4022-A1BD-AC0FEA7B8853}
+		{C241A884-EA02-46DC-90C5-0F955456978A} = {93802318-2396-45D1-969F-71199BBE1246}
 	EndGlobalSection
 EndGlobal

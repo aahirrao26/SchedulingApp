@@ -1,0 +1,127 @@
+﻿@model MedicalAppointmentScheduler.Core.Data.Appointment
+
+@{
+    ViewBag.Title = "MakeAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+<!-- Code to wire up the DatePicker -->
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker({
+            minDate: 0,
+            dateFormat: 'mm/dd/yy',
+            changeMonth: true,
+            changeYear: true,
+            selectOtherMonths: true
+        });
+    })
+
+    $(document).ready(function () {
+
+        $(".date-picker").change(function () {
+
+                $("#slotsGroup").html('');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Receptionist/GetAvailableSlotsFor?doctorID=" + $("#ddlDoctor option:selected").val() + "&date=" + $(".date-picker").val(),
+                    success: function (data) {
+                        var slots = data.availableSlots;
+                        if (slots.length == 0) {
+                            $('#slotsGroup').html('<p>No Slots Available for Selected Date</p>').addClass('alert-danger');
+                            $("#makeAppointment").addClass("invisible");
+                            $("#lblSlot").addClass("invisible");
+                        }
+                        else {
+                            var buttons = '';
+                            var items = '';
+
+                            //$.each(slots, function (i, item) {
+                            //    buttons = buttons + '<option value="' + item.value + '">' + item.text + '</option>';
+                            //});
+                            $('#slotsGroup').html('<select class="form-control" id="SlotID" name="SlotID">' + buttons + '</select>');
+
+                            for (var i = 0; i < slots.length; i++) {
+                                var opt = new Option(slots[i].SlotTime, slots[i].ID);
+                                $('#SlotID').append(opt);
+                            }
+                            $('#slotsGroup').removeClass('alert-danger');
+                            $("#makeAppointment").removeClass("invisible");
+                            $("#lblSlot").removeClass("invisible");
+                        }
+                    }
+                });
+
+                return false;
+               })
+
+        $("#ddlDoctor").change(function () {
+            $("#makeAppointment").addClass("invisible");
+            $("#lblSlot").addClass("invisible");
+            $("#slotsGroup").html('');
+            $(".date-picker").val('');
+        });
+
+    });
+</script>
+
+<h2>Make Appointment</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @*@Html.Hidden("PatientID",(int)ViewBag.PatientID)*@
+            @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DoctorID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control", @id = "ddlDoctor" })
+                @Html.ValidationMessageFor(model => model.DoctorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Date, new { @class = "date-picker", @id = "appointmentDate" })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SlotID, "Available Slot", htmlAttributes: new { @class = "control-label col-md-2 invisible", @id = "lblSlot" })
+            <div class="col-md-10">
+                <div id="slotsGroup">
+                </div>
+                @Html.ValidationMessageFor(model => model.SlotID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Book" class="btn btn-default invisible" id="makeAppointment" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Home Page", "Index")
+</div>
