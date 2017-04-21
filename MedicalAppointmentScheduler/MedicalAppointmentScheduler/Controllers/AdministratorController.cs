@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
 using PagedList;
+using static MedicalAppointmentScheduler.Core.Business.Helper;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
@@ -101,11 +102,16 @@ namespace MedicalAppointmentScheduler.Controllers
         }
 
         // GET: Administrator/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id,int? RoleId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+           
+            if (RoleId == (int)ApplicationRole.Administrator)
+            {
+                return View("Error");
             }
             UserDetails userDetails = adminManager.FindUser(id);
             if (userDetails == null)

@@ -15,8 +15,9 @@ namespace MedicalAppointmentScheduler.Core.Business
         List<Appointment> GetAppointmentList();
         Appointment FindAppointment(int? AppointmentID);
         void DeleteAppointment(int AppointmentID);
+        List<Appointment> GetPatientAppointmentHistory(int patientID);
     }
-    public class AppointmentManager : IAppointmentManager
+    public class AppointmentManager:IAppointmentManager
     {
 
         private MedicalSchedulerDBEntities dbContext;
@@ -39,6 +40,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         {
             try
             {
+                newAppointment.BookedDate = DateTime.Now.Date;
                 dbContext.Appointments.Add(newAppointment);
                 dbContext.SaveChanges();
                 return true;
@@ -54,7 +56,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         /// </summary>
         /// <returns></returns>
         public List<UserDetails> GetDoctorList()
-        {
+        { 
             return dbContext.UserDetails.Where(role => role.RoleID == (int)ApplicationRole.Doctor).ToList();
         }
 
@@ -67,12 +69,12 @@ namespace MedicalAppointmentScheduler.Core.Business
         public List<AvailableSlots> GetAvailableSlots(int doctorID, DateTime date)
         {
             List<AvailableSlots> availableSlots = (from slots in dbContext.Slots
-                                                   join appointments in dbContext.Appointments
-                                                   on slots.ID equals appointments.SlotID
-                                                   into sa
-                                                   from t in sa.Where(f => f.DoctorID == doctorID && f.Date == date.Date).DefaultIfEmpty()
-                                                   where t == null
-                                                   select new AvailableSlots { ID = slots.ID, EndTime = slots.EndTime, StartTime = slots.StartTime }).ToList();
+                                          join appointments in dbContext.Appointments
+                                          on slots.ID equals appointments.SlotID
+                                          into sa
+                                          from t in sa.Where(f => f.DoctorID == doctorID && f.Date == date.Date && f.IsCancelled == false).DefaultIfEmpty()
+                                          where t == null
+                                          select new AvailableSlots { ID = slots.ID, EndTime = slots.EndTime, StartTime = slots.StartTime }).ToList();
             if (date == DateTime.Today)
             {
                 var currentTime = DateTime.Now.TimeOfDay;
@@ -87,7 +89,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         /// <returns></returns>
         public List<Appointment> GetAppointmentList()
         {
-            List<Appointment> appointmentList = dbContext.Appointments.Where(u => u.Date >= DateTime.Today).OrderByDescending(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
+            List<Appointment> appointmentList = dbContext.Appointments.Where(u => u.Date>=DateTime.Today && u.IsCancelled==false).OrderBy(u=>u.Date).ThenBy(u =>u.L_Slots.StartTime).ToList();
             return appointmentList;
         }
 
@@ -114,14 +116,34 @@ namespace MedicalAppointmentScheduler.Core.Business
                 Appointment appointment = dbContext.Appointments.SingleOrDefault(u => u.ID == AppointmentID);
                 if (appointment != null)
                 {
-                    dbContext.Appointments.Remove(appointment);
+                    appointment.IsCancelled = true;
+                   // dbContext.Appointments.Remove(appointment);
                 }
-
+                               
                 dbContext.SaveChanges();
             }
             catch (Exception)
             {
             }
+        }
+
+        /// <summary>
+        /// This method will get the appointment history for the supplied patient 
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        public List<Appointment> GetPatientAppointmentHistory(int patientID)
+        {
+            List<Appointment> appointmentList = new List<Appointment>();
+            if (patientID != 0)
+            {
+                var currentTime = DateTime.Now.TimeOfDay;
+                var appointmentList1 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date < DateTime.Today).ToList();
+                var appointmentList2 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date == DateTime.Today && u.L_Slots.EndTime < currentTime).ToList();
+                var appointmentList3 = dbContext.Appointments.Where(u => u.PatientID == patientID && u.IsCancelled == true).ToList();
+                appointmentList = appointmentList1.Union(appointmentList2).Union(appointmentList3).OrderBy(u=>u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
+            }
+            return appointmentList;
         }
 
 

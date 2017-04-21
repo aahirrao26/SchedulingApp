@@ -18,7 +18,7 @@ namespace MedicalAppointmentScheduler.Core.Data.CustomAttribute
                 }
 
                 DateTime dt = (DateTime)value;
-                if (dt >= DateTime.Now)
+                if (dt.Date >= DateTime.Now.Date)
                 {
                     return ValidationResult.Success;
                 }

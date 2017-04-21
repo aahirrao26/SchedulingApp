@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MedicalAppointmentScheduler.Core.Data.Appointment>
+
+@{
+    ViewBag.Title = "Edit Appointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["UserSuccessMessage"] != null)
+{
+    <div style="margin-top:100px;margin-bottom:50px;" class="alert-success">
+        <span class="successMessage">@TempData["UserSuccessMessage"]</span>
+    </div>
+}
+@if (TempData["UserErrorMessage"] != null)
+{
+    <div style="margin-top:100px;margin-bottom:50px;" class="alert-danger">
+        <span class="successMessage">@TempData["UserErrorMessage"]</span>
+    </div>
+}
+
+<h2>Appointment List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.L_Slots.SlotTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_Details.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_Details1.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_Details2.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.L_Slots.SlotTime)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
+            @Html.ActionLink("Delete", "DeleteAppointment", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

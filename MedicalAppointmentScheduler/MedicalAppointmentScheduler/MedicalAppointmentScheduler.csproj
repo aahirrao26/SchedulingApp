@@ -309,10 +309,16 @@
     <Content Include="Views\Nurse\Index.cshtml" />
     <Content Include="Views\Receptionist\Index.cshtml" />
     <Content Include="Views\Doctor\Index.cshtml" />
-    <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Patient\ViewUpcomingAppointment.cshtml" />
     <Content Include="Views\Doctor\Search.cshtml" />
     <Content Include="Views\Receptionist\Search.cshtml" />
     <Content Include="Views\Receptionist\MakeAppointment.cshtml" />
+    <Content Include="Views\Receptionist\EditAppointment.cshtml" />
+    <Content Include="Views\Receptionist\DeleteAppointment.cshtml" />
+    <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Patient\ViewAppointmentHistory.cshtml" />
+    <Content Include="Views\Patient\MakeAppointment.cshtml" />
+    <Content Include="Views\Patient\ConfirmAppointmentBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

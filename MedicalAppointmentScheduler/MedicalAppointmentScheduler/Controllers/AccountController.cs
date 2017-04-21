@@ -39,9 +39,10 @@ namespace MedicalAppointmentScheduler.Controllers
                 int userId = loginManager.ValidateUser(loginViewModel.Email, loginViewModel.Password);
                 if (userId != 0)
                 {
-                    authenticationHelper.SetAuthCookie(loginViewModel.Email);
-                    Session["LoggedInUser"] = userId;
+                    authenticationHelper.SetAuthCookie(loginViewModel.Email);                  
+                    Session.Add("LoggedInUser", userId);
                     string controllerRole = loginManager.GetUserRole(userId) == null ? "Home" : loginManager.GetUserRole(userId);
+                    Session.Add("LoggedInUserRole", controllerRole);
                     return RedirectToAction("Index", controllerRole);
                 }
                 else

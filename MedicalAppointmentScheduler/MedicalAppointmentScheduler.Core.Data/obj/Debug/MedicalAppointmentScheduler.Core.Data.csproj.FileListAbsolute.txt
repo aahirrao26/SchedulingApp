@@ -8,6 +8,16 @@ C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentS
 C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.csprojResolveAssemblyReference.cache
 C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.dll
 C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.pdb
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.dll.config
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.pdb
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\EntityFramework.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\EntityFramework.xml
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.csprojResolveAssemblyReference.cache
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.dll
+E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\obj\Debug\MedicalAppointmentScheduler.Core.Data.pdb
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.dll.config
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.dll
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\bin\Debug\MedicalAppointmentScheduler.Core.Data.pdb

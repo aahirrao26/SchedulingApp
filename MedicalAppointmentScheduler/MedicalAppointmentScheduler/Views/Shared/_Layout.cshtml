@@ -25,7 +25,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("HomePage", "Index", @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())</li>
+                    @if (Request.IsAuthenticated && Session["LoggedInUserRole"]!=null)
+                    {
+
+                        <li>@Html.ActionLink("HomePage", "Index", Session["LoggedInUserRole"].ToString())</li>
+                    }
+                    else
+                    {
+                    <li>@Html.ActionLink("HomePage", "Index", "Home")</li>
+                    }
                     </ul>
                 @Html.Partial("_LoginPartial")
             </div>
