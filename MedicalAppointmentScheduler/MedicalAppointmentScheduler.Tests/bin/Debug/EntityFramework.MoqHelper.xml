@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EntityFramework.MoqHelper</name>
+    </assembly>
+    <members>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.CreateMockForDbSet``1">
+            <summary>
+            Create a mock instance for DbSet
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <returns>Simple mocked DbSet</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.CreateMockForDbContext``1">
+            <summary>
+            Create a mock instance for DbContext
+            </summary>
+            <typeparam name="T">Dbcontext type that will be mocked</typeparam>
+            <returns>Simple mocked DbContext</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.CreateMockForDbContext``2(Moq.Mock{System.Data.Entity.DbSet{``1}})">
+            <summary>
+            Create a mock instance for DbContext and set it up with an instance of DbSet
+            </summary>
+            <typeparam name="TContext">DbContext type that will be mocked</typeparam>
+            <typeparam name="TEntity">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="mockSet">Mocked DbSet instance</param>
+            <returns>Mocked DbContext instance already configured with a mockSet Object</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.SetupForQueryOn``1(Moq.Mock{System.Data.Entity.DbSet{``0}},System.Collections.Generic.List{``0})">
+            <summary>
+            Sets an in-memory table to simulate real data access made from DbSet 
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="dbSet">Mocked DbSet instance</param>
+            <param name="table">In-memory list of items</param>
+            <returns>Configured DbSet instance for queries on it</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.WithAdd``1(Moq.Mock{System.Data.Entity.DbSet{``0}},System.Collections.Generic.List{``0})">
+            <summary>
+            Mock for Entity Framework 'DbSet.Add' method to work with in-memory table
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="dbSet">Mocked DbSet instance</param>
+            <param name="table">In-memory list of items</param>
+            <returns>Configured DbSet instance for mock calls on 'DbSet.Add' method</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.WithAdd``1(Moq.Mock{System.Data.Entity.DbSet{``0}},System.Collections.Generic.List{``0},System.String,System.Int32)">
+            <summary>
+            Mock for Entity Framework 'DbSet.Add' method to work with in-memory table
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="dbSet">Mocked DbSet instance</param>
+            <param name="table">In-memory list of items</param>
+            <param name="IDPropertyNameToAutoIncrement">Basically is the name of the referenced property as the primary key</param>
+            <param name="IDValueToAdd">Value to be inserted in 'IDPropertyNameToAutoIncrement'</param>
+            <returns>Configured DbSet instance for mock calls on 'DbSet.Add' method</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.WithAttach``1(Moq.Mock{System.Data.Entity.DbSet{``0}},System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            Mock for Entity Framework 'DbSet.Attach' method to work with in-memory table
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="dbSet">Mocked DbSet instance</param>
+            <param name="table">In-memory list of items</param>
+            <param name="IDPropertyNameToCompare">Property name referred to as primary key that will be used to find and update your respective entity on in-memory table</param>
+            <returns>Configured DbSet instance for mock calls on 'DbSet.Attach' method</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.WithAddRange``1(Moq.Mock{System.Data.Entity.DbSet{``0}},System.Collections.Generic.List{``0})">
+            <summary>
+            Mock for Entity Framework 'DbSet.AddRange' method to work with in-memory table
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="dbSet">Mocked DbSet instance</param>
+            <param name="table">In-memory list of items</param>
+            <returns>Configured DbSet instance for mock calls on 'DbSet.AddRange' method</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.WithFind``1(Moq.Mock{System.Data.Entity.DbSet{``0}},System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            Mock for Entity Framework 'DbSet.Find' method to work with in-memory table
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="dbSet">Mocked DbSet instance</param>
+            <param name="table">In-memory list of items</param>
+            <param name="IDPropertyName">Basically is the name of the referenced property as the primary key</param>
+            <returns>Configured DbSet instance for mock calls on 'DbSet.Find' method</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.WithRemove``1(Moq.Mock{System.Data.Entity.DbSet{``0}},System.Collections.Generic.List{``0})">
+            <summary>
+            Mock for Entity Framework 'DbSet.Remove' method to work with in-memory table
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="dbSet">Mocked DbSet instance</param>
+            <param name="table">In-memory list of items</param>
+            <returns>Configured DbSet instance for mock calls on 'DbSet.Remove' method</returns>
+        </member>
+        <member name="M:EntityFramework.MoqHelper.EntityFrameworkMoqHelper.WithRemoveRange``1(Moq.Mock{System.Data.Entity.DbSet{``0}},System.Collections.Generic.List{``0})">
+            <summary>
+            Mock for Entity Framework 'DbSet.RemoveRange' method to work with in-memory table
+            </summary>
+            <typeparam name="T">Associated type (class) on dbset of the DbContext</typeparam>
+            <param name="dbSet">Mocked DbSet instance</param>
+            <param name="table">In-memory list of items</param>
+            <returns>Configured DbSet instance for mock calls on 'DbSet.RemoveRange' method</returns>
+        </member>
+    </members>
+</doc>
