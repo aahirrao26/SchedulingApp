@@ -35,26 +35,16 @@ namespace MedicalAppointmentScheduler.Controllers
         }
 
 
-        /// <summary>
-        /// Creates a view displaying all of the patient's appointments and detailes of those appointments
+       /// <summary>
+        /// Creates a view displaying all of the patient's appointments and detailes of those appointmentsViewUpcomingAppointment
         /// </summary>
         /// <returns></returns>
         public ActionResult ViewUpcomingAppointment()
         {
             int patientID = Convert.ToInt32(Session["LoggedInUser"]);   //Gets patient ID of user
+            List<Appointment> temp = appointmentManager.GetUpcomingAppointments(patientID); //Retrieve all appointments for user
 
-            Dictionary<int, List<Slots>> times = new Dictionary<int, List<Slots>>();    //Holds the times for each appoinment
-            List<Appointment> temp = db.Appointments.Where(u => u.PatientID == patientID).ToList(); //Retrieve all appointments for user
-
-            //Gets the appointment times for each appointment
-            foreach (Appointment i in temp)
-            {
-                times.Add(i.ID, db.Slots.Where(u => u.ID == i.SlotID).ToList());
-            }
-            ViewBag.slots = times;
-
-            return View(db.Appointments.Where(u => u.PatientID == patientID));
-
+            return View(temp);
         }
 
         public ActionResult ViewAppointmentHistory(int? page)
