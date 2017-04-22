@@ -110,5 +110,12 @@ namespace MedicalAppointmentScheduler.Controllers
             appointmentManager.DeleteAppointment(id);
             return RedirectToAction("EditAppointment");
         }
+        
+        public ActionResult ViewHistory(int patientID)
+        {
+            var history = appointmentManager.GetPatientAppointmentHistory(patientID);
+
+            return View(history);
+        }
     }
 }
