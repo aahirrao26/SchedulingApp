@@ -39,12 +39,13 @@ namespace MedicalAppointmentScheduler.Controllers
         /// Creates a view displaying all of the patient's appointments and detailes of those appointmentsViewUpcomingAppointment
         /// </summary>
         /// <returns></returns>
-        public ActionResult ViewUpcomingAppointment()
+        public ActionResult ViewUpcomingAppointment(int? page)
         {
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             int patientID = Convert.ToInt32(Session["LoggedInUser"]);   //Gets patient ID of user
-            List<Appointment> temp = appointmentManager.GetUpcomingAppointments(patientID); //Retrieve all appointments for user
+            List<Appointment> appointmentList = appointmentManager.GetUpcomingAppointments(patientID); //Retrieve all appointments for user
 
-            return View(temp);
+            return View(appointmentList.ToPagedList(pageIndex, pageSize));
         }
 
         public ActionResult ViewAppointmentHistory(int? page)

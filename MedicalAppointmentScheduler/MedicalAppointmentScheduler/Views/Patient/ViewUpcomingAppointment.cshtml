@@ -1,59 +1,59 @@
-@model IEnumerable<MedicalAppointmentScheduler.Core.Data.Appointment>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MedicalAppointmentScheduler.Core.Data.Appointment>
+
 @{
     ViewBag.Title = "Your Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>Medical Scheduler</h1>
-    <p class="lead">Manage appoinments</p>
+<h2>Upcoming Appointments</h2>
+<h1></h1>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BookedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BookedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Details.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Details1.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.L_Slots.SlotTime)
+            </td>
+        </tr>
+    }
+</table>
+<div id='Paging' style="text-align: center">
+    @Html.PagedListPager(Model, page => Url.Action("ViewUpcomingAppointment", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
 </div>
-
-<div id="results" style="margin-top:50px;">
-    <table style="float: left;" rules="rows" border="1">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
-            </th>
-        </tr>
-        @if (Model.Count() == 0)
-        {
-            <tr>
-                <td colspan="5" style="text-align:center;">
-                    No matching records found
-                </td>
-            </tr>
-        }
-        
-        @foreach (var item in Model)
-        {
-            Console.WriteLine(item.ID);
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.L_Slots.SlotTime)
-                </td>
-            </tr>
-        }
-    </table>
-    <table style="float: right;" rules="rows" border="1">
-        <tr>
-            <th>
-                Date
-            </th>
-        </tr>
-        <tr>
-            <th>
-                No unavailable dates
-            </th>
-        </tr>
-    </table>
-</div>
-
