@@ -45,6 +45,9 @@ namespace MedicalAppointmentScheduler.Controllers
             int patientID = Convert.ToInt32(Session["LoggedInUser"]);   //Gets patient ID of user
             List<Appointment> appointmentList = appointmentManager.GetUpcomingAppointments(patientID); //Retrieve all appointments for user
 
+            ViewBag.ShowDoctorDetails = true;
+            ViewBag.ShowPatientDetails = false;
+
             return View(appointmentList.ToPagedList(pageIndex, pageSize));
         }
 

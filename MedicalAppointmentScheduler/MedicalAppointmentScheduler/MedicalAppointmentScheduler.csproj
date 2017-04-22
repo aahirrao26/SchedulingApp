@@ -321,6 +321,7 @@
     <Content Include="Views\Patient\ConfirmAppointmentBooking.cshtml" />
     <Content Include="Views\Shared\_ViewUpcomingAppointments.cshtml" />
     <Content Include="Views\Doctor\ViewUpcomingAppointment.cshtml" />
+    <Content Include="Views\Doctor\EditAvailability.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

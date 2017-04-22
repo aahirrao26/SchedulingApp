@@ -173,7 +173,7 @@ namespace MedicalAppointmentScheduler.Core.Business
             var currentTime = DateTime.Now.TimeOfDay;
             List<Appointment> futureAppointments = new List<Appointment>();
             var temp = dbContext.Appointments.Where(u => u.DoctorID == doctorID && u.Date >= DateTime.Today
-            && u.IsCancelled == false).OrderBy(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
+            && u.IsCancelled == false && u.PatientID != null).OrderBy(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
 
             if (temp != null)
             {

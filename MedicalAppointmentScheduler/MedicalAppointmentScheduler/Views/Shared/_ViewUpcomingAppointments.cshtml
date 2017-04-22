@@ -17,9 +17,17 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().BookedDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorID)
-        </th>
+        @if (ViewBag.ShowDoctorDetails) { 
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorID)
+            </th>
+        }
+        @if (ViewBag.ShowPatientDetails)
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PatientID)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
         </th>
@@ -40,9 +48,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BookedDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User_Details1.FullName)
-            </td>
+            @if (ViewBag.ShowDoctorDetails) { 
+                <td>
+                    @Html.DisplayFor(modelItem => item.User_Details1.FullName)
+                </td>
+            }
+            @if (ViewBag.ShowPatientDetails)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.User_Details2.FirstName)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.L_Slots.SlotTime)
             </td>

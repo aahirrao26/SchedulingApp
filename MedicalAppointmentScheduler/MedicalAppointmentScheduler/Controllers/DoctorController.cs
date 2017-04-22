@@ -61,7 +61,52 @@ namespace MedicalAppointmentScheduler.Controllers
             int doctorID = Convert.ToInt32(Session["LoggedInUser"]);   //Gets doctor ID of user
             List<Appointment> appointmentList = appointmentManager.GetUpcomingAppointmentsForDoctor(doctorID); //Retrieve all appointments for user
 
+            ViewBag.ShowDoctorDetails = false;
+            ViewBag.ShowPatientDetails = true;
+
             return View(appointmentList.ToPagedList(pageIndex, pageSize));
+        }
+
+        public ActionResult GetAvailableSlots(DateTime date)
+        {
+
+            int doctorID = Convert.ToInt32(Session["LoggedInUser"]);
+            var availableSlots = appointmentManager.GetAvailableSlots(doctorID, date);
+
+            return Json(new { availableSlots }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult EditAvailability()
+        {
+            return View();
+        }
+        
+        public ActionResult MakeAppointment(DateTime date,int slotId,int allSlots)
+        {
+            bool isBooked=false;
+
+            Appointment appointment = new Appointment();
+            appointment.BookedBy = Convert.ToInt32(Session["LoggedInUser"]);
+            appointment.DoctorID = Convert.ToInt32(Session["LoggedInUser"]);
+            appointment.Details = "Not Available";
+            appointment.Date = date;
+
+            if (allSlots == 0) {
+                appointment.SlotID = slotId;
+                isBooked = appointmentManager.BookAppointment(appointment);
+            }
+            else{
+
+                var availableSlots = appointmentManager.GetAvailableSlots(Convert.ToInt32(Session["LoggedInUser"]), date);
+                foreach (var slot in availableSlots) {
+                    appointment.SlotID = slot.ID;
+                    isBooked = appointmentManager.BookAppointment(appointment);
+
+                }
+
+            }
+            return Json(new { isBooked }, JsonRequestBehavior.AllowGet);
         }
     }
 }
