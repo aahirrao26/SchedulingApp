@@ -319,6 +319,8 @@
     <Content Include="Views\Patient\ViewAppointmentHistory.cshtml" />
     <Content Include="Views\Patient\MakeAppointment.cshtml" />
     <Content Include="Views\Patient\ConfirmAppointmentBooking.cshtml" />
+    <Content Include="Views\Shared\_ViewUpcomingAppointments.cshtml" />
+    <Content Include="Views\Doctor\ViewUpcomingAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
