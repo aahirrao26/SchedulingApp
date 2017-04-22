@@ -16,6 +16,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         Appointment FindAppointment(int? AppointmentID);
         void DeleteAppointment(int AppointmentID);
         List<Appointment> GetPatientAppointmentHistory(int patientID);
+        List<Appointment> GetUpcomingAppointments(int patientID);
     }
     public class AppointmentManager:IAppointmentManager
     {
@@ -146,6 +147,22 @@ namespace MedicalAppointmentScheduler.Core.Business
             return appointmentList;
         }
 
+        /// <summary>
+        /// Returns a list of upcoming appointments in the database based off of a patientID.
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        public List<Appointment> GetUpcomingAppointments(int patientID)
+        {
+            List<Appointment> futureAppointments = new List<Appointment>();
+            var temp = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date >= DateTime.Today).ToList();
 
+            if (temp != null)
+            {
+                futureAppointments = temp;
+            }
+
+            return futureAppointments;
+        }
     }
 }
