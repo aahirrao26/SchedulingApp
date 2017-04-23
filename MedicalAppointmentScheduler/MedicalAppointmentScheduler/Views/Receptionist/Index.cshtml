@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style type="text/css">
+    div.jumbotron {
+        display: grid;
+    }
+</style>
+
+
 <div class="jumbotron">
     <input class="btn btn-lg searc" type="button" value="Search for Patient" onclick="location.href='@Url.Action("Search", "Receptionist")'" />
 </div>
