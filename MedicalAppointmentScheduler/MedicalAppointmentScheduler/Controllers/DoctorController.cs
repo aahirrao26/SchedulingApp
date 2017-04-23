@@ -108,5 +108,13 @@ namespace MedicalAppointmentScheduler.Controllers
             }
             return Json(new { isBooked }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ViewAppointmentHistory(int patientID, int? page)
+        {
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            List<Appointment> appointmentList = appointmentManager.GetPatientAppointmentHistory(patientID);
+            return View(appointmentList.ToPagedList(pageIndex, pageSize));
+
+        }
     }
 }

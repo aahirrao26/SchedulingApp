@@ -19,6 +19,14 @@
           <Property Name="IsCancelled" Type="bit" Nullable="false" />
           <Property Name="BookedDate" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="Conditions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="L_Slots">
           <Key>
             <PropertyRef Name="ID" />
@@ -41,6 +49,33 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="RoleDescription" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MedicalSchedulerDB.dbo.Patient_Conditions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Patient_Conditions">
+          <Key>
+            <PropertyRef Name="PatientID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="PatientID" />
+          </Key>
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
+          <Property Name="HeightFeet" Type="int" Nullable="false" />
+          <Property Name="HeightInches" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="User_Address">
           <Key>
@@ -169,14 +204,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CONDITION_ID">
+          <End Role="Conditions" Type="Self.Conditions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Patient_Conditions" Type="Self.Patient_Conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conditions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Patient_Conditions">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID">
+          <End Role="User_Details" Type="Self.User_Details" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPE_ID">
+          <End Role="Type" Type="Self.Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Conditions" Type="Self.Conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Conditions">
+              <PropertyRef Name="Type ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPE_PATIENT_ID">
+          <End Role="User_Details" Type="Self.User_Details" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Patient_Conditions" Type="Self.Patient_Conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Patient_Conditions">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MedicalSchedulerDBModelStoreContainer">
           <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conditions" EntityType="Self.Conditions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_Slots" EntityType="Self.L_Slots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_State" EntityType="Self.L_State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_User_Roles" EntityType="Self.L_User_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Address" EntityType="Self.User_Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Details" EntityType="Self.User_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Login" EntityType="Self.User_Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient_Conditions" EntityType="Self.Patient_Conditions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Patient_Conditions].[PatientID] AS [PatientID], 
+    [Patient_Conditions].[ID] AS [ID]
+    FROM [dbo].[Patient_Conditions] AS [Patient_Conditions]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Appointme__Booke__656C112C" Association="Self.FK__Appointme__Booke__656C112C">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="Appointments" EntitySet="Appointments" />
@@ -208,6 +308,22 @@
           <AssociationSet Name="FK__User_Logi__UserI__15502E78" Association="Self.FK__User_Logi__UserI__15502E78">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="User_Login" EntitySet="User_Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONDITION_ID" Association="Self.FK_CONDITION_ID">
+            <End Role="Conditions" EntitySet="Conditions" />
+            <End Role="Patient_Conditions" EntitySet="Patient_Conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID" Association="Self.FK_ID">
+            <End Role="User_Details" EntitySet="User_Details" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPE_ID" Association="Self.FK_TYPE_ID">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Conditions" EntitySet="Conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPE_PATIENT_ID" Association="Self.FK_TYPE_PATIENT_ID">
+            <End Role="User_Details" EntitySet="User_Details" />
+            <End Role="Patient_Conditions" EntitySet="Patient_Conditions" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -260,6 +376,8 @@
           <NavigationProperty Name="Appointments" Relationship="MedicalSchedulerDBModel.FK__Appointme__Booke__4D94879B" FromRole="UserDetails" ToRole="Appointment" />
           <NavigationProperty Name="Appointments1" Relationship="MedicalSchedulerDBModel.FK__Appointme__Docto__4BAC3F29" FromRole="UserDetails" ToRole="Appointment" />
           <NavigationProperty Name="Appointments2" Relationship="MedicalSchedulerDBModel.FK__Appointme__Patie__4CA06362" FromRole="UserDetails" ToRole="Appointment" />
+          <NavigationProperty Name="Patient" Relationship="MedicalSchedulerDBModel.FK_ID" FromRole="UserDetails" ToRole="Patient" />
+          <NavigationProperty Name="Conditions" Relationship="MedicalSchedulerDBModel.Patient_Conditions" FromRole="UserDetails" ToRole="Condition" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -359,6 +477,21 @@
             <End Role="L_Slots" EntitySet="Slots" />
             <End Role="Appointment" EntitySet="Appointments" />
           </AssociationSet>
+          <EntitySet Name="Conditions" EntityType="MedicalSchedulerDBModel.Condition" />
+          <EntitySet Name="Patients" EntityType="MedicalSchedulerDBModel.Patient" />
+          <EntitySet Name="Types" EntityType="MedicalSchedulerDBModel.Type" />
+          <AssociationSet Name="FK_TYPE_ID" Association="MedicalSchedulerDBModel.FK_TYPE_ID">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Condition" EntitySet="Conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID" Association="MedicalSchedulerDBModel.FK_ID">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="Patient_Conditions" Association="MedicalSchedulerDBModel.Patient_Conditions">
+            <End Role="Condition" EntitySet="Conditions" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Appointment">
           <Key>
@@ -434,6 +567,67 @@
               <PropertyRef Name="SlotID" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Condition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Type" Relationship="MedicalSchedulerDBModel.FK_TYPE_ID" FromRole="Condition" ToRole="Type" />
+          <NavigationProperty Name="User_Details" Relationship="MedicalSchedulerDBModel.Patient_Conditions" FromRole="Condition" ToRole="UserDetails" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="PatientID" />
+          </Key>
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="HeightFeet" Type="Int32" Nullable="false" />
+          <Property Name="HeightInches" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+          <NavigationProperty Name="User_Details" Relationship="MedicalSchedulerDBModel.FK_ID" FromRole="Patient" ToRole="UserDetails" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Conditions" Relationship="MedicalSchedulerDBModel.FK_TYPE_ID" FromRole="Type" ToRole="Condition" />
+        </EntityType>
+        <Association Name="FK_TYPE_ID">
+          <End Type="MedicalSchedulerDBModel.Type" Role="Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MedicalSchedulerDBModel.Condition" Role="Condition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Condition">
+              <PropertyRef Name="Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID">
+          <End Type="MedicalSchedulerDBModel.UserDetails" Role="UserDetails" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MedicalSchedulerDBModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Patient_Conditions">
+          <End Type="MedicalSchedulerDBModel.Condition" Role="Condition" Multiplicity="*" />
+          <End Type="MedicalSchedulerDBModel.UserDetails" Role="UserDetails" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -516,6 +710,42 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Conditions">
+            <EntityTypeMapping TypeName="MedicalSchedulerDBModel.Condition">
+              <MappingFragment StoreEntitySet="Conditions">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type_ID" ColumnName="Type ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="MedicalSchedulerDBModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="HeightInches" ColumnName="HeightInches" />
+                <ScalarProperty Name="HeightFeet" ColumnName="HeightFeet" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="MedicalSchedulerDBModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Patient_Conditions" TypeName="MedicalSchedulerDBModel.Patient_Conditions" StoreEntitySet="Patient_Conditions">
+            <EndProperty Name="UserDetails">
+              <ScalarProperty Name="ID" ColumnName="PatientID" />
+            </EndProperty>
+            <EndProperty Name="Condition">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

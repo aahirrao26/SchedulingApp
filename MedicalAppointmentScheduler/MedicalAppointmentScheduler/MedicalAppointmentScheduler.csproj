@@ -322,6 +322,7 @@
     <Content Include="Views\Shared\_ViewUpcomingAppointments.cshtml" />
     <Content Include="Views\Doctor\ViewUpcomingAppointment.cshtml" />
     <Content Include="Views\Doctor\EditAvailability.cshtml" />
+    <Content Include="Views\Doctor\ViewAppointmentHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

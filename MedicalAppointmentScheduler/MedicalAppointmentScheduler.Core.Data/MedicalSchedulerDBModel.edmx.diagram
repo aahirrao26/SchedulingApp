@@ -20,6 +20,12 @@
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__Appointme__Docto__4BAC3F29" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__Appointme__Patie__4CA06362" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__Appointme__SlotI__4E88ABD4" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.Condition" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.Patient" Width="1.5" PointX="5.25" PointY="9.875" />
+        <EntityTypeShape EntityType="MedicalSchedulerDBModel.Type" Width="1.5" PointX="0.75" PointY="10.125" />
+        <AssociationConnector Association="MedicalSchedulerDBModel.FK_TYPE_ID" />
+        <AssociationConnector Association="MedicalSchedulerDBModel.FK_ID" />
+        <AssociationConnector Association="MedicalSchedulerDBModel.Patient_Conditions" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

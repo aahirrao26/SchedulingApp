@@ -32,6 +32,8 @@ public partial class UserDetails
 
         this.Appointments2 = new HashSet<Appointment>();
 
+        this.Conditions = new HashSet<Condition>();
+
     }
 
 
@@ -70,6 +72,12 @@ public partial class UserDetails
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Appointment> Appointments2 { get; set; }
+
+    public virtual Patient Patient { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Condition> Conditions { get; set; }
 
 }
 
