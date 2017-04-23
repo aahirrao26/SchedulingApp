@@ -80,6 +80,9 @@
     <Compile Include="Patient.cs">
       <DependentUpon>MedicalSchedulerDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Patient_Conditions.cs">
+      <DependentUpon>MedicalSchedulerDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Slots.cs">
       <DependentUpon>MedicalSchedulerDBModel.tt</DependentUpon>

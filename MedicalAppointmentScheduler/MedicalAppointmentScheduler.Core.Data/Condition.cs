@@ -22,14 +22,14 @@ public partial class Condition
     public Condition()
     {
 
-        this.User_Details = new HashSet<UserDetails>();
+        this.Patient_Conditions = new HashSet<Patient_Conditions>();
 
     }
 
 
     public int ID { get; set; }
 
-    public int Type_ID { get; set; }
+    public int TypeID { get; set; }
 
     public string Name { get; set; }
 
@@ -39,7 +39,7 @@ public partial class Condition
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<UserDetails> User_Details { get; set; }
+    public virtual ICollection<Patient_Conditions> Patient_Conditions { get; set; }
 
 }
 
