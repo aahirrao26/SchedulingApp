@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalAppointmentScheduler.Core.Data.Models
+namespace MedicalAppointmentScheduler.Core.Data
 {
     [MetadataType(typeof(PatientConditionsMetadata))]
-    public partial class PatientConditions
+    public partial class Patient_Conditions
     {
 
     }
@@ -17,7 +17,7 @@ namespace MedicalAppointmentScheduler.Core.Data.Models
     {
         public int PatientID { get; set; }
         
-        public int ID { get; set; }
+        public int ConditionID { get; set; }
 
         public virtual UserDetails User_Details { get; set; }
 

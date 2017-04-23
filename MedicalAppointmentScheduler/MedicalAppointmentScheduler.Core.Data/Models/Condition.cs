@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalAppointmentScheduler.Core.Data.Models
+namespace MedicalAppointmentScheduler.Core.Data
 {
     [MetadataType(typeof(ConditionMetadata))]
     public partial class Condition
@@ -17,7 +17,7 @@ namespace MedicalAppointmentScheduler.Core.Data.Models
     {
         public int ID { get; set; }
 
-        public int Type_ID { get; set; }
+        public int TypeID { get; set; }
 
         public String Name { get; set; }
 

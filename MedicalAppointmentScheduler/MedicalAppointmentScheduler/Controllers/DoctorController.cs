@@ -26,12 +26,14 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             SearchManager = new SearchManager();
             appointmentManager = new AppointmentManager();
+            conditionsManager = new ConditionsManager();
         }
 
-        public DoctorController(ISearchManager _SearchManager, IAppointmentManager _appointmentManager)
+        public DoctorController(ISearchManager _SearchManager, IAppointmentManager _appointmentManager, IConditionsManager _conditionManager)
         {
             SearchManager = _SearchManager;
             appointmentManager = _appointmentManager;
+            conditionsManager = _conditionManager;
         }
 
 

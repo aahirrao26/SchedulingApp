@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalAppointmentScheduler.Core.Data.Models
+namespace MedicalAppointmentScheduler.Core.Data
 {
     [MetadataType(typeof(PatientMetadata))]
     public partial class Patient

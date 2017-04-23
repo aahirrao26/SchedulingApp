@@ -40,7 +40,9 @@ namespace MedicalAppointmentScheduler.Core.Business
 
         public List<Condition> GetConditions(int patientID)
         {
-            dbContext
+            //TODO: Chnage the logic.
+
+            return dbContext.Conditions.ToList();
         }
     }
 }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalAppointmentScheduler.Core.Data.Models
+namespace MedicalAppointmentScheduler.Core.Data
 {
     [MetadataType(typeof(TypeMetadata))]
-    public partial class Condition
+    public partial class Type
     {
 
     }
