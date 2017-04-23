@@ -62,5 +62,5 @@
 }
 </table>
 <div id='Paging' style="text-align: center">
-    @Html.PagedListPager(Model, page => Url.Action("ViewAppointmentHistory", new { patientID = 2,page=page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+    @Html.PagedListPager(Model, page => Url.Action("ViewAppointmentHistory", new { patientID = ViewContext.ViewBag.PateintID, page=page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
 </div>
