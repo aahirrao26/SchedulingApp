@@ -9,10 +9,11 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
+using MedicalAppointmentScheduler.Security;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
-    [Authorize]
+    [AuthorizeRole((int)Helper.ApplicationRole.Receptionist)]
     [OutputCache(NoStore = true, Duration = 0)]
     public class ReceptionistController : Controller
     {

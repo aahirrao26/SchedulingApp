@@ -9,10 +9,12 @@ using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
 using PagedList;
+using MedicalAppointmentScheduler.Security;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
-    [Authorize]
+    [AuthorizeRole((int)Helper.ApplicationRole.Doctor)]
+
     [OutputCache(NoStore = true, Duration = 0)]
     public class DoctorController : Controller
     {
