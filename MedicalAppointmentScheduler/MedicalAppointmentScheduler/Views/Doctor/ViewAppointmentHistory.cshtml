@@ -6,11 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Your Appointment History</h2>
+<h2> Patient's Appointment History</h2>
 <h1></h1>
 
 @Html.Partial("_ViewAppointmentHistory", Model) 
 
 <div id='Paging' style="text-align: center">
-    @Html.PagedListPager(Model, page => Url.Action("ViewAppointmentHistory", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+    @Html.PagedListPager(Model, page => Url.Action("ViewAppointmentHistory", new { patientID = ViewContext.ViewBag.PateintID, page=page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
 </div>

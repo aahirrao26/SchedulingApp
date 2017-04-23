@@ -17,6 +17,7 @@ namespace MedicalAppointmentScheduler.Core.Business
         void DeleteAppointment(int AppointmentID);
         List<Appointment> GetPatientAppointmentHistory(int patientID);
         List<Appointment> GetUpcomingAppointments(int patientID);
+        List<Appointment> GetUpcomingAppointmentsForDoctor(int doctorID);
     }
     public class AppointmentManager:IAppointmentManager
     {
@@ -154,8 +155,25 @@ namespace MedicalAppointmentScheduler.Core.Business
         /// <returns></returns>
         public List<Appointment> GetUpcomingAppointments(int patientID)
         {
+            var currentTime = DateTime.Now.TimeOfDay;
             List<Appointment> futureAppointments = new List<Appointment>();
-            var temp = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date >= DateTime.Today).ToList();
+            var temp = dbContext.Appointments.Where(u => u.PatientID == patientID && u.Date >= DateTime.Today
+            && u.IsCancelled == false).OrderBy(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
+
+            if (temp != null)
+            {
+                futureAppointments = temp;
+            }
+
+            return futureAppointments;
+        }
+
+        public List<Appointment> GetUpcomingAppointmentsForDoctor(int doctorID)
+        {
+            var currentTime = DateTime.Now.TimeOfDay;
+            List<Appointment> futureAppointments = new List<Appointment>();
+            var temp = dbContext.Appointments.Where(u => u.DoctorID == doctorID && u.Date >= DateTime.Today
+            && u.IsCancelled == false && u.PatientID != null).OrderBy(u => u.Date).ThenBy(u => u.L_Slots.StartTime).ToList();
 
             if (temp != null)
             {

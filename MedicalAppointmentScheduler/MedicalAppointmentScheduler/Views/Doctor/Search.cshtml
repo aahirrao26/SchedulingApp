@@ -24,8 +24,7 @@
 
 <div id="results" style="margin-top:50px;">
     <table class="table">
-        <tr>
-            <th>Select</th>
+        <tr>           
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -38,6 +37,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.EmailAdress)
             </th>
+            <th></th>
         </tr>
 
         @if (Model.Count() == 0)
@@ -53,9 +53,6 @@
         {
             <tr>
                 <td>
-                    @Html.RadioButton("Select", "Appointment")
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 <td>
@@ -66,6 +63,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EmailAdress)
+                </td>
+                <td>
+                    @Html.ActionLink("View Appointment History", "ViewAppointmentHistory", new { patientID = item.ID })
                 </td>
             </tr>
         }

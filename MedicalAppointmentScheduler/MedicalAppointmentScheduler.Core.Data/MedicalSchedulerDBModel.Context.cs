@@ -46,6 +46,14 @@ public partial class MedicalSchedulerDBEntities : DbContext
 
     public virtual DbSet<Slots> Slots { get; set; }
 
+    public virtual DbSet<Condition> Conditions { get; set; }
+
+    public virtual DbSet<Patient_Conditions> Patient_Conditions { get; set; }
+
+    public virtual DbSet<Patient> Patients { get; set; }
+
+    public virtual DbSet<Type> Types { get; set; }
+
 }
 
 }

@@ -164,29 +164,117 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         [TestMethod]
         public void TestGetAppointmentList()
         {
+            //Arrange
+                Appointment testAppointment1 = new Appointment() { ID = 1, BookedBy = 4, Details = "Test 1", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, L_Slots= new Slots {ID=1, StartTime= new TimeSpan(11,0,0) } };
+                appointmentData.Add(testAppointment1);
+
+                Appointment testAppointment2 = new Appointment() { ID = 2, BookedBy = 4, Details = "Test 2", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 2, StartTime = new TimeSpan(9, 0, 0) } };
+                appointmentData.Add(testAppointment2);
+
+                //past appointment
+                Appointment testAppointment3 = new Appointment() { ID = 3, BookedBy = 4, Details = "Test 3", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 5, StartTime = new TimeSpan(18, 0, 0) } };
+                appointmentData.Add(testAppointment3);
+          
+                //Cancelled appointment
+                Appointment testAppointment4 = new Appointment() { ID = 4, BookedBy = 4, Details = "Test 4", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, IsCancelled=true, L_Slots = new Slots { ID = 3, StartTime = new TimeSpan(10, 0, 0) } };
+                appointmentData.Add(testAppointment4);
+
+            //Act
+                List<Appointment> appointments = appointmentManager.GetAppointmentList();
+
             //Assert
-            Appointment testAppointment1 = new Appointment() { ID = 1, BookedBy = 4, Details = "Test 1", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, L_Slots= new Slots {ID=1, StartTime= new TimeSpan(11,0,0) } };
+                Assert.AreEqual(2, appointments.Count);
+                //Test2 should come first due to early start time
+                Assert.AreEqual("Test 2", appointments[0].Details);
+                Assert.AreEqual("Test 1", appointments[1].Details);
+        }
+
+        [TestMethod]
+        public void TestGetPatientAppointmentHistory()
+        {
+            //Arrange
+                Appointment testAppointment1 = new Appointment() { ID = 1, BookedBy = 4, Details = "Test 1", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 1, StartTime = new TimeSpan(11, 0, 0) } };
+                appointmentData.Add(testAppointment1);
+
+                Appointment testAppointment2 = new Appointment() { ID = 2, BookedBy = 4, Details = "Test 2", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 2, StartTime = new TimeSpan(9, 0, 0) } };
+                appointmentData.Add(testAppointment2);
+
+                //past appointment of different patient
+                Appointment testAppointment3 = new Appointment() { ID = 3, BookedBy = 4, Details = "Test 3", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 2, L_Slots = new Slots { ID = 5, StartTime = new TimeSpan(18, 0, 0) } };
+                appointmentData.Add(testAppointment3);
+
+                //Cancelled appointment
+                Appointment testAppointment4 = new Appointment() { ID = 4, BookedBy = 4, Details = "Test 4", Date = new DateTime(2016, 12, 02), DoctorID = 2, PatientID = 9, IsCancelled = true, L_Slots = new Slots { ID = 3, StartTime = new TimeSpan(8, 0, 0) } };
+                appointmentData.Add(testAppointment4);
+
+            //Act
+                List<Appointment> appointments = appointmentManager.GetPatientAppointmentHistory(9);
+
+            //Assert
+                Assert.AreEqual(3, appointments.Count);
+
+                //Test2 should come first due to early start time
+                Assert.AreEqual("Test 2", appointments[0].Details);
+                Assert.AreEqual("Test 1", appointments[1].Details);
+                Assert.AreEqual("Test 4", appointments[2].Details);
+        }
+
+        [TestMethod]
+        public void TestGetUpComingAppointment()
+        {
+            //Arrange
+                Appointment testAppointment1 = new Appointment() { ID = 1, BookedBy = 4, Details = "Test 1", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 1, StartTime = new TimeSpan(11, 0, 0) } };
+                appointmentData.Add(testAppointment1);
+
+                //past appointment
+                Appointment testAppointment2 = new Appointment() { ID = 2, BookedBy = 4, Details = "Test 2", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 2, StartTime = new TimeSpan(9, 0, 0) } };
+                appointmentData.Add(testAppointment2);
+
+                // appointment of different patient
+                Appointment testAppointment3 = new Appointment() { ID = 3, BookedBy = 4, Details = "Test 3", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 2, L_Slots = new Slots { ID = 5, StartTime = new TimeSpan(18, 0, 0) } };
+                appointmentData.Add(testAppointment3);
+
+                //Cancelled appointment
+                Appointment testAppointment4 = new Appointment() { ID = 4, BookedBy = 4, Details = "Test 4", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, IsCancelled = true, L_Slots = new Slots { ID = 3, StartTime = new TimeSpan(10, 0, 0) } };
+                appointmentData.Add(testAppointment4);
+
+            //Act
+                List<Appointment> appointments = appointmentManager.GetUpcomingAppointments(9);
+
+            //Assert
+                Assert.AreEqual(1, appointments.Count);
+                //Test2 should come first due to early start time
+                Assert.AreEqual("Test 1", appointments[0].Details);
+            
+        }
+
+        [TestMethod]
+        public void TestGetUpComingAppointmentForDoctor()
+        {
+            //Arrange
+            Appointment testAppointment1 = new Appointment() { ID = 1, BookedBy = 4, Details = "Test 1", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 1, StartTime = new TimeSpan(11, 0, 0) } };
             appointmentData.Add(testAppointment1);
 
-            Appointment testAppointment2 = new Appointment() { ID = 2, BookedBy = 4, Details = "Test 2", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 2, StartTime = new TimeSpan(9, 0, 0) } };
+            //past appointment
+            Appointment testAppointment2 = new Appointment() { ID = 2, BookedBy = 4, Details = "Test 2", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 2, StartTime = new TimeSpan(9, 0, 0) } };
             appointmentData.Add(testAppointment2);
 
-            //past appointment
-            Appointment testAppointment3 = new Appointment() { ID = 3, BookedBy = 4, Details = "Test 3", Date = new DateTime(2016, 12, 01), DoctorID = 2, PatientID = 9, L_Slots = new Slots { ID = 5, StartTime = new TimeSpan(18, 0, 0) } };
+            // appointment of different patient
+            Appointment testAppointment3 = new Appointment() { ID = 3, BookedBy = 4, Details = "Test 3", Date = new DateTime(2016, 12, 01), DoctorID = 3, PatientID = 7, L_Slots = new Slots { ID = 5, StartTime = new TimeSpan(18, 0, 0) } };
             appointmentData.Add(testAppointment3);
-          
+
             //Cancelled appointment
-            Appointment testAppointment4 = new Appointment() { ID = 4, BookedBy = 4, Details = "Test 4", Date = new DateTime(2018, 12, 01), DoctorID = 2, PatientID = 9, IsCancelled=true, L_Slots = new Slots { ID = 3, StartTime = new TimeSpan(10, 0, 0) } };
+            Appointment testAppointment4 = new Appointment() { ID = 4, BookedBy = 4, Details = "Test 4", Date = new DateTime(2018, 12, 01), DoctorID = 3, PatientID = 9, IsCancelled = true, L_Slots = new Slots { ID = 3, StartTime = new TimeSpan(10, 0, 0) } };
             appointmentData.Add(testAppointment4);
 
             //Act
-            List<Appointment> appointments = appointmentManager.GetAppointmentList();
+            List<Appointment> appointments = appointmentManager.GetUpcomingAppointmentsForDoctor(2);
 
             //Assert
-            Assert.AreEqual(2, appointments.Count);
+            Assert.AreEqual(1, appointments.Count);
             //Test2 should come first due to early start time
-            Assert.AreEqual("Test 2", appointments[0].Details);
-            Assert.AreEqual("Test 1", appointments[1].Details);
+            Assert.AreEqual("Test 1", appointments[0].Details);
+
         }
     }
 

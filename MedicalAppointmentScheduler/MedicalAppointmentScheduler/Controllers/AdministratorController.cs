@@ -6,10 +6,11 @@ using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
 using PagedList;
 using static MedicalAppointmentScheduler.Core.Business.Helper;
+using MedicalAppointmentScheduler.Security;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
-    [Authorize]
+    [AuthorizeRole((int)ApplicationRole.Administrator)]
     [OutputCache(NoStore = true, Duration = 0)]
     public class AdministratorController : Controller
     {

@@ -211,9 +211,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AuthorizeRoleAttribute.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\backgroundImages\indexbackground.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Search.css" />
@@ -319,6 +321,11 @@
     <Content Include="Views\Patient\ViewAppointmentHistory.cshtml" />
     <Content Include="Views\Patient\MakeAppointment.cshtml" />
     <Content Include="Views\Patient\ConfirmAppointmentBooking.cshtml" />
+    <Content Include="Views\Shared\_ViewUpcomingAppointments.cshtml" />
+    <Content Include="Views\Doctor\ViewUpcomingAppointment.cshtml" />
+    <Content Include="Views\Doctor\EditAvailability.cshtml" />
+    <Content Include="Views\Doctor\ViewAppointmentHistory.cshtml" />
+    <Content Include="Views\Shared\_ViewAppointmentHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,10 +7,11 @@ using System.Web.Mvc;
 using PagedList;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
+using MedicalAppointmentScheduler.Security;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
-    [Authorize]
+    [AuthorizeRole((int)Helper.ApplicationRole.Patient)]
     [OutputCache(NoStore = true, Duration = 0)]
     public class PatientController : Controller
     {
@@ -35,16 +36,20 @@ namespace MedicalAppointmentScheduler.Controllers
         }
 
 
-        /// <summary>
+       /// <summary>
         /// Creates a view displaying all of the patient's appointments and detailes of those appointmentsViewUpcomingAppointment
         /// </summary>
         /// <returns></returns>
-        public ActionResult ViewUpcomingAppointment()
+        public ActionResult ViewUpcomingAppointment(int? page)
         {
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             int patientID = Convert.ToInt32(Session["LoggedInUser"]);   //Gets patient ID of user
-            List<Appointment> temp = appointmentManager.GetUpcomingAppointments(patientID); //Retrieve all appointments for user
+            List<Appointment> appointmentList = appointmentManager.GetUpcomingAppointments(patientID); //Retrieve all appointments for user
 
-            return View(temp);
+            ViewBag.ShowDoctorDetails = true;
+            ViewBag.ShowPatientDetails = false;
+
+            return View(appointmentList.ToPagedList(pageIndex, pageSize));
         }
 
         public ActionResult ViewAppointmentHistory(int? page)
