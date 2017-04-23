@@ -18,6 +18,7 @@ namespace MedicalAppointmentScheduler.Controllers
     {
         private ISearchManager SearchManager;
         IAppointmentManager appointmentManager;
+        IConditionsManager conditionsManager;
         int pageSize = 5;
         int pageIndex = 1;
 
@@ -115,6 +116,13 @@ namespace MedicalAppointmentScheduler.Controllers
             List<Appointment> appointmentList = appointmentManager.GetPatientAppointmentHistory(patientID);
             return View(appointmentList.ToPagedList(pageIndex, pageSize));
 
+        }
+
+        public ActionResult ViewDetails(int patientID)
+        {
+            Patient patient = conditionsManager.GetDetails(patientID);
+            List<Condition> listOfConditions = conditionsManager.GetConditions(patientID);
+            return View(conditionsManager.GetDetails(patientID));
         }
     }
 }
