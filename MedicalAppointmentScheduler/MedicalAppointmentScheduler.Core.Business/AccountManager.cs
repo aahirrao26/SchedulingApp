@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using MedicalAppointmentScheduler.Core.Data;
+using System;
 
 namespace MedicalAppointmentScheduler.Core.Business
 {
@@ -46,5 +47,17 @@ namespace MedicalAppointmentScheduler.Core.Business
                                 select roles.RoleName).SingleOrDefault();
             return userRole;         
         }
-    }
+
+        public bool IsUserInRole(string loginName, int RoleID)
+        {
+            int roleID = dbContext.UserDetails.Where(o => o.EmailAdress.ToLower().Equals(loginName)).Select(u=> u.L_User_Roles.ID).FirstOrDefault();
+
+            if (RoleID == roleID)
+            {
+                return true;
+            }
+
+                return false;
+            }
+        }
 }
