@@ -113,6 +113,7 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             List<Appointment> appointmentList = appointmentManager.GetPatientAppointmentHistory(patientID);
+            ViewBag.PateintID = patientID;
             return View(appointmentList.ToPagedList(pageIndex, pageSize));
 
         }
