@@ -50,7 +50,7 @@ namespace MedicalAppointmentScheduler.Core.Business
 
         public bool IsUserInRole(string loginName, int RoleID)
         {
-            int roleID = dbContext.UserDetails.Where(o => o.EmailAdress.ToLower().Equals(loginName)).Select(u=> u.L_User_Roles.ID).FirstOrDefault();
+            int? roleID = dbContext.UserDetails.Where(o => o.EmailAdress.ToLower().Equals(loginName)).Select(u=> u.RoleID).FirstOrDefault();
 
             if (RoleID == roleID)
             {

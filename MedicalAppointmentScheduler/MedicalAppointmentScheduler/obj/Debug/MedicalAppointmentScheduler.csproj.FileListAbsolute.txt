@@ -174,7 +174,6 @@ E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppo
 E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.csprojResolveAssemblyReference.cache
 E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.dll
 E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.pdb
-C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.csprojResolveAssemblyReference.cache
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\ApplicationInsights.config
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\roslyn\csc.exe
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -262,5 +261,6 @@ C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\M
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.csprojResolveAssemblyReference.cache
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.dll
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler\obj\Debug\MedicalAppointmentScheduler.pdb

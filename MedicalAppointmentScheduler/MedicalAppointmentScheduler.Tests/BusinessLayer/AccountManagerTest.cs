@@ -38,7 +38,8 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
 
             var userDetailsData = new List<UserDetails>
             {
-                new UserDetails {ID=1,RoleID=1}
+                new UserDetails {ID=1,RoleID=1, EmailAdress="aa@gmail.com" },
+                new UserDetails {ID=2,RoleID=2, EmailAdress="bb@gmail.com"}
             };
 
             var mockUserLoginSet = EntityFrameworkMoqHelper.CreateMockForDbSet<UserLogin>()
@@ -121,6 +122,20 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             //Assert
             Assert.AreEqual("Index", result.RouteValues["action"]);
             Assert.AreEqual("Administrator", result.RouteValues["controller"]);
+        }
+
+        [TestMethod]
+        public void TestIsUserInRole_Authorize()
+        {
+            bool authorized = accountManager.IsUserInRole("aa@gmail.com",1);
+            Assert.AreEqual(true, authorized);
+        }
+
+        [TestMethod]
+        public void TestIsUserInRole_Unauthorize()
+        {
+            bool authorized = accountManager.IsUserInRole("bb@gmail.com", 1);
+            Assert.AreEqual(false, authorized);
         }
     }
 }
