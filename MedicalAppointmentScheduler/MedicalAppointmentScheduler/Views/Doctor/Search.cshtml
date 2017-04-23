@@ -67,6 +67,9 @@
                 <td>
                     @Html.ActionLink("View Appointment History", "ViewAppointmentHistory", new { patientID = item.ID })
                 </td>
+                <td>
+                    @Html.ActionLink("View Details", "ViewDetails", new { patientID = item.ID })
+                </td>
             </tr>
         }
     </table>
