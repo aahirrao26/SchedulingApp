@@ -18,7 +18,7 @@ namespace MedicalAppointmentScheduler.Security
         {
             bool authorize = false;
 
-            AccountManager accountManager = new AccountManager();
+            IAccountManager accountManager = new AccountManager();
             authorize= accountManager.IsUserInRole(httpContext.User.Identity.Name, userAssignedRoles);
             return authorize;
         }
