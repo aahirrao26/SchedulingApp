@@ -10,10 +10,39 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
 
+    <style>
+        body {
+            background-image: linear-gradient(to left, DarkGray 0%,white 100%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
 
+        #header, #footer, #content {
+            position: absolute;
+            right: 0;
+            left: 0;
+        }
+
+        #header {
+            height: 100px;
+            top: 0;
+        }
+
+        #footer {
+            height: 100px;
+            bottom: 0;
+        }
+
+        #content {
+            top: 100px;
+            bottom: 100px;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="border-bottom-color:#ff6a00; border-bottom-width:thick">
+    <div id="header" class="navbar navbar-inverse navbar-fixed-top" style="border-bottom-color:#ff6a00; border-bottom-width:thick">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -39,10 +68,15 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div id="content" class="container body-content">
         @RenderBody()
-        <hr />
     </div>
+
+    <footer id="footer">
+
+        <hr />
+        <p>&copy; @DateTime.Now.Year - SSDI-FALL-2016-TEAM-2-5</p>
+    </footer>
 
     
     @RenderSection("scripts", required: false)
