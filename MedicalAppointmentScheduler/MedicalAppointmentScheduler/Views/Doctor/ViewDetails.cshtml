@@ -4,30 +4,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/ViewDetails.css" rel="stylesheet" />
+
+
 <h2>Patient Details</h2>
 
 <div class="jumbotron container">
-    <div>
-        <form>
-            Gender: <input type="text" name="gender" value="Norway" readonly><br />
-        </form>
-    </div>
+    <div style="text-align:center;">
+        <div class="box">
+            <form>
+                <b>Gender: </b><input class="detailsText" type="text" name="gender" value="@ViewBag.patient.Gender" readonly><br />
+            </form>
+        </div>
 
-    <div>
-        <form>
-            <b>Height:</b><br />
-            Feet: <input type="text" name="feet" value="Norway" readonly><br />
-            Inches: <input type="text" name="inches" value="Norway" readonly>
-       </form>
+        <div class="box">
+            <form>
+                <b>Height:</b><br />
+                Feet: <input class="detailsText" type="text" name="feet" style="margin-bottom:10px;" value="@ViewBag.patient.HeightFeet" readonly>
+                Inches: <input class="detailsText" type="text" name="inches" value="@ViewBag.patient.HeightInches" readonly>
+            </form>
+        </div>
+
+        <div class="box">
+            <form>
+                <b>Weight: </b><input class="detailsText" type="text" name="weight" value="@ViewBag.patient.Weight" readonly><br />
+            </form>
+        </div>
     </div>
     
-    <div>
-        <form>
-            Weight: <input type="text" name="weight" value="Norway" readonly><br />
-        </form>
-    </div>
-    
-    <div>
+    <div id="conditions">
         <h4>@ViewBag.typeOne</h4>
         <ul>
             @foreach (var item in ViewBag.listOfTypeOne)

@@ -225,5 +225,11 @@ namespace MedicalAppointmentScheduler.Controllers
 
             return View();
         }
+
+        public ActionResult EditDetails(int patientID)
+        {
+
+            return View();
+        }
     }
 }
