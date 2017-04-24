@@ -4,74 +4,72 @@ ViewBag.Title = "Appointment List";
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>Medical Scheduler</h1>
-    <p class="lead">Manage appoinments</p>
-</div>
-<div id="results" style="margin-top:50px;">
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Details)
-            </th>
-            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookedBy)
-            </th>
-            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>
-                @Html.DisplayNameFor(model => model.DoctorID)
-            </th>
-            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>
-                @Html.DisplayNameFor(model => model.PatientID)
-            </th>
-            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
-            </th>
-        </tr>
-        @if (Model.Count() == 0)
-        {
+<h2>Patient's Appointment History</h2>
+<h1></h1>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
+        </th>      
+        <th>
+            @Html.DisplayNameFor(model => model.IsCancelled)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
         <tr>
             <td colspan="5" style="text-align:center;">
                 No matching records found
             </td>
         </tr>
-        }
-
-        @foreach (var item in Model)
-        {
-        Console.WriteLine(item.ID);
+    }
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Details)
             </td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>
-                @Html.DisplayFor(modelItem => item.BookedBy)
-           </td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorID)
+                @Html.DisplayFor(modelItem => item.User_Details.FullName)
             </td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientID)
+                @Html.DisplayFor(modelItem => item.BookedDate)
             </td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Details2.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Details1.FullName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.L_Slots.SlotTime)
             </td>
+            <td>
+                @(item.IsCancelled ? "Cancelled" : "-")
+            </td>
         </tr>
     }
-    </table>
-</div>
+</table>
