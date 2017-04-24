@@ -10,7 +10,8 @@ namespace MedicalAppointmentScheduler.Core.Business
     public interface IConditionsManager
     {
         Patient GetDetails(int patientID);
-        List<Condition> GetConditions(int patientID);
+        List<String> GetConditions(int patientID, int type);
+        String GetTypes(int type);
     }
 
     /// <summary>
@@ -38,11 +39,19 @@ namespace MedicalAppointmentScheduler.Core.Business
             return dbContext.Patients.Where(u => u.PatientID == patientID).Single();
         }
 
-        public List<Condition> GetConditions(int patientID)
+        public List<String> GetConditions(int patientID, int type)
         {
-            //TODO: Chnage the logic.
+            var listOfConditions = from P in dbContext.Patient_Conditions.Where(u => u.PatientID == patientID && u.TypeID == type)
+                                   join C in dbContext.Conditions.Where(u => u.TypeID == type)
+                                   on P.ConditionID equals C.ID
+                                   select C.Name.ToString();
+            List<String> list = listOfConditions.Distinct().ToList();
+            return list;
+        }
 
-            return dbContext.Conditions.ToList();
+        public String GetTypes(int type)
+        {
+               return dbContext.Types.Where(u => u.ID == type).Single().Name.ToString();
         }
     }
 }

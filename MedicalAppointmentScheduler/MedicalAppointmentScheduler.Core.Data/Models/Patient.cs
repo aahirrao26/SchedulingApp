@@ -8,10 +8,6 @@ using System.Threading.Tasks;
 namespace MedicalAppointmentScheduler.Core.Data
 {
     [MetadataType(typeof(PatientMetadata))]
-    public partial class Patient
-    {
-
-    }
 
     public class PatientMetadata
     {

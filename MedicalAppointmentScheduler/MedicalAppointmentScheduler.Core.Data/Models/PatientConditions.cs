@@ -19,8 +19,12 @@ namespace MedicalAppointmentScheduler.Core.Data
         
         public int ConditionID { get; set; }
 
+        public int TypeID { get; set; }
+
         public virtual UserDetails User_Details { get; set; }
 
         public virtual Condition Condition { get; set; }
+
+        public virtual Type Type { get; set; }
     }
 }
