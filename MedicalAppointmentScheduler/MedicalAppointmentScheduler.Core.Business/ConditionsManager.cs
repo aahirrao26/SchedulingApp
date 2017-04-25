@@ -46,8 +46,11 @@ namespace MedicalAppointmentScheduler.Core.Business
                                    on P.ConditionID equals C.ID
                                    select C.Name.ToString();
             List<String> list = listOfConditions.Distinct().ToList();
+            if (list.Count == 0)
+                list.Add(null);
             return list;
         }
+
 
         public String GetTypes(int type)
         {
