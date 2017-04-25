@@ -31,7 +31,7 @@
             </form>
         </div>
     </div>
-    
+
     <div id="conditions">
         <h4>@ViewBag.typeOne</h4>
         <ul>
@@ -65,7 +65,7 @@
 
         <h4>@ViewBag.typeThree</h4>
         <ul>
-            @if(ViewBag.listOfTypeThree[0] == null)
+            @if (ViewBag.listOfTypeThree[0] == null)
             {
                 <li>N/A</li>
             }
@@ -95,17 +95,17 @@
 
         <h4>@ViewBag.typeFive</h4>
         <ul>
-           @if (ViewBag.listOfTypeFive[0] == null)
-           {
-            <li>N/A</li>
-           }
-           else
-           {
-               foreach (var item in ViewBag.listOfTypeFive)
-               {
-                <li>@item</li>
-               }
-           }
+            @if (ViewBag.listOfTypeFive[0] == null)
+            {
+                <li>N/A</li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeFive)
+                {
+                    <li>@item</li>
+                }
+            }
         </ul>
 
         <h4>@ViewBag.typeSix</h4>
@@ -172,7 +172,7 @@
         <ul>
             @if (ViewBag.listOfTypeTen[0] == null)
             {
-                <li></li>
+                <li>N/A</li>
             }
             else
             {
@@ -276,9 +276,9 @@
 </div>
 
 <div style="text-align:center">
-    <input id="Back" value="Go Back" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("Search", "Doctor") + "'");" />
-    @*<input id="Edit" value="Edit Details" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewDetails", "Doctor") + "'");" />
-    <input id="Edit" value="View Prescriptions" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewPrescriptions", "Doctor") + "'");" />
-    <input id="Edit" value="View Immunizations" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewImmunizations", "Doctor") + "'");" />
-    <input id="Edit" value="View Allergies" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewAllergies", "Doctor") + "'");" />*@
+    <input value="Go Back" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("Search", "Doctor") + "'");" />
+    <input value="Edit Details" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewDetails", "Doctor") + "'");" />
+    <input value="View Prescriptions" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewPrescriptions", "Doctor") + "'");" />
+    <input value="View Immunizations" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewImmunizations", "Doctor") + "'");" />
+    <input value="View Allergies" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewAllergies", "Doctor") + "'");" />
 </div>
