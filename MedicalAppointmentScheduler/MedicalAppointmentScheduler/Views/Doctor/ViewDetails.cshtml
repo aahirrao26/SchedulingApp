@@ -1,0 +1,270 @@
+﻿@model IEnumerable<MedicalAppointmentScheduler.Core.Data.Type>
+@{
+    ViewBag.Title = "ViewDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/ViewDetails.css" rel="stylesheet" />
+
+
+<h2>Patient Details</h2>
+
+<div class="jumbotron container">
+    <div style="text-align:center;">
+        <div class="box">
+            <form>
+                <b>Gender: </b><input class="detailsText" type="text" name="gender" value="@ViewBag.patient.Gender" readonly><br />
+            </form>
+        </div>
+
+        <div class="box">
+            <form>
+                <b>Height:</b><br />
+                Feet: <input class="detailsText" type="text" name="feet" style="margin-bottom:10px;" value="@ViewBag.patient.HeightFeet" readonly>
+                Inches: <input class="detailsText" type="text" name="inches" value="@ViewBag.patient.HeightInches" readonly>
+            </form>
+        </div>
+
+        <div class="box">
+            <form>
+                <b>Weight: </b><input class="detailsText" type="text" name="weight" value="@ViewBag.patient.Weight" readonly><br />
+            </form>
+        </div>
+    </div>
+    
+    <div id="conditions">
+        <h4>@ViewBag.typeOne</h4>
+        <ul>
+            @foreach (var item in ViewBag.listOfTypeOne)
+            {
+                <li>@item</li>
+            }
+        </ul>
+
+        <h4>@ViewBag.typeTwo</h4>
+        <ul>
+            @foreach (var item in ViewBag.listOfTypeTwo)
+            {
+                <li>@item</li>
+            }
+        </ul>
+
+        <h4>@ViewBag.typeThree</h4>
+        <ul>
+            @if(ViewBag.listOfTypeThree[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeThree)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeFour</h4>
+        <ul>
+            @if (ViewBag.listOfTypeFour[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeFour)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeFive</h4>
+        <ul>
+           @if (ViewBag.listOfTypeFive[0] == null)
+           {
+            <li></li>
+           }
+           else
+           {
+               foreach (var item in ViewBag.listOfTypeFive)
+               {
+                <li>item</li>
+               }
+           }
+        </ul>
+
+        <h4>@ViewBag.typeSix</h4>
+        <ul>
+            @if (ViewBag.listOfTypeSix[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeSix)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeSeven</h4>
+        <ul>
+            @if (ViewBag.listOfTypeSeven[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeSeven)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeEight</h4>
+        <ul>
+            @if (ViewBag.listOfTypeEight[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeEight)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeNine</h4>
+        <ul>
+            @if (ViewBag.listOfTypeNine[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeNine)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeTen</h4>
+        <ul>
+            @if (ViewBag.listOfTypeTen[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeTen)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeEleven</h4>
+        <ul>
+            @if (ViewBag.listOfTypeEleven[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeEleven)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeTwelve</h4>
+        <ul>
+            @if (ViewBag.listOfTypeTwelve[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeTwelve)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeThirteen</h4>
+        <ul>
+            @if (ViewBag.listOfTypeThirteen[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeThirteen)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeFourteen</h4>
+        <ul>
+            @if (ViewBag.listOfTypeFourteen[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeFourteen)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeFifthteen</h4>
+        <ul>
+            @if (ViewBag.listOfTypeFifthteen[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeFifthteen)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+
+        <h4>@ViewBag.typeSixteen</h4>
+        <ul>
+            @if (ViewBag.listOfTypeSixteen[0] == null)
+            {
+                <li></li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeSixteen)
+                {
+                    <li>item</li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+<div style="text-align:center">
+    <input id="Back" value="Go Back" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("Search", "Doctor") + "'");" />
+    <input id="Edit" value="Edit Details" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewDetails", "Doctor") + "'");" />
+    <input id="Edit" value="View Prescriptions" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewPrescriptions", "Doctor") + "'");" />
+    <input id="Edit" value="View Immunizations" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewImmunizations", "Doctor") + "'");" />
+    <input id="Edit" value="View Allergies" type="submit" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("ViewAllergies", "Doctor") + "'");" />
+</div>

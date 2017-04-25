@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\MedicalSchedulerDBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\SHAKTI.SHAKTI-PC\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Core.Data\MedicalSchedulerDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

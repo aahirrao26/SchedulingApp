@@ -74,7 +74,11 @@
       <DependentUpon>MedicalSchedulerDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Condition.cs" />
+    <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\PatientConditions.cs" />
     <Compile Include="Models\Slots.cs" />
+    <Compile Include="Models\Type.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Patient.cs">

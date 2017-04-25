@@ -28,6 +28,7 @@
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__Patient_C__Condi__14270015" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK__Patient_C__Patie__1332DBDC" />
         <AssociationConnector Association="MedicalSchedulerDBModel.FK_ID" />
+        <AssociationConnector Association="MedicalSchedulerDBModel.FK__Patient_C__TypeI__09A971A2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

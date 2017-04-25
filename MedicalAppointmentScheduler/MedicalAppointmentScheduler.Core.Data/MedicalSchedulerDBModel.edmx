@@ -57,6 +57,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PatientID" Type="int" Nullable="false" />
           <Property Name="ConditionID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Patients">
           <Key>
@@ -106,7 +107,7 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Appointme__Booke__656C112C">
+        <Association Name="FK__Appointme__Booke__36B12243">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="1" />
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -118,7 +119,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Appointme__Docto__6383C8BA">
+        <Association Name="FK__Appointme__Docto__37A5467C">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="1" />
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,7 +131,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Appointme__Patie__6477ECF3">
+        <Association Name="FK__Appointme__Patie__38996AB5">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="0..1" />
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -142,7 +143,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Appointme__SlotI__66603565">
+        <Association Name="FK__Appointme__SlotI__398D8EEE">
           <End Role="L_Slots" Type="Self.L_Slots" Multiplicity="1" />
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +155,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Condition__TypeI__10566F31">
+        <Association Name="FK__Condition__TypeI__7D439ABD">
           <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="Conditions" Type="Self.Conditions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,7 +167,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Patient_C__Condi__14270015">
+        <Association Name="FK__Patient_C__Condi__08B54D69">
           <End Role="Conditions" Type="Self.Conditions" Multiplicity="1" />
           <End Role="Patient_Conditions" Type="Self.Patient_Conditions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,7 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Patient_C__Patie__1332DBDC">
+        <Association Name="FK__Patient_C__Patie__07C12930">
           <End Role="User_Details" Type="Self.User_Details" Multiplicity="1" />
           <End Role="Patient_Conditions" Type="Self.Patient_Conditions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -187,6 +188,18 @@
             </Principal>
             <Dependent Role="Patient_Conditions">
               <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patient_C__TypeI__09A971A2">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Patient_Conditions" Type="Self.Patient_Conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Patient_Conditions">
+              <PropertyRef Name="TypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -264,32 +277,36 @@
           <EntitySet Name="User_Address" EntityType="Self.User_Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Details" EntityType="Self.User_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Login" EntityType="Self.User_Login" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Appointme__Booke__656C112C" Association="Self.FK__Appointme__Booke__656C112C">
+          <AssociationSet Name="FK__Appointme__Booke__36B12243" Association="Self.FK__Appointme__Booke__36B12243">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Appointme__Docto__6383C8BA" Association="Self.FK__Appointme__Docto__6383C8BA">
+          <AssociationSet Name="FK__Appointme__Docto__37A5467C" Association="Self.FK__Appointme__Docto__37A5467C">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Appointme__Patie__6477ECF3" Association="Self.FK__Appointme__Patie__6477ECF3">
+          <AssociationSet Name="FK__Appointme__Patie__38996AB5" Association="Self.FK__Appointme__Patie__38996AB5">
             <End Role="User_Details" EntitySet="User_Details" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Appointme__SlotI__66603565" Association="Self.FK__Appointme__SlotI__66603565">
+          <AssociationSet Name="FK__Appointme__SlotI__398D8EEE" Association="Self.FK__Appointme__SlotI__398D8EEE">
             <End Role="L_Slots" EntitySet="L_Slots" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Condition__TypeI__10566F31" Association="Self.FK__Condition__TypeI__10566F31">
+          <AssociationSet Name="FK__Condition__TypeI__7D439ABD" Association="Self.FK__Condition__TypeI__7D439ABD">
             <End Role="Type" EntitySet="Type" />
             <End Role="Conditions" EntitySet="Conditions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Patient_C__Condi__14270015" Association="Self.FK__Patient_C__Condi__14270015">
+          <AssociationSet Name="FK__Patient_C__Condi__08B54D69" Association="Self.FK__Patient_C__Condi__08B54D69">
             <End Role="Conditions" EntitySet="Conditions" />
             <End Role="Patient_Conditions" EntitySet="Patient_Conditions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Patient_C__Patie__1332DBDC" Association="Self.FK__Patient_C__Patie__1332DBDC">
+          <AssociationSet Name="FK__Patient_C__Patie__07C12930" Association="Self.FK__Patient_C__Patie__07C12930">
             <End Role="User_Details" EntitySet="User_Details" />
+            <End Role="Patient_Conditions" EntitySet="Patient_Conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patient_C__TypeI__09A971A2" Association="Self.FK__Patient_C__TypeI__09A971A2">
+            <End Role="Type" EntitySet="Type" />
             <End Role="Patient_Conditions" EntitySet="Patient_Conditions" />
           </AssociationSet>
           <AssociationSet Name="FK__User_Addr__State__1A14E395" Association="Self.FK__User_Addr__State__1A14E395">
@@ -484,6 +501,10 @@
             <End Role="UserDetails" EntitySet="UserDetails" />
             <End Role="Patient" EntitySet="Patients" />
           </AssociationSet>
+          <AssociationSet Name="FK__Patient_C__TypeI__09A971A2" Association="MedicalSchedulerDBModel.FK__Patient_C__TypeI__09A971A2">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Patient_Conditions" EntitySet="Patient_Conditions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Appointment">
           <Key>
@@ -579,6 +600,8 @@
           <Property Name="ConditionID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Condition" Relationship="MedicalSchedulerDBModel.FK__Patient_C__Condi__14270015" FromRole="Patient_Conditions" ToRole="Condition" />
           <NavigationProperty Name="User_Details" Relationship="MedicalSchedulerDBModel.FK__Patient_C__Patie__1332DBDC" FromRole="Patient_Conditions" ToRole="UserDetails" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="MedicalSchedulerDBModel.FK__Patient_C__TypeI__09A971A2" FromRole="Patient_Conditions" ToRole="Type" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -598,6 +621,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Conditions" Relationship="MedicalSchedulerDBModel.FK__Condition__TypeI__10566F31" FromRole="Type" ToRole="Condition" />
+          <NavigationProperty Name="Patient_Conditions" Relationship="MedicalSchedulerDBModel.FK__Patient_C__TypeI__09A971A2" FromRole="Type" ToRole="Patient_Conditions" />
         </EntityType>
         <Association Name="FK__Condition__TypeI__10566F31">
           <End Type="MedicalSchedulerDBModel.Type" Role="Type" Multiplicity="1" />
@@ -646,6 +670,18 @@
             </Principal>
             <Dependent Role="Patient">
               <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patient_C__TypeI__09A971A2">
+          <End Type="MedicalSchedulerDBModel.Type" Role="Type" Multiplicity="1" />
+          <End Type="MedicalSchedulerDBModel.Patient_Conditions" Role="Patient_Conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Patient_Conditions">
+              <PropertyRef Name="TypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -742,6 +778,7 @@
           <EntitySetMapping Name="Patient_Conditions">
             <EntityTypeMapping TypeName="MedicalSchedulerDBModel.Patient_Conditions">
               <MappingFragment StoreEntitySet="Patient_Conditions">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="ConditionID" ColumnName="ConditionID" />
                 <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
