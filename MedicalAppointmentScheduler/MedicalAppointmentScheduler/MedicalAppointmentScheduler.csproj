@@ -329,6 +329,8 @@
     <Content Include="Views\Doctor\ViewAppointmentHistory.cshtml" />
     <Content Include="Views\Doctor\ViewDetails.cshtml" />
     <Content Include="Views\Doctor\EditDetails.cshtml" />
+    <Content Include="Views\Shared\_ViewAppointmentHistory.cshtml" />
+    <Content Include="Views\Receptionist\ViewHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -117,11 +117,12 @@ namespace MedicalAppointmentScheduler.Controllers
             return RedirectToAction("EditAppointment");
         }
         
-        public ActionResult ViewHistory(int patientID)
+        public ActionResult ViewHistory(int patientID, int? page)
         {
-            var history = appointmentManager.GetPatientAppointmentHistory(patientID);
-
-            return View(history);
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var appointmentHistory = appointmentManager.GetPatientAppointmentHistory(patientID);
+            ViewBag.PateintID = patientID;
+            return View(appointmentHistory.ToPagedList(pageIndex, pageSize));
         }
     }
 }

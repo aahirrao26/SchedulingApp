@@ -1,4 +1,6 @@
-@model IEnumerable<MedicalAppointmentScheduler.Core.Data.Appointment>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MedicalAppointmentScheduler.Core.Data.Appointment>
+
 @{
 ViewBag.Title = "Appointment List";
 Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,28 +12,28 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Details)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Details)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BookedBy)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BookedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BookedDate)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BookedDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PatientID)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PatientID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DoctorID)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
         </th>      
         <th>
-            @Html.DisplayNameFor(model => model.IsCancelled)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().IsCancelled)
         </th>
         <th></th>
     </tr>
@@ -73,3 +75,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </tr>
     }
 </table>
+<div id='Paging' style="text-align: center">
+    @Html.PagedListPager(Model, page => Url.Action("ViewHistory", new { patientID = ViewContext.ViewBag.PateintID, page = page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+</div>

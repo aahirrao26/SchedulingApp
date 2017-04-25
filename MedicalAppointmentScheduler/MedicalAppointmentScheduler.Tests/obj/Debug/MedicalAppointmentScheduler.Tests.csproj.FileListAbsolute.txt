@@ -108,7 +108,6 @@ E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppo
 E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.csprojResolveAssemblyReference.cache
 E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.dll
 E:\MS\SSDI\Project\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.pdb
-C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\ApplicationInsights.config
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\roslyn\csc.exe
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -163,5 +162,6 @@ C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\M
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\Microsoft.Owin.xml
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\System.Web.Optimization.xml
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\PagedList.xml
+C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.dll
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.pdb
