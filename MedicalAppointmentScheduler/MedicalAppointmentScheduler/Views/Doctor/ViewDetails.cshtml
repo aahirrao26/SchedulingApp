@@ -35,17 +35,31 @@
     <div id="conditions">
         <h4>@ViewBag.typeOne</h4>
         <ul>
-            @foreach (var item in ViewBag.listOfTypeOne)
+            @if (ViewBag.listOfTypeOne[0] == null)
             {
-                <li>@item</li>
+                <li>N/A</li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeOne)
+                {
+                    <li>@item</li>
+                }
             }
         </ul>
 
         <h4>@ViewBag.typeTwo</h4>
         <ul>
-            @foreach (var item in ViewBag.listOfTypeTwo)
+            @if (ViewBag.listOfTypeTwo[0] == null)
             {
-                <li>@item</li>
+                <li>N/A</li>
+            }
+            else
+            {
+                foreach (var item in ViewBag.listOfTypeTwo)
+                {
+                    <li>@item</li>
+                }
             }
         </ul>
 
@@ -59,7 +73,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeThree)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -74,7 +88,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeFour)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -89,7 +103,7 @@
            {
                foreach (var item in ViewBag.listOfTypeFive)
                {
-                <li>item</li>
+                <li>@item</li>
                }
            }
         </ul>
@@ -104,7 +118,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeSix)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -119,7 +133,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeSeven)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -134,7 +148,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeEight)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -149,7 +163,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeNine)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -164,7 +178,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeTen)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -179,7 +193,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeEleven)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -194,7 +208,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeTwelve)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -209,7 +223,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeThirteen)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -224,7 +238,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeFourteen)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -239,7 +253,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeFifthteen)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
@@ -254,7 +268,7 @@
             {
                 foreach (var item in ViewBag.listOfTypeSixteen)
                 {
-                    <li>item</li>
+                    <li>@item</li>
                 }
             }
         </ul>
