@@ -163,8 +163,8 @@ namespace MedicalAppointmentScheduler.Controllers
             String typeThirteen = conditionsManager.GetTypes(13);
             ViewBag.typeThirteen = typeThirteen;
 
-            String typeFourten = conditionsManager.GetTypes(14);
-            ViewBag.typeFourten = typeFourten;
+            String typeFourteen = conditionsManager.GetTypes(14);
+            ViewBag.typeFourteen = typeFourteen;
 
             String typeFifthteen = conditionsManager.GetTypes(15);
             ViewBag.typeFifthteen = typeFifthteen;
