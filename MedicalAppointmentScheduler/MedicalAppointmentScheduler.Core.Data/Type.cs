@@ -24,6 +24,8 @@ public partial class Type
 
         this.Conditions = new HashSet<Condition>();
 
+        this.Patient_Conditions = new HashSet<Patient_Conditions>();
+
     }
 
 
@@ -36,6 +38,10 @@ public partial class Type
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Condition> Conditions { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Patient_Conditions> Patient_Conditions { get; set; }
 
 }
 

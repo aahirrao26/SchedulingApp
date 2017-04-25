@@ -211,11 +211,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\AuthorizeRoleAttribute.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\backgroundImages\indexbackground.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Search.css" />
@@ -260,6 +258,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\ViewDetails.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -325,8 +324,8 @@
     <Content Include="Views\Doctor\ViewUpcomingAppointment.cshtml" />
     <Content Include="Views\Doctor\EditAvailability.cshtml" />
     <Content Include="Views\Doctor\ViewAppointmentHistory.cshtml" />
-    <Content Include="Views\Shared\_ViewAppointmentHistory.cshtml" />
-    <Content Include="Views\Receptionist\ViewHistory.cshtml" />
+    <Content Include="Views\Doctor\ViewDetails.cshtml" />
+    <Content Include="Views\Doctor\EditDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
