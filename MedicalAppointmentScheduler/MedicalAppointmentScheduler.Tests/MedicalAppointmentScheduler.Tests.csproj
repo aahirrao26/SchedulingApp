@@ -107,6 +107,7 @@
     <Compile Include="BusinessLayer\AccountManagerTest.cs" />
     <Compile Include="BusinessLayer\AdminManagerTest.cs" />
     <Compile Include="BusinessLayer\AppointmentManagerTest.cs" />
+    <Compile Include="BusinessLayer\ConditionManagerTest.cs" />
     <Compile Include="BusinessLayer\SearchManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
