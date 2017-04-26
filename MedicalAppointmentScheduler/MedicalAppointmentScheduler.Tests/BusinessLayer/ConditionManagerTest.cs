@@ -108,7 +108,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             Assert.AreEqual(1, mockContext.Object.Types.Count());
             
             //Act
-           string testTypeName = conditionsManager.GetTypes(1);
+            string testTypeName = conditionsManager.GetTypes(1);
 
             //Assert
             Assert.AreEqual("Test Type", testTypeName);         
