@@ -22,6 +22,8 @@ namespace MedicalAppointmentScheduler.Core.Business
 
         UserDetails FindUser(int? userId);
 
+        List<UserDetails> GetUserByEmail(String email);
+
         void Dispose();
     }
 
@@ -124,5 +126,9 @@ namespace MedicalAppointmentScheduler.Core.Business
             dbContext.Dispose(); 
         }
 
+        public List<UserDetails> GetUserByEmail(string email)
+        {
+            return dbContext.UserDetails.Where(u => u.EmailAdress.Equals(email)).ToList();
+        }
     }
 }
