@@ -22,6 +22,8 @@ namespace MedicalAppointmentScheduler.Core.Business
 
         UserDetails FindUser(int? userId);
 
+        List<UserDetails> GetUserByEmail(String email);
+
         void Dispose();
     }
 
@@ -94,6 +96,11 @@ namespace MedicalAppointmentScheduler.Core.Business
         public void CreateUser(UserDetails userDetails)
         {
             dbContext.UserDetails.Add(userDetails);
+            if (userDetails.RoleID == (int)Helper.ApplicationRole.Patient)
+            {
+                var patient = new Patient { PatientID = userDetails.ID };
+                dbContext.Patients.Add(patient);
+            }
             dbContext.SaveChanges();
         }
 
@@ -119,5 +126,9 @@ namespace MedicalAppointmentScheduler.Core.Business
             dbContext.Dispose(); 
         }
 
+        public List<UserDetails> GetUserByEmail(string email)
+        {
+            return dbContext.UserDetails.Where(u => u.EmailAdress.Equals(email)).ToList();
+        }
     }
 }

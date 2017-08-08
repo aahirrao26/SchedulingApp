@@ -159,9 +159,6 @@ C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\M
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\System.Web.WebPages.xml
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\Microsoft.Owin.xml
-C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\System.Web.Optimization.xml
-C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\bin\Debug\PagedList.xml
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.dll
 C:\Users\Amrita\Source\Repos\SchedulingApplication\MedicalAppointmentScheduler\MedicalAppointmentScheduler.Tests\obj\Debug\MedicalAppointmentScheduler.Tests.pdb

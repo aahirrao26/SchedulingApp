@@ -1,0 +1,20 @@
+﻿.detailsText {
+    width: 100px;
+}
+
+#conditions {
+    font-size:15px;
+}
+
+.box {
+    width: 200px;
+    height:100px;
+    margin:5px;
+    display:inline-block;
+    text-align: left;
+}
+
+input[type="text"] {
+    height: 30px;
+    width: 100px;
+}

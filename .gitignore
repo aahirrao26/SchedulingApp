@@ -12,3 +12,5 @@
 /MedicalAppointmentScheduler/MedicalAppointmentScheduler.Tests/obj/Debug
 /MedicalAppointmentScheduler/MedicalAppointmentScheduler.Core.Data/obj/Debug
 /MedicalAppointmentScheduler/MedicalAppointmentScheduler.Core.Business/obj/Debug
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler/Content/backgroundImages
+/MedicalAppointmentScheduler/MedicalAppointmentScheduler.Core.Business/MailHelper.cs
