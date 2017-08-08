@@ -9,16 +9,20 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
+using MedicalAppointmentScheduler.Security;
+using PagedList;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
-    [Authorize]
+    [AuthorizeRole((int)Helper.ApplicationRole.Receptionist)]
     [OutputCache(NoStore = true, Duration = 0)]
     public class ReceptionistController : Controller
     {
         private MedicalSchedulerDBEntities db = new MedicalSchedulerDBEntities();
         private ISearchManager SearchManager;
         IAppointmentManager appointmentManager;
+        int pageSize = 5;
+        int pageIndex = 1;
 
         public ReceptionistController()
         {
@@ -83,10 +87,12 @@ namespace MedicalAppointmentScheduler.Controllers
             return Json(new { availableSlots }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult EditAppointment()
+        public ActionResult EditAppointment(int? page)
         {
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+                        
             List<Appointment> appointmentList = appointmentManager.GetAppointmentList();
-            return View(appointmentList);                
+            return View(appointmentList.ToPagedList(pageIndex, pageSize));                
         }
 
         public ActionResult DeleteAppointment(int? id)
@@ -109,6 +115,14 @@ namespace MedicalAppointmentScheduler.Controllers
         {
             appointmentManager.DeleteAppointment(id);
             return RedirectToAction("EditAppointment");
+        }
+        
+        public ActionResult ViewHistory(int patientID, int? page)
+        {
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var appointmentHistory = appointmentManager.GetPatientAppointmentHistory(patientID);
+            ViewBag.PateintID = patientID;
+            return View(appointmentHistory.ToPagedList(pageIndex, pageSize));
         }
     }
 }

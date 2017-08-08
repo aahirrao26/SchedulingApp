@@ -5,11 +5,13 @@ using System.Web.Mvc;
 using MedicalAppointmentScheduler.Core.Data;
 using MedicalAppointmentScheduler.Core.Business;
 using PagedList;
+using System.Linq;
 using static MedicalAppointmentScheduler.Core.Business.Helper;
+using MedicalAppointmentScheduler.Security;
 
 namespace MedicalAppointmentScheduler.Controllers
 {
-    [Authorize]
+    [AuthorizeRole((int)ApplicationRole.Administrator)]
     [OutputCache(NoStore = true, Duration = 0)]
     public class AdministratorController : Controller
     {
@@ -63,13 +65,25 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Phone,EmailAdress,RoleID")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
-            {               
-                adminManager.CreateUser(userDetails);
-                return RedirectToAction("Index");
+            {
+                    adminManager.CreateUser(userDetails);
+                    return RedirectToAction("Index");
             }
 
             ViewBag.RoleID = new SelectList(adminManager.GetRoles(), "ID", "RoleName", userDetails.RoleID);
             return View(userDetails);
+        }
+
+        public ActionResult IsEmailAvailable(string email, int? userId)
+        {
+            bool isAvailable = false;
+
+            if (userId == null)
+                isAvailable = adminManager.GetUserByEmail(email).Count == 0;
+            else
+                isAvailable = adminManager.GetUserByEmail(email).Where(u => u.ID != userId).ToList().Count == 0;
+
+            return Json(new { isAvailable }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Administrator/Edit/5
@@ -93,7 +107,7 @@ namespace MedicalAppointmentScheduler.Controllers
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Phone,EmailAdress,RoleID")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
-            {                          
+            {
                 adminManager.EditUser(userDetails);
                 return RedirectToAction("Index");
             }
@@ -108,7 +122,7 @@ namespace MedicalAppointmentScheduler.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           
+
             if (RoleId == (int)ApplicationRole.Administrator)
             {
                 return View("Error");
@@ -125,7 +139,7 @@ namespace MedicalAppointmentScheduler.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {                    
+        {
             adminManager.DeleteUser(id);
             return RedirectToAction("Index");
         }

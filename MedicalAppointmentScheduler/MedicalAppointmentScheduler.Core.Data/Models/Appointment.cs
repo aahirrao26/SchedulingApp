@@ -44,6 +44,14 @@ namespace MedicalAppointmentScheduler.Core.Data
 
         public int SlotID { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Booked On")]
+        public System.DateTime BookedDate { get; set; }
+
+        [Display(Name = "Status")]
+        public bool IsCancelled { get; set; }
+
         public virtual UserDetails User_Details { get; set; }
 
         public virtual UserDetails User_Details1 { get; set; }

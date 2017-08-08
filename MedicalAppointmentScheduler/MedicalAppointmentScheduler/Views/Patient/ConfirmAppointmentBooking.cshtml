@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmAppointmentBooking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Appointment Status</h2>
+
+@if (Convert.ToBoolean(ViewData["AppointmentBooked"]) == true)
+{
+    <div style="margin-top:25px;margin-bottom:50px;" class="alert-success">
+        <span class="successMessage"> Your appointment has been confirmed ! To cancel the appointment, please contact the hospital directly.</span>
+    </div>
+}
+else
+{
+    <div style="margin-top:25px;margin-bottom:50px;" class="alert-danger">
+        <span class="successMessage">Sorry! The appointment cannot be booked online at this moment.</span>
+    </div>
+}
+
+
+

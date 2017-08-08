@@ -32,6 +32,10 @@ public partial class Appointment
 
     public int SlotID { get; set; }
 
+    public System.DateTime BookedDate { get; set; }
+
+    public bool IsCancelled { get; set; }
+
 
 
     public virtual UserDetails User_Details { get; set; }

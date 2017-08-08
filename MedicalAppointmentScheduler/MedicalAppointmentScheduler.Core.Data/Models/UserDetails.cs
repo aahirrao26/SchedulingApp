@@ -35,6 +35,7 @@ namespace MedicalAppointmentScheduler.Core.Data
         public string LastName { get; set; }
 
         [Required]
+        [Phone]
         [Display(Name = "Phone Number")]
         public string Phone { get; set; }
 

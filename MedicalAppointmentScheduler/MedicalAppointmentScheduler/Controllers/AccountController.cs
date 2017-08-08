@@ -26,6 +26,12 @@ namespace MedicalAppointmentScheduler.Controllers
        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                string controllerRole = Session["LoggedInUserRole"].ToString();
+                return RedirectToAction("Index",controllerRole);
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -34,23 +40,23 @@ namespace MedicalAppointmentScheduler.Controllers
         [HttpPost]
         public ActionResult Login(UserLogin loginViewModel)
         {
-            if (ModelState.IsValid)
-            {                            
-                int userId = loginManager.ValidateUser(loginViewModel.Email, loginViewModel.Password);
-                if (userId != 0)
+               if (ModelState.IsValid)
                 {
-                    authenticationHelper.SetAuthCookie(loginViewModel.Email);                  
-                    Session.Add("LoggedInUser", userId);
-                    string controllerRole = loginManager.GetUserRole(userId) == null ? "Home" : loginManager.GetUserRole(userId);
-                    Session.Add("LoggedInUserRole", controllerRole);
-                    return RedirectToAction("Index", controllerRole);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The user login or password provided is incorrect.");
-                }
+                    int userId = loginManager.ValidateUser(loginViewModel.Email, loginViewModel.Password);
+                    if (userId != 0)
+                    {
+                        authenticationHelper.SetAuthCookie(loginViewModel.Email);
+                        Session.Add("LoggedInUser", userId);
+                        string controllerRole = loginManager.GetUserRole(userId) == null ? "Home" : loginManager.GetUserRole(userId);
+                        Session.Add("LoggedInUserRole", controllerRole);
+                        return RedirectToAction("Index", controllerRole);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "The user login or password provided is incorrect.");
+                    }
 
-            }
+                }
             // If we got this far, something failed, redisplay form
             return View(loginViewModel);
         }

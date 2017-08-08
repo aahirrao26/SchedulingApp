@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MedicalAppointmentScheduler.Core.Data.Appointment>
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MedicalAppointmentScheduler.Core.Data.Appointment>
 
 @{
     ViewBag.Title = "Edit Appointment";
@@ -23,22 +24,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Details)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Details)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BookedBy)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BookedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DoctorID)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PatientID)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PatientID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.L_Slots.SlotTime)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
         </th>
         <th></th>
     </tr>
@@ -63,12 +64,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.L_Slots.SlotTime)
         </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
+        <td>          
             @Html.ActionLink("Delete", "DeleteAppointment", new { id=item.ID })
         </td>
     </tr>
 }
 
 </table>
+<br />
+<div id='Paging' style="text-align: center">
+    @Html.PagedListPager(Model, page => Url.Action("EditAppointment", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+</div>

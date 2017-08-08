@@ -20,6 +20,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
         List<UserLogin> userLoginData;
         List<UserAddress> userAddressData;
         List<UserRole> userRoleData;
+        List<Patient> patientData;
 
        [TestInitialize]
         public void setUpData()
@@ -46,6 +47,13 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
                                        .WithRemove(userAddressData)
                                        .WithFind(userAddressData,"UserID");
 
+            patientData = new List<Patient>();
+            var mockPatientSet = EntityFrameworkMoqHelper.CreateMockForDbSet<Patient>()
+                                     .SetupForQueryOn(patientData)
+                                      .WithAdd(patientData)
+                                      .WithRemove(patientData)
+                                      .WithFind(patientData, "PatientID");
+
             userRoleData = new List<UserRole>();
             userRoleData.Add(new UserRole { ID = 1, RoleName = "Test_Admin" });
             userRoleData.Add(new UserRole { ID = 2, RoleName = "Test_Doctor" });
@@ -59,6 +67,7 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             mockContext.Setup(m => m.UserDetails).Returns(mockUserDetailsSet.Object);
             mockContext.Setup(m => m.UserAddresses).Returns(mockUserAddressSet.Object);
             mockContext.Setup(m => m.UserRoles).Returns(mockUserRoleSet.Object);
+            mockContext.Setup(m => m.Patients).Returns(mockPatientSet.Object);
 
             adminManager = new AdminManager(mockContext.Object);    
         }
@@ -78,6 +87,24 @@ namespace MedicalAppointmentScheduler.Tests.BusinessLayer
             Assert.AreEqual("Sean", userDetailsData[0].FirstName);
             Assert.AreEqual("Fox", userDetailsData[0].LastName);
             Assert.AreEqual(3, userDetailsData[0].RoleID);
+        }
+
+        [TestMethod]
+        public void CreatePatientUserTest()
+        {
+            //Arrange
+            UserDetails user = new UserDetails() { ID = 3, FirstName = "Sean", LastName = "Fox", EmailAdress = "33@gmail.com", RoleID = 2 };
+
+            //Act
+            adminManager.CreateUser(user);
+
+            //Assert
+            Assert.AreEqual(1, mockContext.Object.UserDetails.Count());
+            Assert.AreEqual("33@gmail.com", mockContext.Object.UserDetails.Single().EmailAdress);
+            Assert.AreEqual(2, userDetailsData[0].RoleID);
+
+            Assert.AreEqual(1, mockContext.Object.Patients.Count());
+            Assert.AreEqual(3, mockContext.Object.Patients.Single().PatientID);
         }
 
         [TestMethod]

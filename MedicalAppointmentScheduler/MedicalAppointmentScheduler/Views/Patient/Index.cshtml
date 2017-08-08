@@ -4,9 +4,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style type="text/css">
+    div.jumbotron {
+        display: grid;
+    }
+</style>
+
 <div class="jumbotron">
     <input class="btn btn-lg searc" type="button" value="View Upcoming Appointments" onclick="location.href='@Url.Action("ViewUpcomingAppointment", "Patient")'" />
 </div>
 <div class="jumbotron">
     <input class="btn btn-lg searc" type="button" value="View Appointment History" onclick="location.href='@Url.Action("ViewAppointmentHistory", "Patient")'" />
+</div>
+<div class="jumbotron">
+    <input class="btn btn-lg searc" type="button" value="Book Appointment" onclick="location.href='@Url.Action("MakeAppointment", "Patient")'" />
 </div>

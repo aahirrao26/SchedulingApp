@@ -10,10 +10,24 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
 
+    <style>
+        body {
+            background-image: linear-gradient(to left, DarkGray 0%,white 100%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            height:100%;
+        }
+      
 
+        #content {
+            top: 80px;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div id="header" class="navbar navbar-inverse navbar-fixed-top" style="border-bottom-color:#ff6a00; border-bottom-width:thick">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,25 +39,29 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (Request.IsAuthenticated && Session["LoggedInUserRole"]!=null)
+                    @if (Request.IsAuthenticated && Session["LoggedInUserRole"] != null)
                     {
 
                         <li>@Html.ActionLink("HomePage", "Index", Session["LoggedInUserRole"].ToString())</li>
                     }
                     else
                     {
-                    <li>@Html.ActionLink("HomePage", "Index", "Home")</li>
+                        <li>@Html.ActionLink("HomePage", "Index", "Home")</li>
                     }
-                    </ul>
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div id="content" class="container body-content">
         @RenderBody()
-        <hr />
     </div>
 
+    @*<footer id="footer">
+
+        <hr />
+        <p>&copy; @DateTime.Now.Year - SSDI-FALL-2016-TEAM-2-5</p>
+    </footer>*@
     
     @RenderSection("scripts", required: false)
 </body>

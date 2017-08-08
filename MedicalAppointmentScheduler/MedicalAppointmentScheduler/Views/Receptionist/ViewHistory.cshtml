@@ -1,0 +1,80 @@
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MedicalAppointmentScheduler.Core.Data.Appointment>
+
+@{
+ViewBag.Title = "Appointment List";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Patient's Appointment History</h2>
+<h1></h1>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BookedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BookedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PatientID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().L_Slots.SlotTime)
+        </th>      
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().IsCancelled)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="5" style="text-align:center;">
+                No matching records found
+            </td>
+        </tr>
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Details.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Details2.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Details1.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.L_Slots.SlotTime)
+            </td>
+            <td>
+                @(item.IsCancelled ? "Cancelled" : "-")
+            </td>
+        </tr>
+    }
+</table>
+<div id='Paging' style="text-align: center">
+    @Html.PagedListPager(Model, page => Url.Action("ViewHistory", new { patientID = ViewContext.ViewBag.PateintID, page = page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+</div>

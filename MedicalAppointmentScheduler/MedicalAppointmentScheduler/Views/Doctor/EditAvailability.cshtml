@@ -1,0 +1,136 @@
+﻿@model MedicalAppointmentScheduler.Core.Data.Appointment
+@{
+    ViewBag.Title = "MakeAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<!-- Code to wire up the DatePicker -->
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker({
+            minDate: 0,
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            selectOtherMonths: true
+        });
+    })
+
+    $(document).ready(function () {
+
+        $(".date-picker").change(function () {
+
+            $("#slotsGroup").html('');
+
+            $.ajax({
+                type: "GET",
+                url: "/Doctor/GetAvailableSlots?date=" + $(".date-picker").val(),
+                success: function (data) {
+                    var slots = data.availableSlots;
+                    if (slots.length == 0) {
+                        $('#slotsGroup').html('<p>All slots are booked for Selected Date</p>').addClass('alert-danger');
+                        $("#makeAppointment").addClass("invisible");
+                        $("#lblSlot").addClass("invisible");
+                        $("#cbAllSlotsDiv").addClass("invisible");
+                    }
+                    else {
+                        var buttons = '';
+                        var items = '';
+
+                        $('#slotsGroup').html('<select class="form-control" id="SlotID" name="SlotID">' + buttons + '</select>');
+
+                        for (var i = 0; i < slots.length; i++) {
+                            var opt = new Option(slots[i].SlotTime, slots[i].ID);
+                            $('#SlotID').append(opt);
+                        }
+                        $('#slotsGroup').removeClass('alert-danger');
+                        $("#makeAppointment").removeClass("invisible");
+                        $("#lblSlot").removeClass("invisible");
+                        $("#cbAllSlotsDiv").removeClass("invisible");
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $("#makeAppointment").click(function (event) {
+            if ($("#SlotID").val() == undefined) {
+                alert("Sorry! Something Went Wrong.");
+                return false;
+            }
+            var allSlots=0;
+            if ($("#cbAllSlots").is(':checked')) {
+                allSlots = 1;
+            }
+
+            event.preventDefault();
+            $.ajax({
+                type: "GET",
+                url: "/Doctor/MakeAppointment?date=" + $(".date-picker").val() + "&slotId=" + $("#SlotID").val() + "&allSlots=" + allSlots,
+                success: function (data) {
+                    if (data.isBooked) {
+                        alert("Availability Changed");
+
+                        $("#lblSlot").addClass("invisible");
+                        $("#cbAllSlotsDiv").addClass("invisible");
+                        $("#slotsGroup").html('');
+                        $(".date-picker").val('');
+                    }
+                    else {
+                        alert("Sorry! Something Went Wrong.");
+
+                        $("#lblSlot").addClass("invisible");
+                        $("#cbAllSlotsDiv").addClass("invisible");
+                        $("#slotsGroup").html('');
+                        $(".date-picker").val('');
+                    }
+                }
+            });
+
+            return false;
+            
+        });
+
+    });
+</script>
+<h2>Edit Availability</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Date">Pick Date</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Date, new { @class = "date-picker", @id = "appointmentDate" })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SlotID, "Available Slots", htmlAttributes: new { @class = "control-label col-md-2 invisible", @id = "lblSlot" })
+            <div class="col-md-10">
+                <div id="slotsGroup">
+                </div>
+                <div  id="cbAllSlotsDiv" class="invisible">
+                    <input type="checkbox" name="vehicle" id="cbAllSlots" value="true">Block all available slots for the day<br>
+                </div>
+                @Html.ValidationMessageFor(model => model.SlotID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Block" class="btn btn-default invisible" id="makeAppointment" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to Home Page", "Index")
+</div>

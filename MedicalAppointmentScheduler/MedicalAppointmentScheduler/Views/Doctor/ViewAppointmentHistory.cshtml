@@ -1,0 +1,16 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MedicalAppointmentScheduler.Core.Data.Appointment>
+
+@{
+    ViewBag.Title = "ViewAppointmentHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Patient's Appointment History</h2>
+<h1></h1>
+
+@Html.Partial("_ViewAppointmentHistory", Model) 
+
+<div id='Paging' style="text-align: center">
+    @Html.PagedListPager(Model, page => Url.Action("ViewAppointmentHistory", new { patientID = ViewContext.ViewBag.PateintID, page=page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+</div>
